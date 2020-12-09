@@ -108,14 +108,23 @@ int main(int argc, char *argv[]) {
     // the widget that will show the video
     QVideoWidget *videoWidget = new QVideoWidget;
 
-    // the QMediaPlayer which controls the playback
-    QWidget *myWindow = new QWidget();
+    // layout for videoplayer
+    QWidget *innerWindow = new QWidget();
+    QWidget *outerWindow = new QWidget();
     ThePlayer *player = new ThePlayer;
     player->setVideoOutput(videoWidget);
-    QHBoxLayout *myLayout = new QHBoxLayout();
-    myLayout->addWidget(videoWidget);
-    myLayout->addWidget(player->slider);
-    myWindow->setLayout(myLayout);
+
+    QVBoxLayout *outerLayout = new QVBoxLayout();
+
+    QHBoxLayout *innerLayout = new QHBoxLayout();
+
+    innerLayout->addWidget(videoWidget);
+    innerLayout->addWidget(player->volumeSlider);
+    innerWindow->setLayout(innerLayout);
+    outerLayout->addWidget(innerWindow);
+    outerLayout->addWidget(player->videoSlider);
+    outerWindow->setLayout(outerLayout);
+
 
     // a row of buttons
     QWidget *buttonWidget = new QWidget();
@@ -123,6 +132,7 @@ int main(int argc, char *argv[]) {
     vector<TheButton*> buttons;
     // the buttons are arranged horizontally
     QHBoxLayout *layout = new QHBoxLayout();
+//    layout->addWidget(player->videoSlider);
     buttonWidget->setLayout(layout);
 
 
@@ -147,7 +157,7 @@ int main(int argc, char *argv[]) {
 
     // add the video and the buttons to the top level widget
 //    top->addWidget(videoWidget);
-    top->addWidget(myWindow);
+    top->addWidget(outerWindow);
     top->addWidget(buttonWidget);
 
     // showtime!

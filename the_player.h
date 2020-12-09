@@ -25,18 +25,26 @@ private:
     QTimer* mTimer;
     long updateCount = 0;
 
-
 public:
-    QSlider* slider;
+
+    QSlider* volumeSlider;
+    QSlider* videoSlider;
+
     ThePlayer() : QMediaPlayer(NULL) {
-        setVolume(100); // be slightly less annoying
+        setVolume(0); // be slightly less annoying
         connect (this, SIGNAL (stateChanged(QMediaPlayer::State)), this, SLOT (playStateChanged(QMediaPlayer::State)) );       
 
         mTimer = new QTimer(NULL);
         mTimer->setInterval(1000); // 1000ms is one second between ...
         mTimer->start();
-        connect( mTimer, SIGNAL (timeout()), SLOT ( shuffle() ) ); // ...running shuffle method
-        this->slider = new QSlider(Qt::Vertical);
+//        connect( mTimer, SIGNAL (timeout()), SLOT ( shuffle() ) ); // ...running shuffle method
+
+        this->volumeSlider = new QSlider(Qt::Vertical);
+        this->videoSlider = new QSlider(Qt::Horizontal);
+
+        // use slider to control the volume here
+        connect(this->volumeSlider,SIGNAL(valueChanged(int)), this, SLOT(setVolume(int)));
+
     }
 
     // all buttons have been setup, store pointers here

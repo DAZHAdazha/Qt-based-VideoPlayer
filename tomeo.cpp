@@ -111,19 +111,25 @@ int main(int argc, char *argv[]) {
     // layout for videoplayer
     QWidget *innerWindow = new QWidget();
     QWidget *outerWindow = new QWidget();
+    QWidget *controlWindow = new QWidget();
     ThePlayer *player = new ThePlayer;
     player->setVideoOutput(videoWidget);
 
     QVBoxLayout *outerLayout = new QVBoxLayout();
-
     QHBoxLayout *innerLayout = new QHBoxLayout();
+    QHBoxLayout *controlLayout = new QHBoxLayout();
 
     innerLayout->addWidget(videoWidget);
     innerLayout->addWidget(player->volumeSlider);
     innerWindow->setLayout(innerLayout);
     outerLayout->addWidget(innerWindow);
     outerLayout->addWidget(player->videoSlider);
+    outerLayout->addWidget(controlWindow);
+    controlLayout->addWidget(player->playButton);
+    controlLayout->addWidget(player->stopButton);
+    controlWindow->setLayout(controlLayout);
     outerWindow->setLayout(outerLayout);
+
 
 
     // a row of buttons
@@ -147,6 +153,7 @@ int main(int argc, char *argv[]) {
 
     // tell the player what buttons and videos are available
     player->setContent(&buttons, & videos);
+
 
     // create the main window and layout
     QWidget window;

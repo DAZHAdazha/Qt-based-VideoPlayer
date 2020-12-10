@@ -27,6 +27,7 @@
 #include <QtCore/QDirIterator>
 #include "the_player.h"
 #include "the_button.h"
+#include "reader.h"
 
 
 using namespace std;
@@ -115,6 +116,8 @@ int main(int argc, char *argv[]) {
     ThePlayer *player = new ThePlayer;
     player->setVideoOutput(videoWidget);
 
+
+
     QVBoxLayout *outerLayout = new QVBoxLayout();
     QHBoxLayout *innerLayout = new QHBoxLayout();
     QHBoxLayout *controlLayout = new QHBoxLayout();
@@ -127,6 +130,7 @@ int main(int argc, char *argv[]) {
     outerLayout->addWidget(controlWindow);
     controlLayout->addWidget(player->playButton);
     controlLayout->addWidget(player->stopButton);
+    controlLayout->addWidget(new Reader());
     controlWindow->setLayout(controlLayout);
     outerWindow->setLayout(outerLayout);
 
@@ -163,11 +167,10 @@ int main(int argc, char *argv[]) {
     window.setMinimumSize(800, 680);
 
     // add the video and the buttons to the top level widget
-//    top->addWidget(videoWidget);
     top->addWidget(outerWindow);
     top->addWidget(buttonWidget);
-
     // showtime!
+
     window.show();
 
     // wait for the app to terminate

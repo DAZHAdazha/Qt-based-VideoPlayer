@@ -10,14 +10,19 @@ CONFIG += c++11
 SOURCES += \
         the_button.cpp \
         the_player.cpp \
-        tomeo.cpp
+        tomeo.cpp \
+    reader.cpp
 
 HEADERS += \
     the_button.h \
-    the_player.h
+    the_player.h \
+    reader.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+FORMS += \
+    reader.ui
 

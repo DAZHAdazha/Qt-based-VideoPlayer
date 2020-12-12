@@ -48,10 +48,10 @@ QVariant PlaylistModel::data(const QModelIndex &index, int role) const {
                     auto pixmap = QPixmap::fromImage(sprite);
                     value.setValue(PlaylistItem(name, pixmap));
                 } else {
-                    qDebug() << "warning: I couldn't process thumbnail " << thumb << Qt::endl;
+                    qDebug() << "warning: I couldn't process thumbnail " << thumb << endl;
                 }
             } else {
-                qDebug() << "warning: I couldn't find thumbnail " << thumb << Qt::endl;
+                qDebug() << "warning: I couldn't find thumbnail " << thumb << endl;
             }
             // Cache the item
             const_cast<PlaylistModel *>(this)->m_data[index] = value;

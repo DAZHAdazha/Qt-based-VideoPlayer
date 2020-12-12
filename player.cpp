@@ -7,6 +7,9 @@
 #include <QVideoProbe>
 #include <QtWidgets>
 
+#include <iostream>
+using namespace std;
+
 #include "playlistdelegate.h"
 
 Player::Player(QWidget *parent) : QWidget(parent), videoWidget(0), slider(0), colorDialog(0) {
@@ -14,6 +17,7 @@ Player::Player(QWidget *parent) : QWidget(parent), videoWidget(0), slider(0), co
     // Owned by the Player
     playlist = new QMediaPlaylist();
     player->setPlaylist(playlist);
+    player->setNotifyInterval(20);
 
     connect(player, SIGNAL(durationChanged(qint64)), SLOT(durationChanged(qint64)));
     connect(player, SIGNAL(positionChanged(qint64)), SLOT(positionChanged(qint64)));
@@ -39,7 +43,9 @@ Player::Player(QWidget *parent) : QWidget(parent), videoWidget(0), slider(0), co
     connect(playlistView, SIGNAL(activated(QModelIndex)), this, SLOT(jump(QModelIndex)));
 
     slider = new QSlider(Qt::Horizontal, this);
-    slider->setRange(0, player->duration() / 1000);
+//    slider->setRange(0, player->duration() / 1000);
+    slider->setRange(0, player->duration());
+
     connect(slider, SIGNAL(sliderMoved(int)), this, SLOT(seek(int)));
 
     labelDuration = new QLabel(this);
@@ -132,15 +138,19 @@ void Player::removeSelected() {
 }
 
 void Player::durationChanged(qint64 duration) {
-    this->duration = duration / 1000;
-    slider->setMaximum(duration / 1000);
+//    this->duration = duration / 1000;
+//    slider->setMaximum(duration / 1000);
+    this->duration = duration;
+    slider->setMaximum(duration);
 }
 
 void Player::positionChanged(qint64 progress) {
     if (!slider->isSliderDown()) {
-        slider->setValue(progress / 1000);
+//        slider->setValue(progress / 1000);
+        slider->setValue(progress);
     }
-    updateDurationInfo(progress / 1000);
+//    updateDurationInfo(progress / 1000);
+    updateDurationInfo(progress);
 }
 
 void Player::currentMediaChanged(const QMediaContent &media) {
@@ -153,7 +163,8 @@ void Player::currentMediaChanged(const QMediaContent &media) {
 void Player::previousClicked() {
     // Go to previous track if we are within the first 5 seconds of playback
     // Otherwise, seek to the beginning.
-    if (player->position() <= 5000)
+//    if (player->position() <= 5000)
+    if (player->position() <= 5)
         playlist->previous();
     else
         player->setPosition(0);
@@ -171,7 +182,8 @@ void Player::playlistPositionChanged(int currentItem) {
 }
 
 void Player::seek(int seconds) {
-    player->setPosition(seconds * 1000);
+//    player->setPosition(seconds * 1000);
+    player->setPosition(seconds);
 }
 
 void Player::statusChanged(QMediaPlayer::MediaStatus status) {
@@ -254,10 +266,10 @@ void Player::displayErrorMessage() {
 void Player::updateDurationInfo(qint64 currentInfo) {
     QString tStr;
     if (currentInfo || duration) {
-        QTime currentTime((currentInfo / 3600) % 60, (currentInfo / 60) % 60, currentInfo % 60,
-                          (currentInfo * 1000) % 1000);
-        QTime totalTime((duration / 3600) % 60, (duration / 60) % 60, duration % 60,
-                        (duration * 1000) % 1000);
+        QTime currentTime((currentInfo / 3600/1000) % 60, (currentInfo / 60/1000) % 60, currentInfo/1000 % 60,
+                          (currentInfo) % 1000);
+        QTime totalTime((duration / 3600/1000) % 60, (duration / 60/1000) % 60, duration/1000 % 60,
+                        (duration) % 1000);
         QString format = "mm:ss";
         if (duration > 3600) format = "hh:mm:ss";
         tStr = currentTime.toString(format) + " / " + totalTime.toString(format);

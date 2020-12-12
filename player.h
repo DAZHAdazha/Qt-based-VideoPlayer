@@ -54,7 +54,6 @@ class Player : public QWidget {
     void videoAvailableChanged(bool available);
 
     void displayErrorMessage();
-
    private:
     void setTrackInfo(const QString &info);
     void setStatusInfo(const QString &info);

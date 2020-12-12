@@ -39,12 +39,13 @@ class Player : public QWidget {
     void open();
     void durationChanged(qint64 duration);
     void positionChanged(qint64 progress);
-    void metaDataChanged();
+    void currentMediaChanged(const QMediaContent &media);
 
     void previousClicked();
 
     void seek(int seconds);
     void jump(const QModelIndex &index);
+    void removeSelected();
     void playlistPositionChanged(int);
 
     void statusChanged(QMediaPlayer::MediaStatus status);
@@ -57,6 +58,7 @@ class Player : public QWidget {
    private:
     void setTrackInfo(const QString &info);
     void setStatusInfo(const QString &info);
+    void updateWindowTitle();
     void handleCursor(QMediaPlayer::MediaStatus status);
     void updateDurationInfo(qint64 currentInfo);
     // Initializes layouts
@@ -72,6 +74,7 @@ class Player : public QWidget {
     QPushButton *colorButton;
     QDialog *colorDialog;
     QAbstractButton *openButton;
+    QAbstractButton *removeButton;
 
     PlaylistModel *playlistModel;
     QAbstractItemView *playlistView;

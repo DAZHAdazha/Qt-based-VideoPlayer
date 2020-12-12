@@ -17,7 +17,7 @@ Player::Player(QWidget *parent) : QWidget(parent), videoWidget(0), slider(0), co
 
     connect(player, SIGNAL(durationChanged(qint64)), SLOT(durationChanged(qint64)));
     connect(player, SIGNAL(positionChanged(qint64)), SLOT(positionChanged(qint64)));
-    connect(player, SIGNAL(metaDataChanged()), SLOT(metaDataChanged()));
+    connect(player, &QMediaPlayer::currentMediaChanged, this, &Player::currentMediaChanged);
     connect(playlist, SIGNAL(currentIndexChanged(int)), SLOT(playlistPositionChanged(int)));
     connect(player, SIGNAL(mediaStatusChanged(QMediaPlayer::MediaStatus)), this,
             SLOT(statusChanged(QMediaPlayer::MediaStatus)));
@@ -47,12 +47,13 @@ Player::Player(QWidget *parent) : QWidget(parent), videoWidget(0), slider(0), co
     openButton = new QPushButton(tr("Open"), this);
     connect(openButton, SIGNAL(clicked()), this, SLOT(open()));
 
+    removeButton = new QPushButton(tr("Remove"), this);
+    connect(removeButton, SIGNAL(clicked()), this, SLOT(removeSelected()));
+
     fullScreenButton = new QPushButton(tr("FullScreen"), this);
     fullScreenButton->setCheckable(true);
 
     initLayout();
-
-    metaDataChanged();
 }
 
 Player::~Player() {}
@@ -92,6 +93,7 @@ void Player::initLayout() {
     controlLayout->addWidget(initControls());
     controlLayout->addStretch(1);
     controlLayout->addWidget(openButton);
+    controlLayout->addWidget(removeButton);
     controlLayout->addWidget(fullScreenButton);
 
     QHBoxLayout *hLayout = new QHBoxLayout;
@@ -122,6 +124,13 @@ void Player::addToPlaylist(const QList<QUrl> urls) {
     foreach (const QUrl &url, urls) { playlist->addMedia(url); }
 }
 
+void Player::removeSelected() {
+    auto current = playlistView->currentIndex();
+    if (current.isValid()) {
+        playlist->removeMedia(current.row());
+    }
+}
+
 void Player::durationChanged(qint64 duration) {
     this->duration = duration / 1000;
     slider->setMaximum(duration / 1000);
@@ -134,12 +143,9 @@ void Player::positionChanged(qint64 progress) {
     updateDurationInfo(progress / 1000);
 }
 
-void Player::metaDataChanged() {
-    if (player->isMetaDataAvailable()) {
-        setTrackInfo(QString("%1 - %2")
-                         .arg(player->metaData(QMediaMetaData::AlbumArtist).toString())
-                         .arg(player->metaData(QMediaMetaData::Title).toString()));
-    }
+void Player::currentMediaChanged(const QMediaContent &media) {
+    auto url = media.request().url().path();
+    setTrackInfo(QFileInfo(url).fileName());
 }
 
 void Player::previousClicked() {
@@ -224,18 +230,19 @@ void Player::videoAvailableChanged(bool available) {
 
 void Player::setTrackInfo(const QString &info) {
     trackInfo = info;
-    if (!statusInfo.isEmpty())
-        setWindowTitle(QString("%1 | %2").arg(trackInfo).arg(statusInfo));
-    else
-        setWindowTitle(trackInfo);
+    updateWindowTitle();
 }
 
 void Player::setStatusInfo(const QString &info) {
     statusInfo = info;
+    updateWindowTitle();
+}
+
+void Player::updateWindowTitle() {
     if (!statusInfo.isEmpty())
-        setWindowTitle(QString("%1 | %2").arg(trackInfo).arg(statusInfo));
+        setWindowTitle(QString("%1 | %2 - Tomeo").arg(trackInfo).arg(statusInfo));
     else
-        setWindowTitle(trackInfo);
+        setWindowTitle(QString("%1 - Tomeo").arg(trackInfo));
 }
 
 void Player::displayErrorMessage() {

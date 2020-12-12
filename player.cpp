@@ -144,8 +144,10 @@ void Player::positionChanged(qint64 progress) {
 }
 
 void Player::currentMediaChanged(const QMediaContent &media) {
-    auto url = media.request().url().path();
-    setTrackInfo(QFileInfo(url).fileName());
+    if (!media.isNull()) {
+        auto url = media.canonicalRequest().url().path();
+        setTrackInfo(QFileInfo(url).fileName());
+    }
 }
 
 void Player::previousClicked() {

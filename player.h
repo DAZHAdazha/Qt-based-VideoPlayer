@@ -16,9 +16,7 @@ class QMediaPlayer;
 class QModelIndex;
 class QPushButton;
 class QSlider;
-class QVideoProbe;
 class QVideoWidget;
-class QAudioProbe;
 QT_END_NAMESPACE
 
 class PlaylistModel;
@@ -68,7 +66,6 @@ class Player : public QWidget {
     QMediaPlayer *player;
     QMediaPlaylist *playlist;
     VideoWidget *videoWidget;
-    QLabel *coverLabel;
     QSlider *slider;
     QLabel *labelDuration;
     QPushButton *fullScreenButton;

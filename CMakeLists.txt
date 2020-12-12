@@ -22,6 +22,7 @@ add_executable(tomeo
     playercontrols.cpp
     playlistmodel.cpp
     videowidget.cpp
+    playlistdelegate.cpp
 )
 
 target_link_libraries(tomeo Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Multimedia Qt5::MultimediaWidgets Qt5::Network Qt5::Xml)

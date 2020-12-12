@@ -2,6 +2,7 @@
 #define PLAYLISTMODEL_H
 
 #include <QAbstractItemModel>
+#include "playlistitem.h"
 
 QT_BEGIN_NAMESPACE
 class QMediaPlaylist;

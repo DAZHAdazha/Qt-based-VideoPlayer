@@ -11,11 +11,12 @@ int main(int argc, char *argv[]) {
     QCoreApplication::setApplicationName("Player Example");
     QCoreApplication::setOrganizationName("QtProject");
     QCoreApplication::setApplicationVersion(QT_VERSION_STR);
+
     QCommandLineParser parser;
-    parser.setApplicationDescription("Qt MultiMedia Player Example");
+    parser.setApplicationDescription("Tomeo Video Player");
     parser.addHelpOption();
     parser.addVersionOption();
-    parser.addPositionalArgument("url", "The URL to open.");
+    parser.addPositionalArgument("dir", "The directory to open.");
     parser.process(app);
 
     Player player;
@@ -27,11 +28,6 @@ int main(int argc, char *argv[]) {
         player.addToPlaylist(urls);
     }
 
-#if defined(Q_WS_SIMULATOR)
-    player.setAttribute(Qt::WA_LockLandscapeOrientation);
-    player.showMaximized();
-#else
     player.show();
-#endif
     return app.exec();
 }

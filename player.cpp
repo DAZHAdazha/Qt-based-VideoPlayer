@@ -7,9 +7,11 @@
 #include <QVideoProbe>
 #include <QtWidgets>
 
-Player::Player(QWidget *parent)
-    : QWidget(parent), videoWidget(0), coverLabel(0), slider(0), colorDialog(0) {
+#include "playlistdelegate.h"
+
+Player::Player(QWidget *parent) : QWidget(parent), videoWidget(0), slider(0), colorDialog(0) {
     player = new QMediaPlayer(this);
+    // Owned by the Player
     playlist = new QMediaPlaylist();
     player->setPlaylist(playlist);
 
@@ -31,6 +33,7 @@ Player::Player(QWidget *parent)
     playlistModel->setPlaylist(playlist);
 
     playlistView = new QListView(this);
+    playlistView->setItemDelegate(new PlaylistDelegate);
     playlistView->setModel(playlistModel);
     playlistView->setCurrentIndex(playlistModel->index(playlist->currentIndex(), 0));
     connect(playlistView, SIGNAL(activated(QModelIndex)), this, SLOT(jump(QModelIndex)));
@@ -111,31 +114,12 @@ void Player::open() {
     QFileDialog fileDialog(this);
     fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
     fileDialog.setWindowTitle(tr("Open Files"));
-    QStringList supportedMimeTypes = player->supportedMimeTypes();
-    if (!supportedMimeTypes.isEmpty()) {
-        supportedMimeTypes.append("audio/x-m3u");  // MP3 playlists
-        fileDialog.setMimeTypeFilters(supportedMimeTypes);
-    }
-    //    fileDialog.setDirectory(QStandardPaths::standardLocations(QStandardPaths::MoviesLocation).value(0,
-    //    QDir::homePath()));
+    fileDialog.setMimeTypeFilters(player->supportedMimeTypes());
     if (fileDialog.exec() == QDialog::Accepted) addToPlaylist(fileDialog.selectedUrls());
 }
 
-static bool isPlaylist(const QUrl &url)  // Check for ".m3u" playlists.
-{
-    if (!url.isLocalFile()) return false;
-    const QFileInfo fileInfo(url.toLocalFile());
-    return fileInfo.exists() &&
-           !fileInfo.suffix().compare(QLatin1String("m3u"), Qt::CaseInsensitive);
-}
-
 void Player::addToPlaylist(const QList<QUrl> urls) {
-    foreach (const QUrl &url, urls) {
-        if (isPlaylist(url))
-            playlist->load(url);
-        else
-            playlist->addMedia(url);
-    }
+    foreach (const QUrl &url, urls) { playlist->addMedia(url); }
 }
 
 void Player::durationChanged(qint64 duration) {
@@ -155,12 +139,6 @@ void Player::metaDataChanged() {
         setTrackInfo(QString("%1 - %2")
                          .arg(player->metaData(QMediaMetaData::AlbumArtist).toString())
                          .arg(player->metaData(QMediaMetaData::Title).toString()));
-
-        if (coverLabel) {
-            QUrl url = player->metaData(QMediaMetaData::CoverArtUrlLarge).value<QUrl>();
-
-            coverLabel->setPixmap(!url.isEmpty() ? QPixmap(url.toString()) : QPixmap());
-        }
     }
 }
 
@@ -218,13 +196,11 @@ void Player::statusChanged(QMediaPlayer::MediaStatus status) {
 void Player::stateChanged(QMediaPlayer::State state) {}
 
 void Player::handleCursor(QMediaPlayer::MediaStatus status) {
-#ifndef QT_NO_CURSOR
     if (status == QMediaPlayer::LoadingMedia || status == QMediaPlayer::BufferingMedia ||
         status == QMediaPlayer::StalledMedia)
         setCursor(QCursor(Qt::BusyCursor));
     else
         unsetCursor();
-#endif
 }
 
 void Player::bufferingProgress(int progress) {
@@ -244,7 +220,6 @@ void Player::videoAvailableChanged(bool available) {
 
         if (fullScreenButton->isChecked()) videoWidget->setFullScreen(true);
     }
-    //    colorButton->setEnabled(available);
 }
 
 void Player::setTrackInfo(const QString &info) {

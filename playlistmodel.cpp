@@ -1,8 +1,11 @@
 #include "playlistmodel.h"
 
 #include <QFileInfo>
+#include <QImageReader>
+#include <QLabel>
 #include <QMediaPlaylist>
 #include <QUrl>
+#include <QtWidgets/QFileIconProvider>
 
 PlaylistModel::PlaylistModel(QObject *parent) : QAbstractItemModel(parent), m_playlist(0) {}
 
@@ -30,9 +33,28 @@ QModelIndex PlaylistModel::parent(const QModelIndex &child) const {
 QVariant PlaylistModel::data(const QModelIndex &index, int role) const {
     if (index.isValid() && role == Qt::DisplayRole) {
         QVariant value = m_data[index];
-        if (!value.isValid() && index.column() == Title) {
+
+        if (!value.isValid() && index.column() == Title && index.row() < m_playlist->mediaCount()) {
             QUrl location = m_playlist->media(index.row()).request().url();
-            return QFileInfo(location.path()).fileName();
+            auto path = location.path();
+            auto name = QFileInfo(path).fileName();
+            auto thumb = path.left(path.length() - 4) + ".png";
+            value = name;
+
+            if (QFile(thumb).exists()) {
+                auto imageReader = new QImageReader(thumb);
+                auto sprite = imageReader->read();  // read the thumbnail
+                if (!sprite.isNull()) {
+                    auto pixmap = QPixmap::fromImage(sprite);
+                    value.setValue(PlaylistItem(name, pixmap));
+                } else {
+                    qDebug() << "warning: I couldn't process thumbnail " << thumb << Qt::endl;
+                }
+            } else {
+                qDebug() << "warning: I couldn't find thumbnail " << thumb << Qt::endl;
+            }
+            // Cache the item
+            const_cast<PlaylistModel *>(this)->m_data[index] = value;
         }
 
         return value;

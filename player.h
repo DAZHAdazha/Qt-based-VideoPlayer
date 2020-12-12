@@ -43,6 +43,9 @@ class Player : public QWidget {
 
     void previousClicked();
 
+    void goForward();
+    void goBack();
+
     void seek(int seconds);
     void jump(const QModelIndex &index);
     void removeSelected();

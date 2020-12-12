@@ -80,6 +80,9 @@ PlayerControls *Player::initControls() {
     connect(controls, SIGNAL(changeMuting(bool)), player, SLOT(setMuted(bool)));
     connect(controls, SIGNAL(changeRate(qreal)), player, SLOT(setPlaybackRate(qreal)));
 
+    connect(controls, SIGNAL(forward()),this, SLOT(goForward()));
+    connect(controls, SIGNAL(back()),this, SLOT(goBack()));
+
     connect(controls, SIGNAL(stop()), videoWidget, SLOT(update()));
 
     connect(player, SIGNAL(stateChanged(QMediaPlayer::State)), controls,
@@ -129,6 +132,14 @@ void Player::open() {
 
 void Player::addToPlaylist(const QList<QUrl> urls) {
     foreach (const QUrl &url, urls) { playlist->addMedia(url); }
+}
+
+void Player::goForward() {
+    player->setPosition(player->position()+15000);
+}
+
+void Player::goBack() {
+    player->setPosition(player->position()-15000);
 }
 
 void Player::removeSelected() {

@@ -33,6 +33,14 @@ PlayerControls::PlayerControls(QWidget *parent)
     volumeSlider->setRange(0, 100);
     connect(volumeSlider, SIGNAL(valueChanged(int)), this, SLOT(onVolumeSliderValueChanged()));
 
+    forwardButton = new QToolButton(this);
+    forwardButton->setIcon(style()->standardIcon(QStyle::SP_ArrowRight));
+    connect(forwardButton, SIGNAL(clicked()), this, SLOT(forwardClicked()));
+
+    backButton = new QToolButton(this);
+    backButton->setIcon(style()->standardIcon(QStyle::SP_ArrowLeft));
+    connect(backButton, SIGNAL(clicked()), this, SLOT(backClicked()));
+
     rateBox = new QComboBox(this);
     rateBox->addItem("0.25x", QVariant(0.25));
     rateBox->addItem("0.5x", QVariant(0.5));
@@ -56,6 +64,8 @@ void PlayerControls::initLayout() {
     layout->addWidget(stopButton);
     layout->addWidget(nextButton);
     layout->addWidget(muteButton);
+    layout->addWidget(backButton);
+    layout->addWidget(forwardButton);
     layout->addWidget(volumeSlider);
     layout->addWidget(rateBox);
     setLayout(layout);
@@ -128,6 +138,14 @@ void PlayerControls::playClicked() {
 
 void PlayerControls::muteClicked() {
     emit changeMuting(!playerMuted);
+}
+
+void PlayerControls::backClicked() {
+    emit back();
+}
+
+void PlayerControls::forwardClicked() {
+    emit forward();
 }
 
 qreal PlayerControls::playbackRate() const {

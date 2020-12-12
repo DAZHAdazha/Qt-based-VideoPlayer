@@ -36,12 +36,16 @@ class PlayerControls : public QWidget {
     void changeVolume(int volume);
     void changeMuting(bool muting);
     void changeRate(qreal rate);
+    void forward();
+    void back();
 
    private slots:
     void playClicked();
     void muteClicked();
     void updateRate();
     void onVolumeSliderValueChanged();
+    void forwardClicked();
+    void backClicked();
 
    private:
     QMediaPlayer::State playerState;
@@ -52,6 +56,8 @@ class PlayerControls : public QWidget {
     QAbstractButton *previousButton;
     QAbstractButton *muteButton;
     QAbstractSlider *volumeSlider;
+    QAbstractButton *backButton;
+    QAbstractButton *forwardButton;
     QComboBox *rateBox;
     // Initializes layout of buttons
     void initLayout();

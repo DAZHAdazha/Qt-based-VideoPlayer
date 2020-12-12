@@ -14,7 +14,7 @@ if(CMAKE_VERSION VERSION_LESS "3.7.0")
     set(CMAKE_INCLUDE_CURRENT_DIR ON)
 endif()
 
-find_package(Qt5 COMPONENTS Core Gui Widgets Multimedia MultimediaWidgets REQUIRED)
+find_package(Qt5 COMPONENTS Core Gui Widgets Multimedia MultimediaWidgets Network Xml REQUIRED)
 
 add_executable(tomeo
     main.cpp
@@ -24,4 +24,4 @@ add_executable(tomeo
     videowidget.cpp
 )
 
-target_link_libraries(tomeo Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Multimedia Qt5::MultimediaWidgets)
+target_link_libraries(tomeo Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Multimedia Qt5::MultimediaWidgets Qt5::Network Qt5::Xml)

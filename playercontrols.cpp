@@ -1,6 +1,5 @@
 #include "playercontrols.h"
 
-#include <QAudio>
 #include <QBoxLayout>
 #include <QComboBox>
 #include <QSlider>
@@ -8,16 +7,7 @@
 #include <QToolButton>
 
 PlayerControls::PlayerControls(QWidget *parent)
-    : QWidget(parent),
-      playerState(QMediaPlayer::StoppedState),
-      playerMuted(false),
-      playButton(0),
-      stopButton(0),
-      nextButton(0),
-      previousButton(0),
-      muteButton(0),
-      volumeSlider(0),
-      rateBox(0) {
+    : QWidget(parent), playerState(QMediaPlayer::StoppedState), playerMuted(false) {
     playButton = new QToolButton(this);
     playButton->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
     connect(playButton, SIGNAL(clicked()), this, SLOT(playClicked()));
@@ -50,6 +40,10 @@ PlayerControls::PlayerControls(QWidget *parent)
     rateBox->setCurrentIndex(1);
     connect(rateBox, SIGNAL(activated(int)), SLOT(updateRate()));
 
+    initLayout();
+}
+
+void PlayerControls::initLayout() {
     QBoxLayout *layout = new QHBoxLayout;
     layout->setMargin(0);
     layout->addWidget(playButton);

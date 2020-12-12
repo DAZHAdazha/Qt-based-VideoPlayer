@@ -54,6 +54,8 @@ class PlayerControls : public QWidget {
     QAbstractButton *muteButton;
     QAbstractSlider *volumeSlider;
     QComboBox *rateBox;
+    // Initializes layout of buttons
+    void initLayout();
 };
 
 #endif  // PLAYERCONTROLS_H

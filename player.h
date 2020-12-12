@@ -6,6 +6,8 @@
 #include <QWidget>
 
 #include "videowidget.h"
+#include "playercontrols.h"
+#include "playlistmodel.h"
 
 QT_BEGIN_NAMESPACE
 class QAbstractItemView;
@@ -54,13 +56,14 @@ class Player : public QWidget {
 
     void displayErrorMessage();
 
-    void showColorDialog();
-
    private:
     void setTrackInfo(const QString &info);
     void setStatusInfo(const QString &info);
     void handleCursor(QMediaPlayer::MediaStatus status);
     void updateDurationInfo(qint64 currentInfo);
+    // Initializes layouts
+    void initLayout();
+    PlayerControls* initControls();
 
     QMediaPlayer *player;
     QMediaPlaylist *playlist;
@@ -71,6 +74,7 @@ class Player : public QWidget {
     QPushButton *fullScreenButton;
     QPushButton *colorButton;
     QDialog *colorDialog;
+    QAbstractButton *openButton;
 
     PlaylistModel *playlistModel;
     QAbstractItemView *playlistView;

@@ -11,11 +11,10 @@ class QAbstractSlider;
 class QComboBox;
 QT_END_NAMESPACE
 
-class PlayerControls : public QWidget
-{
+class PlayerControls : public QWidget {
     Q_OBJECT
 
-public:
+   public:
     PlayerControls(QWidget *parent = 0);
 
     QMediaPlayer::State state() const;
@@ -23,13 +22,13 @@ public:
     bool isMuted() const;
     qreal playbackRate() const;
 
-public slots:
+   public slots:
     void setState(QMediaPlayer::State state);
     void setVolume(int volume);
     void setMuted(bool muted);
     void setPlaybackRate(float rate);
 
-signals:
+   signals:
     void play();
     void pause();
     void stop();
@@ -39,13 +38,13 @@ signals:
     void changeMuting(bool muting);
     void changeRate(qreal rate);
 
-private slots:
+   private slots:
     void playClicked();
     void muteClicked();
     void updateRate();
     void onVolumeSliderValueChanged();
 
-private:
+   private:
     QMediaPlayer::State playerState;
     bool playerMuted;
     QAbstractButton *playButton;
@@ -57,4 +56,4 @@ private:
     QComboBox *rateBox;
 };
 
-#endif // PLAYERCONTROLS_H
+#endif  // PLAYERCONTROLS_H

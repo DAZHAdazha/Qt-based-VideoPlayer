@@ -1,13 +1,11 @@
+#include <QApplication>
+#include <QCommandLineOption>
+#include <QCommandLineParser>
+#include <QDir>
 
 #include "player.h"
 
-#include <QApplication>
-#include <QCommandLineParser>
-#include <QCommandLineOption>
-#include <QDir>
-
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
     QCoreApplication::setApplicationName("Player Example");

@@ -2,11 +2,11 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "videowidget.h"
-
-#include <QWidget>
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
+#include <QWidget>
+
+#include "videowidget.h"
 
 QT_BEGIN_NAMESPACE
 class QAbstractItemView;
@@ -22,11 +22,10 @@ QT_END_NAMESPACE
 
 class PlaylistModel;
 
-class Player : public QWidget
-{
+class Player : public QWidget {
     Q_OBJECT
 
-public:
+   public:
     Player(QWidget *parent = 0);
     ~Player();
 
@@ -34,10 +33,10 @@ public:
 
     void addToPlaylist(const QList<QUrl> urls);
 
-signals:
+   signals:
     void fullScreenChanged(bool fullScreen);
 
-private slots:
+   private slots:
     void open();
     void durationChanged(qint64 duration);
     void positionChanged(qint64 progress);
@@ -58,7 +57,7 @@ private slots:
 
     void showColorDialog();
 
-private:
+   private:
     void setTrackInfo(const QString &info);
     void setStatusInfo(const QString &info);
     void handleCursor(QMediaPlayer::MediaStatus status);
@@ -74,9 +73,6 @@ private:
     QPushButton *colorButton;
     QDialog *colorDialog;
 
-    QVideoProbe *videoProbe;
-    QAudioProbe *audioProbe;
-
     PlaylistModel *playlistModel;
     QAbstractItemView *playlistView;
     QString trackInfo;
@@ -84,4 +80,4 @@ private:
     qint64 duration;
 };
 
-#endif // PLAYER_H
+#endif  // PLAYER_H

@@ -36,7 +36,7 @@ QVariant PlaylistModel::data(const QModelIndex &index, int role) const {
 
         if (!value.isValid() && index.column() == Title && index.row() < m_playlist->mediaCount()) {
             QUrl location = m_playlist->media(index.row()).canonicalRequest().url();
-            auto path = location.path();
+            auto path = location.toLocalFile();
             auto name = QFileInfo(path).fileName();
             auto thumb = path.left(path.length() - 4) + ".png";
             value = name;

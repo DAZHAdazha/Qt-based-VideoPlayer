@@ -6,12 +6,11 @@
 #include <QMediaService>
 #include <QVideoProbe>
 #include <QtWidgets>
-
 #include <iostream>
 using namespace std;
 
-#include "playlistdelegate.h"
 #include "absolutesetstyle.h"
+#include "playlistdelegate.h"
 
 Player::Player(QWidget *parent) : QWidget(parent), videoWidget(0), slider(0), colorDialog(0) {
     player = new QMediaPlayer(this);
@@ -261,10 +260,10 @@ void Player::displayErrorMessage() {
 void Player::updateDurationInfo(qint64 currentInfo) {
     QString tStr;
     if (currentInfo || duration) {
-        QTime currentTime((currentInfo / 3600/1000) % 60, (currentInfo / 60/1000) % 60, currentInfo/1000 % 60,
-                          (currentInfo) % 1000);
-        QTime totalTime((duration / 3600/1000) % 60, (duration / 60/1000) % 60, duration/1000 % 60,
-                        (duration) % 1000);
+        QTime currentTime((currentInfo / 3600 / 1000) % 60, (currentInfo / 60 / 1000) % 60,
+                          currentInfo / 1000 % 60, (currentInfo) % 1000);
+        QTime totalTime((duration / 3600 / 1000) % 60, (duration / 60 / 1000) % 60,
+                        duration / 1000 % 60, (duration) % 1000);
         QString format = "mm:ss";
         if (duration > 3600) format = "hh:mm:ss";
         tStr = currentTime.toString(format) + " / " + totalTime.toString(format);

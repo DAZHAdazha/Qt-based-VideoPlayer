@@ -5,9 +5,9 @@
 #include <QMediaPlaylist>
 #include <QWidget>
 
-#include "videowidget.h"
 #include "playercontrols.h"
 #include "playlistmodel.h"
+#include "videowidget.h"
 
 QT_BEGIN_NAMESPACE
 class QAbstractItemView;
@@ -54,6 +54,7 @@ class Player : public QWidget {
     void videoAvailableChanged(bool available);
 
     void displayErrorMessage();
+
    private:
     void setTrackInfo(const QString &info);
     void setStatusInfo(const QString &info);
@@ -62,7 +63,7 @@ class Player : public QWidget {
     void updateDurationInfo(qint64 currentInfo);
     // Initializes layouts
     void initLayout();
-    PlayerControls* initControls();
+    PlayerControls *initControls();
 
     QMediaPlayer *player;
     QMediaPlaylist *playlist;

@@ -20,33 +20,27 @@ PlayerControls::PlayerControls(QWidget *parent)
       rateBox(0) {
     playButton = new QToolButton(this);
     playButton->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
-
     connect(playButton, SIGNAL(clicked()), this, SLOT(playClicked()));
 
     stopButton = new QToolButton(this);
     stopButton->setIcon(style()->standardIcon(QStyle::SP_MediaStop));
     stopButton->setEnabled(false);
-
     connect(stopButton, SIGNAL(clicked()), this, SIGNAL(stop()));
 
     nextButton = new QToolButton(this);
     nextButton->setIcon(style()->standardIcon(QStyle::SP_MediaSkipForward));
-
     connect(nextButton, SIGNAL(clicked()), this, SIGNAL(next()));
 
     previousButton = new QToolButton(this);
     previousButton->setIcon(style()->standardIcon(QStyle::SP_MediaSkipBackward));
-
     connect(previousButton, SIGNAL(clicked()), this, SIGNAL(previous()));
 
     muteButton = new QToolButton(this);
     muteButton->setIcon(style()->standardIcon(QStyle::SP_MediaVolume));
-
     connect(muteButton, SIGNAL(clicked()), this, SLOT(muteClicked()));
 
     volumeSlider = new QSlider(Qt::Horizontal, this);
     volumeSlider->setRange(0, 100);
-
     connect(volumeSlider, SIGNAL(valueChanged(int)), this, SLOT(onVolumeSliderValueChanged()));
 
     rateBox = new QComboBox(this);
@@ -54,14 +48,13 @@ PlayerControls::PlayerControls(QWidget *parent)
     rateBox->addItem("1.0x", QVariant(1.0));
     rateBox->addItem("2.0x", QVariant(2.0));
     rateBox->setCurrentIndex(1);
-
     connect(rateBox, SIGNAL(activated(int)), SLOT(updateRate()));
 
     QBoxLayout *layout = new QHBoxLayout;
     layout->setMargin(0);
-    layout->addWidget(stopButton);
-    layout->addWidget(previousButton);
     layout->addWidget(playButton);
+    layout->addWidget(previousButton);
+    layout->addWidget(stopButton);
     layout->addWidget(nextButton);
     layout->addWidget(muteButton);
     layout->addWidget(volumeSlider);

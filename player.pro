@@ -13,7 +13,9 @@ HEADERS = \
     playlistmodel.h \
     videowidget.h \
     playlistdelegate.h \
-    playlistitem.h
+    playlistitem.h \
+    absolutesetstyle.h
+    
 SOURCES = main.cpp \
     player.cpp \
     playercontrols.cpp \

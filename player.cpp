@@ -11,6 +11,7 @@
 using namespace std;
 
 #include "playlistdelegate.h"
+#include "absolutesetstyle.h"
 
 Player::Player(QWidget *parent) : QWidget(parent), videoWidget(0), slider(0), colorDialog(0) {
     player = new QMediaPlayer(this);
@@ -43,8 +44,8 @@ Player::Player(QWidget *parent) : QWidget(parent), videoWidget(0), slider(0), co
     connect(playlistView, SIGNAL(activated(QModelIndex)), this, SLOT(jump(QModelIndex)));
 
     slider = new QSlider(Qt::Horizontal, this);
-//    slider->setRange(0, player->duration() / 1000);
     slider->setRange(0, player->duration());
+    slider->setStyle(new AbsoluteSetStyle(slider->style()));
 
     connect(slider, SIGNAL(sliderMoved(int)), this, SLOT(seek(int)));
 
@@ -138,18 +139,14 @@ void Player::removeSelected() {
 }
 
 void Player::durationChanged(qint64 duration) {
-//    this->duration = duration / 1000;
-//    slider->setMaximum(duration / 1000);
     this->duration = duration;
     slider->setMaximum(duration);
 }
 
 void Player::positionChanged(qint64 progress) {
     if (!slider->isSliderDown()) {
-//        slider->setValue(progress / 1000);
         slider->setValue(progress);
     }
-//    updateDurationInfo(progress / 1000);
     updateDurationInfo(progress);
 }
 
@@ -163,7 +160,6 @@ void Player::currentMediaChanged(const QMediaContent &media) {
 void Player::previousClicked() {
     // Go to previous track if we are within the first 5 seconds of playback
     // Otherwise, seek to the beginning.
-//    if (player->position() <= 5000)
     if (player->position() <= 5)
         playlist->previous();
     else
@@ -182,7 +178,6 @@ void Player::playlistPositionChanged(int currentItem) {
 }
 
 void Player::seek(int seconds) {
-//    player->setPosition(seconds * 1000);
     player->setPosition(seconds);
 }
 

@@ -64,9 +64,10 @@ void PlayerControls::initLayout() {
     layout->addWidget(stopButton);
     layout->addWidget(nextButton);
     layout->addWidget(muteButton);
+    layout->addWidget(volumeSlider);
     layout->addWidget(backButton);
     layout->addWidget(forwardButton);
-    layout->addWidget(volumeSlider);
+
     layout->addWidget(rateBox);
     setLayout(layout);
 }

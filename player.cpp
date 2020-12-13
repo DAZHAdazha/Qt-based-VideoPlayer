@@ -21,6 +21,7 @@ Player::Player(QWidget *parent) : QWidget(parent), videoWidget(0), slider(0), co
 
     // set the position of the player
     this->setGeometry(500,300,1000,600);
+    this->setMinimumSize(650,450);
 
     connect(player, SIGNAL(durationChanged(qint64)), SLOT(durationChanged(qint64)));
     connect(player, SIGNAL(positionChanged(qint64)), SLOT(positionChanged(qint64)));

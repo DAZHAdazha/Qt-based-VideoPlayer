@@ -95,10 +95,24 @@ PlayerControls *Player::initControls() {
 }
 
 void Player::initLayout() {
+
+    QWidget *listWindow = new QWidget();
+    QBoxLayout *listLayout = new QVBoxLayout;
+    tagButton = new QToolButton(this);
+    tagButton->setIcon(style()->standardIcon(QStyle::SP_FileDialogListView));
+
+    listLayout->addWidget(tagButton,1);
+    listLayout->addWidget(playlistView,9);
+    listWindow->setLayout(listLayout);
+
     // Top layout
     QBoxLayout *displayLayout = new QHBoxLayout;
     displayLayout->addWidget(videoWidget, 3);
-    displayLayout->addWidget(playlistView, 1);
+//    displayLayout->addWidget(playlistView, 1);
+    displayLayout->addWidget(listWindow, 1);
+
+
+
 
     QBoxLayout *controlLayout = new QHBoxLayout;
     controlLayout->setMargin(0);

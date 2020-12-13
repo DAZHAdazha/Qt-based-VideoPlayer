@@ -78,6 +78,7 @@ class Player : public QWidget {
     QDialog *colorDialog;
     QAbstractButton *openButton;
     QAbstractButton *removeButton;
+    QAbstractButton *tagButton;
 
     PlaylistModel *playlistModel;
     QAbstractItemView *playlistView;

@@ -1,4 +1,5 @@
 #include "playercontrols.h"
+#include "absolutesetstyle.h"
 
 #include <QBoxLayout>
 #include <QComboBox>
@@ -31,6 +32,9 @@ PlayerControls::PlayerControls(QWidget *parent)
 
     volumeSlider = new QSlider(Qt::Horizontal, this);
     volumeSlider->setRange(0, 100);
+
+    volumeSlider->setStyle(new AbsoluteSetStyle(volumeSlider->style()));
+
     connect(volumeSlider, SIGNAL(valueChanged(int)), this, SLOT(onVolumeSliderValueChanged()));
 
     forwardButton = new QToolButton(this);

@@ -19,6 +19,9 @@ Player::Player(QWidget *parent) : QWidget(parent), videoWidget(0), slider(0), co
     player->setPlaylist(playlist);
     player->setNotifyInterval(20);
 
+    // set the position of the player
+    this->setGeometry(500,300,1000,600);
+
     connect(player, SIGNAL(durationChanged(qint64)), SLOT(durationChanged(qint64)));
     connect(player, SIGNAL(positionChanged(qint64)), SLOT(positionChanged(qint64)));
     connect(player, &QMediaPlayer::currentMediaChanged, this, &Player::currentMediaChanged);

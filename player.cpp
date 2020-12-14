@@ -99,17 +99,21 @@ void Player::initLayout() {
 
     QWidget *listWindow = new QWidget();
     QBoxLayout *listLayout = new QVBoxLayout;
-    tagButton = new QToolButton(this);
-    tagButton->setIcon(style()->standardIcon(QStyle::SP_FileDialogListView));
+    videoAmount = new QLabel(this);
+    int videoAmountNumber = playlistView->model()->rowCount();
+    char videoAmountChar[20];
+    string videoAmountString = "Total " + to_string(videoAmountNumber) + " videos";
+    strcpy(videoAmountChar,videoAmountString.c_str());
+    videoAmount->setText(videoAmountChar);
 
-    listLayout->addWidget(tagButton,1);
+
     listLayout->addWidget(playlistView,9);
+    listLayout->addWidget(videoAmount,1);
     listWindow->setLayout(listLayout);
 
     // Top layout
     QBoxLayout *displayLayout = new QHBoxLayout;
     displayLayout->addWidget(videoWidget, 3);
-//    displayLayout->addWidget(playlistView, 1);
     displayLayout->addWidget(listWindow, 1);
 
 
@@ -145,6 +149,11 @@ void Player::open() {
     fileDialog.setWindowTitle(tr("Open Files"));
     fileDialog.setMimeTypeFilters(player->supportedMimeTypes());
     if (fileDialog.exec() == QDialog::Accepted) addToPlaylist(fileDialog.selectedUrls());
+    int videoAmountNumber = playlistView->model()->rowCount();
+    char videoAmountChar[20];
+    string videoAmountString = "Total " + to_string(videoAmountNumber) + " videos";
+    strcpy(videoAmountChar,videoAmountString.c_str());
+    videoAmount->setText(videoAmountChar);
 }
 
 void Player::addToPlaylist(const QList<QUrl> urls) {
@@ -164,6 +173,11 @@ void Player::removeSelected() {
     if (current.isValid()) {
         playlist->removeMedia(current.row());
     }
+    int videoAmountNumber = playlistView->model()->rowCount();
+    char videoAmountChar[20];
+    string videoAmountString = "Total " + to_string(videoAmountNumber) + " videos";
+    strcpy(videoAmountChar,videoAmountString.c_str());
+    videoAmount->setText(videoAmountChar);
 }
 
 void Player::durationChanged(qint64 duration) {

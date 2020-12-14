@@ -54,10 +54,14 @@ Player::Player(QWidget *parent) : QWidget(parent), videoWidget(0), slider(0), co
 
     labelDuration = new QLabel(this);
 
-    openButton = new QPushButton(tr("Open"), this);
+//    openButton = new QPushButton(tr("Open"), this);
+    openButton = new QPushButton(this);
+    openButton->setIcon(QIcon(":/add.png"));
     connect(openButton, SIGNAL(clicked()), this, SLOT(open()));
 
-    removeButton = new QPushButton(tr("Remove"), this);
+//    removeButton = new QPushButton(tr("Remove"), this);
+    removeButton = new QPushButton(this);
+    removeButton->setIcon(QIcon(":/delete.png"));
     connect(removeButton, SIGNAL(clicked()), this, SLOT(removeSelected()));
 
     fullScreenButton = new QPushButton(tr("FullScreen"), this);
@@ -98,7 +102,27 @@ PlayerControls *Player::initControls() {
 void Player::initLayout() {
 
     QWidget *listWindow = new QWidget();
+    QWidget *inferiorWindow = new QWidget();
+    QWidget *upperWindow = new QWidget();
     QBoxLayout *listLayout = new QVBoxLayout;
+
+
+
+    QPalette pal(inferiorWindow->palette());
+
+    pal.setColor(QPalette::Background, Qt::white);
+    inferiorWindow->setAutoFillBackground(true);
+    inferiorWindow->setPalette(pal);
+
+    QBoxLayout *inferiorLayout = new QHBoxLayout;
+    QBoxLayout *upperLayout = new QHBoxLayout;
+
+    inferiorLayout->setMargin(0);
+    listLayout->setMargin(0);
+
+    QPushButton *test = new QPushButton("test");
+    test->setIcon(QIcon(":/tag.png"));
+
     videoAmount = new QLabel(this);
     int videoAmountNumber = playlistView->model()->rowCount();
     char videoAmountChar[20];
@@ -106,8 +130,18 @@ void Player::initLayout() {
     strcpy(videoAmountChar,videoAmountString.c_str());
     videoAmount->setText(videoAmountChar);
 
-    listLayout->addWidget(playlistView,9);
-    listLayout->addWidget(videoAmount,1);
+    upperLayout->addWidget(test);
+    upperWindow->setLayout(upperLayout);
+
+    inferiorLayout->addWidget(videoAmount);
+    inferiorLayout->addWidget(openButton);
+    inferiorLayout->addWidget(removeButton);
+    inferiorWindow->setLayout(inferiorLayout);
+
+
+    listLayout->addWidget(upperWindow,1);
+    listLayout->addWidget(playlistView,8);
+    listLayout->addWidget(inferiorWindow,1);
     listWindow->setLayout(listLayout);
 
     // Top layout
@@ -122,8 +156,6 @@ void Player::initLayout() {
     controlLayout->setMargin(0);
     controlLayout->addWidget(initControls());
     controlLayout->addStretch(1);
-    controlLayout->addWidget(openButton);
-    controlLayout->addWidget(removeButton);
     controlLayout->addWidget(fullScreenButton);
 
     QHBoxLayout *hLayout = new QHBoxLayout;

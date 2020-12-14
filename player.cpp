@@ -119,8 +119,8 @@ void Player::initLayout() {
     QBoxLayout *inferiorLayout = new QHBoxLayout;
     QBoxLayout *upperLayout = new QHBoxLayout;
 
-    inferiorLayout->setMargin(0);
-    listLayout->setMargin(0);
+//    inferiorLayout->setMargin(0);
+//    listLayout->setMargin(0);
 
     QPushButton *test = new QPushButton("test");
     test->setIcon(QIcon(":/tag.png"));
@@ -144,6 +144,8 @@ void Player::initLayout() {
     listLayout->addWidget(upperWindow,1);
     listLayout->addWidget(playlistView,8);
     listLayout->addWidget(inferiorWindow,1);
+//    listLayout->setMargin(0);
+    listLayout->setSpacing(0);
     listWindow->setLayout(listLayout);
 
     // Top layout
@@ -155,7 +157,7 @@ void Player::initLayout() {
 
 
     QBoxLayout *controlLayout = new QHBoxLayout;
-    controlLayout->setMargin(0);
+//    controlLayout->setMargin(0);
     controlLayout->addWidget(initControls());
     controlLayout->addStretch(1);
     controlLayout->addWidget(fullScreenButton);

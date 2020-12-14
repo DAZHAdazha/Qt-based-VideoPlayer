@@ -27,7 +27,8 @@ PlayerControls::PlayerControls(QWidget *parent)
     connect(previousButton, SIGNAL(clicked()), this, SIGNAL(previous()));
 
     muteButton = new QToolButton(this);
-    muteButton->setIcon(style()->standardIcon(QStyle::SP_MediaVolume));
+//    muteButton->setIcon(style()->standardIcon(QStyle::SP_MediaVolume));
+    muteButton->setIcon(QIcon(":/volume.png"));
     connect(muteButton, SIGNAL(clicked()), this, SLOT(muteClicked()));
 
     volumeSlider = new QSlider(Qt::Horizontal, this);
@@ -38,11 +39,13 @@ PlayerControls::PlayerControls(QWidget *parent)
     connect(volumeSlider, SIGNAL(valueChanged(int)), this, SLOT(onVolumeSliderValueChanged()));
 
     forwardButton = new QToolButton(this);
-    forwardButton->setIcon(style()->standardIcon(QStyle::SP_ArrowRight));
+//    forwardButton->setIcon(style()->standardIcon(QStyle::SP_ArrowRight));
+    forwardButton->setIcon(QIcon(":/forward.png"));
     connect(forwardButton, SIGNAL(clicked()), this, SLOT(forwardClicked()));
 
     backButton = new QToolButton(this);
-    backButton->setIcon(style()->standardIcon(QStyle::SP_ArrowLeft));
+//    backButton->setIcon(style()->standardIcon(QStyle::SP_ArrowLeft));
+    backButton->setIcon(QIcon(":/backward.png"));
     connect(backButton, SIGNAL(clicked()), this, SLOT(backClicked()));
 
     rateBox = new QComboBox(this);
@@ -124,8 +127,15 @@ void PlayerControls::setMuted(bool muted) {
     if (muted != playerMuted) {
         playerMuted = muted;
 
-        muteButton->setIcon(
-            style()->standardIcon(muted ? QStyle::SP_MediaVolumeMuted : QStyle::SP_MediaVolume));
+//        muteButton->setIcon(
+//            style()->standardIcon(muted ? QStyle::SP_MediaVolumeMuted : QStyle::SP_MediaVolume));
+
+        if(muted){
+            muteButton->setIcon(QIcon(":/mute.png"));
+        }
+        else{
+            muteButton->setIcon(QIcon(":/volume.png"));
+        }
     }
 }
 

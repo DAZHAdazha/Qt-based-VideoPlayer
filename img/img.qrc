@@ -4,5 +4,9 @@
         <file>delete.png</file>
         <file>tag.png</file>
         <file>fullscreen.png</file>
+        <file>backward.png</file>
+        <file>forward.png</file>
+        <file>mute.png</file>
+        <file>volume.png</file>
     </qresource>
 </RCC>

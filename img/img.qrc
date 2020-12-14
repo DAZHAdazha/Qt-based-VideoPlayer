@@ -3,5 +3,6 @@
         <file>add.png</file>
         <file>delete.png</file>
         <file>tag.png</file>
+        <file>fullscreen.png</file>
     </qresource>
 </RCC>

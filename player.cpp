@@ -64,7 +64,9 @@ Player::Player(QWidget *parent) : QWidget(parent), videoWidget(0), slider(0), co
     removeButton->setIcon(QIcon(":/delete.png"));
     connect(removeButton, SIGNAL(clicked()), this, SLOT(removeSelected()));
 
-    fullScreenButton = new QPushButton(tr("FullScreen"), this);
+//    fullScreenButton = new QPushButton(tr("FullScreen"), this);
+    fullScreenButton = new QPushButton(this);
+    fullScreenButton->setIcon(QIcon(":/fullscreen.png"));
     fullScreenButton->setCheckable(true);
 
     initLayout();

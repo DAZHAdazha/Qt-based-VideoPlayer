@@ -106,7 +106,6 @@ void Player::initLayout() {
     strcpy(videoAmountChar,videoAmountString.c_str());
     videoAmount->setText(videoAmountChar);
 
-
     listLayout->addWidget(playlistView,9);
     listLayout->addWidget(videoAmount,1);
     listWindow->setLayout(listLayout);

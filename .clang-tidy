@@ -1,0 +1,10 @@
+Checks: 'readability-function-size,readability-identifier-naming'
+CheckOptions:
+  - key: readability-function-size.LineThreshold
+    value: 50
+  - key: readability-identifier-naming.GlobalConstantPrefix
+    value: k
+  - key: readability-identifier-naming.LocalVariableCase
+    value: camelBack
+  - key: readability-identifier-naming.ClassMemberCase
+    value: camelBack

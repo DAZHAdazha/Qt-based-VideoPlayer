@@ -1,5 +1,4 @@
 #include "playercontrols.h"
-#include "absolutesetstyle.h"
 
 #include <QBoxLayout>
 #include <QComboBox>
@@ -7,33 +6,34 @@
 #include <QStyle>
 #include <QToolButton>
 
+#include "absolutesetstyle.h"
+
 PlayerControls::PlayerControls(QWidget *parent)
     : QWidget(parent), playerState(QMediaPlayer::StoppedState), playerMuted(false) {
-
     playButton = new QToolButton(this);
     playButton->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
-    playButton->setIconSize(QSize(25,25));
+    playButton->setIconSize(QSize(25, 25));
     connect(playButton, SIGNAL(clicked()), this, SLOT(playClicked()));
 
     stopButton = new QToolButton(this);
     stopButton->setIcon(style()->standardIcon(QStyle::SP_MediaStop));
-    stopButton->setIconSize(QSize(25,25));
+    stopButton->setIconSize(QSize(25, 25));
     stopButton->setEnabled(false);
     connect(stopButton, SIGNAL(clicked()), this, SIGNAL(stop()));
 
     nextButton = new QToolButton(this);
     nextButton->setIcon(style()->standardIcon(QStyle::SP_MediaSkipForward));
-    nextButton->setIconSize(QSize(25,25));
+    nextButton->setIconSize(QSize(25, 25));
     connect(nextButton, SIGNAL(clicked()), this, SIGNAL(next()));
 
     previousButton = new QToolButton(this);
     previousButton->setIcon(style()->standardIcon(QStyle::SP_MediaSkipBackward));
-    previousButton->setIconSize(QSize(25,25));
+    previousButton->setIconSize(QSize(25, 25));
     connect(previousButton, SIGNAL(clicked()), this, SIGNAL(previous()));
 
     muteButton = new QToolButton(this);
     muteButton->setIcon(QIcon(":/volume.png"));
-    muteButton->setIconSize(QSize(25,25));
+    muteButton->setIconSize(QSize(25, 25));
     connect(muteButton, SIGNAL(clicked()), this, SLOT(muteClicked()));
 
     volumeSlider = new QSlider(Qt::Horizontal, this);
@@ -43,14 +43,18 @@ PlayerControls::PlayerControls(QWidget *parent)
 
     forwardButton = new QToolButton(this);
     forwardButton->setIcon(QIcon(":/forward.png"));
-    forwardButton->setIconSize(QSize(25,25));
+    forwardButton->setIconSize(QSize(25, 25));
     connect(forwardButton, SIGNAL(clicked()), this, SLOT(forwardClicked()));
 
     backButton = new QToolButton(this);
-    backButton->setIconSize(QSize(25,25));
+    backButton->setIconSize(QSize(25, 25));
     backButton->setIcon(QIcon(":/backward.png"));
     connect(backButton, SIGNAL(clicked()), this, SLOT(backClicked()));
+    initRateBox();
+    initLayout();
+}
 
+void PlayerControls::initRateBox() {
     rateBox = new QComboBox(this);
     rateBox->addItem("0.25x", QVariant(0.25));
     rateBox->addItem("0.5x", QVariant(0.5));
@@ -62,8 +66,6 @@ PlayerControls::PlayerControls(QWidget *parent)
     rateBox->addItem("2.0x", QVariant(2.0));
     rateBox->setCurrentIndex(3);
     connect(rateBox, SIGNAL(activated(int)), SLOT(updateRate()));
-
-    initLayout();
 }
 
 void PlayerControls::initLayout() {
@@ -125,10 +127,9 @@ bool PlayerControls::isMuted() const {
 void PlayerControls::setMuted(bool muted) {
     if (muted != playerMuted) {
         playerMuted = muted;
-        if(muted){
+        if (muted) {
             muteButton->setIcon(QIcon(":/mute.png"));
-        }
-        else{
+        } else {
             muteButton->setIcon(QIcon(":/volume.png"));
         }
     }

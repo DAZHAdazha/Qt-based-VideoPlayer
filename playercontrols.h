@@ -61,6 +61,7 @@ class PlayerControls : public QWidget {
     QComboBox *rateBox;
     // Initializes layout of buttons
     void initLayout();
+    void initRateBox();
 };
 
 #endif  // PLAYERCONTROLS_H

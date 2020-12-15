@@ -9,42 +9,45 @@
 
 PlayerControls::PlayerControls(QWidget *parent)
     : QWidget(parent), playerState(QMediaPlayer::StoppedState), playerMuted(false) {
+
     playButton = new QToolButton(this);
     playButton->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
+    playButton->setIconSize(QSize(25,25));
     connect(playButton, SIGNAL(clicked()), this, SLOT(playClicked()));
 
     stopButton = new QToolButton(this);
     stopButton->setIcon(style()->standardIcon(QStyle::SP_MediaStop));
+    stopButton->setIconSize(QSize(25,25));
     stopButton->setEnabled(false);
     connect(stopButton, SIGNAL(clicked()), this, SIGNAL(stop()));
 
     nextButton = new QToolButton(this);
     nextButton->setIcon(style()->standardIcon(QStyle::SP_MediaSkipForward));
+    nextButton->setIconSize(QSize(25,25));
     connect(nextButton, SIGNAL(clicked()), this, SIGNAL(next()));
 
     previousButton = new QToolButton(this);
     previousButton->setIcon(style()->standardIcon(QStyle::SP_MediaSkipBackward));
+    previousButton->setIconSize(QSize(25,25));
     connect(previousButton, SIGNAL(clicked()), this, SIGNAL(previous()));
 
     muteButton = new QToolButton(this);
-//    muteButton->setIcon(style()->standardIcon(QStyle::SP_MediaVolume));
     muteButton->setIcon(QIcon(":/volume.png"));
+    muteButton->setIconSize(QSize(25,25));
     connect(muteButton, SIGNAL(clicked()), this, SLOT(muteClicked()));
 
     volumeSlider = new QSlider(Qt::Horizontal, this);
     volumeSlider->setRange(0, 100);
-
     volumeSlider->setStyle(new AbsoluteSetStyle(volumeSlider->style()));
-
     connect(volumeSlider, SIGNAL(valueChanged(int)), this, SLOT(onVolumeSliderValueChanged()));
 
     forwardButton = new QToolButton(this);
-//    forwardButton->setIcon(style()->standardIcon(QStyle::SP_ArrowRight));
     forwardButton->setIcon(QIcon(":/forward.png"));
+    forwardButton->setIconSize(QSize(25,25));
     connect(forwardButton, SIGNAL(clicked()), this, SLOT(forwardClicked()));
 
     backButton = new QToolButton(this);
-//    backButton->setIcon(style()->standardIcon(QStyle::SP_ArrowLeft));
+    backButton->setIconSize(QSize(25,25));
     backButton->setIcon(QIcon(":/backward.png"));
     connect(backButton, SIGNAL(clicked()), this, SLOT(backClicked()));
 
@@ -74,7 +77,6 @@ void PlayerControls::initLayout() {
     layout->addWidget(volumeSlider);
     layout->addWidget(backButton);
     layout->addWidget(forwardButton);
-
     layout->addWidget(rateBox);
     setLayout(layout);
 }
@@ -86,7 +88,6 @@ QMediaPlayer::State PlayerControls::state() const {
 void PlayerControls::setState(QMediaPlayer::State state) {
     if (state != playerState) {
         playerState = state;
-
         switch (state) {
             case QMediaPlayer::StoppedState:
                 stopButton->setEnabled(false);
@@ -108,14 +109,12 @@ int PlayerControls::volume() const {
     qreal linearVolume =
         QAudio::convertVolume(volumeSlider->value() / qreal(100), QAudio::LogarithmicVolumeScale,
                               QAudio::LinearVolumeScale);
-
     return qRound(linearVolume * 100);
 }
 
 void PlayerControls::setVolume(int volume) {
     qreal logarithmicVolume = QAudio::convertVolume(volume / qreal(100), QAudio::LinearVolumeScale,
                                                     QAudio::LogarithmicVolumeScale);
-
     volumeSlider->setValue(qRound(logarithmicVolume * 100));
 }
 
@@ -126,10 +125,6 @@ bool PlayerControls::isMuted() const {
 void PlayerControls::setMuted(bool muted) {
     if (muted != playerMuted) {
         playerMuted = muted;
-
-//        muteButton->setIcon(
-//            style()->standardIcon(muted ? QStyle::SP_MediaVolumeMuted : QStyle::SP_MediaVolume));
-
         if(muted){
             muteButton->setIcon(QIcon(":/mute.png"));
         }

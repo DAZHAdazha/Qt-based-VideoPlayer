@@ -49,24 +49,23 @@ Player::Player(QWidget *parent) : QWidget(parent), videoWidget(0), slider(0), co
     slider = new QSlider(Qt::Horizontal, this);
     slider->setRange(0, player->duration());
     slider->setStyle(new AbsoluteSetStyle(slider->style()));
-
     connect(slider, SIGNAL(sliderMoved(int)), this, SLOT(seek(int)));
 
     labelDuration = new QLabel(this);
 
-//    openButton = new QPushButton(tr("Open"), this);
     openButton = new QPushButton(this);
     openButton->setIcon(QIcon(":/add.png"));
+    openButton->setIconSize(QSize(25,25));
     connect(openButton, SIGNAL(clicked()), this, SLOT(open()));
 
-//    removeButton = new QPushButton(tr("Remove"), this);
     removeButton = new QPushButton(this);
     removeButton->setIcon(QIcon(":/delete.png"));
+    removeButton->setIconSize(QSize(25,25));
     connect(removeButton, SIGNAL(clicked()), this, SLOT(removeSelected()));
 
-//    fullScreenButton = new QPushButton(tr("FullScreen"), this);
     fullScreenButton = new QPushButton(this);
     fullScreenButton->setIcon(QIcon(":/fullscreen.png"));
+    fullScreenButton->setIconSize(QSize(25,25));
     fullScreenButton->setCheckable(true);
 
     initLayout();
@@ -88,10 +87,8 @@ PlayerControls *Player::initControls() {
     connect(controls, SIGNAL(changeVolume(int)), player, SLOT(setVolume(int)));
     connect(controls, SIGNAL(changeMuting(bool)), player, SLOT(setMuted(bool)));
     connect(controls, SIGNAL(changeRate(qreal)), player, SLOT(setPlaybackRate(qreal)));
-
     connect(controls, SIGNAL(forward()),this, SLOT(goForward()));
     connect(controls, SIGNAL(back()),this, SLOT(goBack()));
-
     connect(controls, SIGNAL(stop()), videoWidget, SLOT(update()));
 
     connect(player, SIGNAL(stateChanged(QMediaPlayer::State)), controls,
@@ -106,24 +103,19 @@ void Player::initLayout() {
     QWidget *listWindow = new QWidget();
     QWidget *inferiorWindow = new QWidget();
     QWidget *upperWindow = new QWidget();
-    QBoxLayout *listLayout = new QVBoxLayout;
-
-
 
     QPalette pal(inferiorWindow->palette());
-
     pal.setColor(QPalette::Background, Qt::white);
     inferiorWindow->setAutoFillBackground(true);
     inferiorWindow->setPalette(pal);
 
+    QBoxLayout *listLayout = new QVBoxLayout;
     QBoxLayout *inferiorLayout = new QHBoxLayout;
     QBoxLayout *upperLayout = new QHBoxLayout;
 
-//    inferiorLayout->setMargin(0);
-//    listLayout->setMargin(0);
-
     QPushButton *test = new QPushButton("test");
     test->setIcon(QIcon(":/tag.png"));
+    test->setIconSize(QSize(25,25));
 
     videoAmount = new QLabel(this);
     int videoAmountNumber = playlistView->model()->rowCount();
@@ -140,11 +132,9 @@ void Player::initLayout() {
     inferiorLayout->addWidget(removeButton);
     inferiorWindow->setLayout(inferiorLayout);
 
-
     listLayout->addWidget(upperWindow,1);
     listLayout->addWidget(playlistView,8);
     listLayout->addWidget(inferiorWindow,1);
-//    listLayout->setMargin(0);
     listLayout->setSpacing(0);
     listWindow->setLayout(listLayout);
 
@@ -153,11 +143,7 @@ void Player::initLayout() {
     displayLayout->addWidget(videoWidget, 3);
     displayLayout->addWidget(listWindow, 1);
 
-
-
-
     QBoxLayout *controlLayout = new QHBoxLayout;
-//    controlLayout->setMargin(0);
     controlLayout->addWidget(initControls());
     controlLayout->addStretch(1);
     controlLayout->addWidget(fullScreenButton);
@@ -196,11 +182,11 @@ void Player::addToPlaylist(const QList<QUrl> urls) {
 }
 
 void Player::goForward() {
-    player->setPosition(player->position()+15000);
+    player->setPosition(player->position()+10000);
 }
 
 void Player::goBack() {
-    player->setPosition(player->position()-15000);
+    player->setPosition(player->position()-10000);
 }
 
 void Player::removeSelected() {
@@ -338,9 +324,9 @@ void Player::displayErrorMessage() {
 void Player::updateDurationInfo(qint64 currentInfo) {
     QString tStr;
     if (currentInfo || duration) {
-        QTime currentTime((currentInfo / 3600 / 1000) % 60, (currentInfo / 60 / 1000) % 60,
+        QTime currentTime((currentInfo / 3600000) % 60, (currentInfo / 60000) % 60,
                           currentInfo / 1000 % 60, (currentInfo) % 1000);
-        QTime totalTime((duration / 3600 / 1000) % 60, (duration / 60 / 1000) % 60,
+        QTime totalTime((duration / 3600000) % 60, (duration / 60000) % 60,
                         duration / 1000 % 60, (duration) % 1000);
         QString format = "mm:ss";
         if (duration > 3600) format = "hh:mm:ss";

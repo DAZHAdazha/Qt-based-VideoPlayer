@@ -19,6 +19,8 @@ Player::Player(QWidget *parent) : QWidget(parent), videoWidget(0), slider(0), co
     player->setPlaylist(playlist);
     player->setNotifyInterval(20);
 
+    library = new Library();
+
     // set the position of the player
     this->setGeometry(500,300,1000,600);
     this->setMinimumSize(650,450);
@@ -63,6 +65,9 @@ Player::Player(QWidget *parent) : QWidget(parent), videoWidget(0), slider(0), co
     removeButton->setIconSize(QSize(25,25));
     connect(removeButton, SIGNAL(clicked()), this, SLOT(removeSelected()));
 
+    libraryButton = new QPushButton("Library");
+    connect(libraryButton, SIGNAL(clicked()), this, SLOT(showLibrary()));
+
     fullScreenButton = new QPushButton(this);
     fullScreenButton->setIcon(QIcon(":/fullscreen.png"));
     fullScreenButton->setIconSize(QSize(25,25));
@@ -99,7 +104,6 @@ PlayerControls *Player::initControls() {
 }
 
 void Player::initLayout() {
-
     QWidget *listWindow = new QWidget();
     QWidget *inferiorWindow = new QWidget();
     QWidget *upperWindow = new QWidget();
@@ -114,7 +118,6 @@ void Player::initLayout() {
     QBoxLayout *upperLayout = new QHBoxLayout;
 
     QPushButton *tag = new QPushButton("test");
-//    tag = new QPushButton(t);
     tag->setIcon(QIcon(":/tag.png"));
     tag->setIconSize(QSize(25,25));
 
@@ -147,6 +150,7 @@ void Player::initLayout() {
     QBoxLayout *controlLayout = new QHBoxLayout;
     controlLayout->addWidget(initControls());
     controlLayout->addStretch(1);
+    controlLayout->addWidget(libraryButton);
     controlLayout->addWidget(fullScreenButton);
 
     QHBoxLayout *hLayout = new QHBoxLayout;
@@ -334,4 +338,12 @@ void Player::updateDurationInfo(qint64 currentInfo) {
         tStr = currentTime.toString(format) + " / " + totalTime.toString(format);
     }
     labelDuration->setText(tStr);
+}
+
+void Player::showLibrary() {
+    if (library->isVisible()) {
+        library->hide();
+    } else {
+        library->show();
+    }
 }

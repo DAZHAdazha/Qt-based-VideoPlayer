@@ -1,10 +1,12 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <qabstractbutton.h>
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
 #include <QWidget>
 
+#include "library.h"
 #include "playercontrols.h"
 #include "playlistmodel.h"
 #include "videowidget.h"
@@ -57,6 +59,7 @@ class Player : public QWidget {
     void videoAvailableChanged(bool available);
 
     void displayErrorMessage();
+    void showLibrary();
 
    private:
     void setTrackInfo(const QString &info);
@@ -79,6 +82,7 @@ class Player : public QWidget {
     QAbstractButton *openButton;
     QAbstractButton *removeButton;
     QAbstractButton *tag;
+    QAbstractButton *libraryButton;
     QLabel *videoAmount;
 
     PlaylistModel *playlistModel;
@@ -86,6 +90,8 @@ class Player : public QWidget {
     QString trackInfo;
     QString statusInfo;
     qint64 duration;
+
+    Library *library;
 };
 
 #endif  // PLAYER_H

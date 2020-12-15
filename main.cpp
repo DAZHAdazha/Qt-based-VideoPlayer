@@ -8,7 +8,7 @@
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
-    QCoreApplication::setApplicationName("Player Example");
+    QCoreApplication::setApplicationName("Tomeo");
     QCoreApplication::setOrganizationName("QtProject");
     QCoreApplication::setApplicationVersion(QT_VERSION_STR);
 

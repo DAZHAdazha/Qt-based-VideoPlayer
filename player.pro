@@ -14,14 +14,22 @@ HEADERS = \
     videowidget.h \
     playlistdelegate.h \
     playlistitem.h \
-    absolutesetstyle.h
-    
+    absolutesetstyle.h \
+    library.h \
+    videogridmodel.h \
+    videogriddelegate.h \
+    videoitem.h
+
 SOURCES = main.cpp \
     player.cpp \
     playercontrols.cpp \
     playlistmodel.cpp \
     videowidget.cpp \
-    playlistdelegate.cpp
+    playlistdelegate.cpp \
+    library.cpp \
+    videogridmodel.cpp \
+    videogriddelegate.cpp \
+    videoitem.cpp
 
 target.path = $$[QT_INSTALL_EXAMPLES]/multimediawidgets/player
 INSTALLS += target

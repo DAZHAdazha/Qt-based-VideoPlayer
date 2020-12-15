@@ -24,6 +24,9 @@ add_executable(tomeo
     videowidget.cpp
     playlistdelegate.cpp
     library.cpp
+    videogridmodel.cpp
+    videogriddelegate.cpp
+    videoitem.cpp
     img/img.qrc
 )
 

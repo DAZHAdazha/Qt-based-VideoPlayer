@@ -30,8 +30,23 @@ void PlaylistDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
 
         if (rect.width() > kThumbWidth) {
             auto textRect = QRect(rect);
+            auto textRect2 = QRect(rect);
             textRect.setLeft(rect.left() + kThumbWidth);
+            textRect.setTop(rect.top() - 30);
+            textRect2.setLeft(rect.left() + kThumbWidth);
+            textRect2.setTop(rect.top() + 30);
+
+            QFont font = painter->font() ;
+            font.setPointSize(font.pointSize() * 1.5);
+            font.setBold(true);
+            painter->setFont(font);
             painter->drawText(textRect, Qt::AlignVCenter | Qt::AlignLeading, item.title);
+
+
+            font.setPointSize(font.pointSize() / 1.5);
+            font.setBold(false);
+            painter->setFont(font);
+            painter->drawText(textRect2, Qt::AlignVCenter | Qt::AlignLeading, item.location);
         }
 
         painter->restore();

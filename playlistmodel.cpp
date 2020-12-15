@@ -46,7 +46,7 @@ QVariant PlaylistModel::data(const QModelIndex &index, int role) const {
                 auto sprite = imageReader->read();  // read the thumbnail
                 if (!sprite.isNull()) {
                     auto pixmap = QPixmap::fromImage(sprite);
-                    value.setValue(PlaylistItem(name, pixmap));
+                    value.setValue(PlaylistItem(name, path, pixmap));
                 } else {
                     qDebug() << "warning: I couldn't process thumbnail " << thumb << endl;
                 }

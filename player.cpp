@@ -113,9 +113,10 @@ void Player::initLayout() {
     QBoxLayout *inferiorLayout = new QHBoxLayout;
     QBoxLayout *upperLayout = new QHBoxLayout;
 
-    QPushButton *test = new QPushButton("test");
-    test->setIcon(QIcon(":/tag.png"));
-    test->setIconSize(QSize(25,25));
+    QPushButton *tag = new QPushButton("test");
+//    tag = new QPushButton(t);
+    tag->setIcon(QIcon(":/tag.png"));
+    tag->setIconSize(QSize(25,25));
 
     videoAmount = new QLabel(this);
     int videoAmountNumber = playlistView->model()->rowCount();
@@ -124,7 +125,7 @@ void Player::initLayout() {
     strcpy(videoAmountChar,videoAmountString.c_str());
     videoAmount->setText(videoAmountChar);
 
-    upperLayout->addWidget(test);
+    upperLayout->addWidget(tag);
     upperWindow->setLayout(upperLayout);
 
     inferiorLayout->addWidget(videoAmount);

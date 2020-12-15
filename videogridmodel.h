@@ -10,8 +10,10 @@ class VideoGridModel : public QAbstractListModel {
    public:
     explicit VideoGridModel(int _gridSize, QWidget *parent)
         : gridSize(_gridSize), QAbstractListModel(parent) {
-        m_data.push_back(VideoItem(QPixmap(), "Title", "_DATE_", "", ""));
-        m_data.push_back(VideoItem(QPixmap(), "Title2", "_DATE_2", "", ""));
+        for(int i=0;i<20;i++){
+            m_data.push_back(VideoItem(QPixmap("D:\\IDMdownload\\videos\\a.png"), "Title", "_DATE_", "Location", "Memo"));
+        }
+
     }
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     int rowCount(const QModelIndex &parent) const override;

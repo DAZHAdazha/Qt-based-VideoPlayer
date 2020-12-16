@@ -10,8 +10,9 @@
 
 Library::Library(QWidget *parent) : QWidget(parent) {
     setWindowTitle("Library - Tomeo");
-    setMinimumSize(1280, 720);
-    setGeometry(50, 50, 1280, 720);
+    setMinimumSize(1300, 720);
+    setMaximumWidth(1280);
+    setGeometry(50, 50, 1300, 720);
 
     addTagButton = new QPushButton("Add Tag");
 
@@ -30,7 +31,7 @@ Library::Library(QWidget *parent) : QWidget(parent) {
     videoGridView->setModel(videoGridModel);
     videoGridView->setItemDelegate(new VideoGridDelegate);
     videoGridView->setViewMode(QListView::IconMode);
-    videoGridView->setGridSize(QSize(250, 150));
+    videoGridView->setGridSize(QSize(250, 200));
 
     initLayout();
 }

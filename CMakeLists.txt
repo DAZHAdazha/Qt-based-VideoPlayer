@@ -29,6 +29,7 @@ add_executable(tomeo
     videoitem.cpp
     database.cpp
     addvideo.cpp
+    utils.cpp
     img/img.qrc
 )
 

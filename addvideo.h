@@ -25,15 +25,21 @@ class Addvideo : public QWidget {
     void cancel();
     void submit();
 
+   signals:
+    void videoAdded(int id);
+    void videoAddDone();
+
    private:
     void reset();
-    
+
     QAbstractButton* openButton;
     QLineEdit* pathField;
     QCalendarWidget* dateField;
     QLineEdit* locationField;
     QAbstractButton* okButton;
     QAbstractButton* cancelButton;
+
+    QStringList files;
 };
 
 #endif  // ADDVIDEO_H

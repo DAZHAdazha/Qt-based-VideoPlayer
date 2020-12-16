@@ -7,6 +7,8 @@
 #include <QUrl>
 #include <QtWidgets/QFileIconProvider>
 
+#include "utils.h"
+
 PlaylistModel::PlaylistModel(QObject *parent) : QAbstractItemModel(parent), m_playlist(0) {}
 
 int PlaylistModel::rowCount(const QModelIndex &parent) const {
@@ -38,20 +40,10 @@ QVariant PlaylistModel::data(const QModelIndex &index, int role) const {
             QUrl location = m_playlist->media(index.row()).canonicalRequest().url();
             auto path = location.toLocalFile();
             auto name = QFileInfo(path).fileName();
-            auto thumb = path.left(path.length() - 4) + ".png";
             value = name;
-
-            if (QFile(thumb).exists()) {
-                auto imageReader = new QImageReader(thumb);
-                auto sprite = imageReader->read();  // read the thumbnail
-                if (!sprite.isNull()) {
-                    auto pixmap = QPixmap::fromImage(sprite);
-                    value.setValue(PlaylistItem(name, path, pixmap));
-                } else {
-                    qDebug() << "warning: I couldn't process thumbnail " << thumb << endl;
-                }
-            } else {
-                qDebug() << "warning: I couldn't find thumbnail " << thumb << endl;
+            auto thumb = loadThumbnail(path);
+            if (!thumb.isNull()) {
+                value.setValue(PlaylistItem(name, path, thumb));
             }
             // Cache the item
             const_cast<PlaylistModel *>(this)->m_data[index] = value;

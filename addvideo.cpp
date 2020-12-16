@@ -3,8 +3,11 @@
 #include <qboxlayout.h>
 #include <qcalendarwidget.h>
 #include <qlabel.h>
+#include <qmessagebox.h>
 #include <qnamespace.h>
 #include <qpushbutton.h>
+#include <qsqlerror.h>
+#include <qsqlquery.h>
 
 #include <iostream>
 
@@ -16,7 +19,7 @@ Addvideo::Addvideo(QWidget *parent) : QWidget(parent) {
     connect(openButton, SIGNAL(clicked()), this, SLOT(openFile()));
 
     pathField = new QLineEdit(this);
-    pathField->setDisabled(true);
+    pathField->setReadOnly(true);
     dateField = new QCalendarWidget(this);
     locationField = new QLineEdit(this);
 
@@ -52,14 +55,20 @@ Addvideo::Addvideo(QWidget *parent) : QWidget(parent) {
 }
 
 void Addvideo::openFile() {
-    auto fileName = QFileDialog::getOpenFileName(this, tr("Select Video"), ".",
-                                                 "Video Files (*.mp4 *.mov *.wmv)");
-    if (fileName.isEmpty()) {
+    files = QFileDialog::getOpenFileNames(this, tr("Select Video"), ".",
+                                          "Video Files (*.mp4 *.mov *.wmv)");
+    if (files.isEmpty()) {
         return;
     }
-    pathField->setText(fileName);
 
-    QFileInfo info(fileName);
+    QString filesDisp;
+    QTextStream fileDispStream(&filesDisp);
+    for (int i = 0; i < files.size(); i++) {
+      fileDispStream << QFileInfo(files[i]).fileName() << "; ";
+    }
+    pathField->setText(filesDisp);
+
+    QFileInfo info(files[0]);
     auto createdTime = info.birthTime();
     if (createdTime.isValid()) {
         dateField->setSelectedDate(createdTime.date());
@@ -69,6 +78,7 @@ void Addvideo::openFile() {
 }
 
 void Addvideo::reset() {
+    files.clear();
     dateField->showToday();
     pathField->clear();
     locationField->clear();
@@ -80,4 +90,34 @@ void Addvideo::cancel() {
     hide();
 }
 
-void Addvideo::submit() {}
+void Addvideo::submit() {
+    QSqlQuery query;
+    bool success = true;
+    for (int i = 0; i < files.size(); i++) {
+        query.prepare(
+            "INSERT INTO videos "
+            "(title, date, location, path, memo) "
+            "VALUES (?, ?, ?, ?, ?)");
+        auto path = files[i];
+        auto date = dateField->selectedDate().startOfDay();
+
+        query.addBindValue(QFileInfo(path).fileName());
+        query.addBindValue(date.toSecsSinceEpoch());
+        query.addBindValue(locationField->text());
+        query.addBindValue(path);
+        query.addBindValue("");
+        if (!query.exec()) {
+            success = false;
+            QMessageBox::critical(this, "Error", query.lastError().text());
+            break;
+        }
+        emit videoAdded(query.lastInsertId().toInt());
+    }
+
+    if (success) {
+        emit videoAddDone();
+        cancel();
+    } else {
+        qDebug() << query.lastError();
+    }
+}

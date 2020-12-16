@@ -23,11 +23,12 @@ Database::Database(const QString& path) {
         "PRIMARY KEY(id AUTOINCREMENT))");
     success = query.exec(
         "CREATE TABLE videos ("
-        "id	INTEGER,"
-        "title	TEXT,"
-        "date	INTEGER,"
-        "location	TEXT,"
-        "path	TEXT,"
+        "id	INTEGER NOT NULL,"
+        "title	TEXT NOT NULL,"
+        "date	INTEGER NOT NULL,"
+        "location	TEXT NOT NULL,"
+        "path	TEXT NOT NULL,"
+        "memo TEXT,"
         "PRIMARY KEY(id AUTOINCREMENT)"
         ")");
     success = query.exec(

@@ -29,6 +29,8 @@ class Library : public QWidget {
     void showAddVideo();
     void showAddTag();
     void selectTag(const QModelIndex &index);
+    void videoAdded(int id);
+    void videoAddDone();
    private:
     void initLayout();
     void refreshTags();

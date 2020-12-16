@@ -17,6 +17,8 @@ Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
     setGeometry(50, 50, 1300, 720);
 
     addVideoForm = new Addvideo();
+    connect(addVideoForm, SIGNAL(videoAdded(int)), this, SLOT(videoAdded(int)));
+    connect(addVideoForm, SIGNAL(videoAddDone()), this, SLOT(videoAddDone()));
 
     addTagButton = new QPushButton("Add Tag");
     connect(addTagButton, SIGNAL(clicked()), this, SLOT(showAddTag()));
@@ -38,7 +40,7 @@ Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
     connect(addVideoButton, SIGNAL(clicked()), this, SLOT(showAddVideo()));
 
     videoGridView = new QListView(this);
-    videoGridModel = new VideoGridModel(4, this);
+    videoGridModel = new VideoGridModel(this);
     videoGridView->setModel(videoGridModel);
     videoGridView->setItemDelegate(new VideoGridDelegate);
     videoGridView->setViewMode(QListView::IconMode);
@@ -112,4 +114,12 @@ void Library::selectTag(const QModelIndex &index) {
     auto idIndex = tagListModel->index(index.row(), 0);
     auto id = idIndex.data().toInt();
     qDebug() << id;
+}
+
+void Library::videoAdded(int id) {
+    qDebug() << "Video ID " << id;
+}
+
+void Library::videoAddDone() {
+    videoGridModel->refresh();
 }

@@ -16,7 +16,7 @@ Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
     setMaximumWidth(1280);
     setGeometry(50, 50, 1300, 720);
 
-    addvideo = new Addvideo();
+    addVideoForm = new Addvideo();
 
     addTagButton = new QPushButton("Add Tag");
     connect(addTagButton, SIGNAL(clicked()), this, SLOT(showAddTag()));
@@ -87,11 +87,7 @@ void Library::initLayout() {
 }
 
 void Library::showAddVideo() {
-    if (addvideo->isVisible()) {
-        addvideo->hide();
-    } else {
-        addvideo->show();
-    }
+    addVideoForm->show();
 }
 
 void Library::showAddTag() {

@@ -70,6 +70,7 @@ class Player : public QWidget {
     void updateDurationInfo(qint64 currentInfo);
     // Initializes layouts
     void initLayout();
+    void initPlayerSignals();
     PlayerControls *initControls();
 
     QMediaPlayer *player;

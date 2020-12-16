@@ -3,8 +3,8 @@
 
 //#include "videogridmodel.h"
 
-#include <QWidget>
 #include <QApplication>
+#include <QWidget>
 #include <QtWidgets>
 
 QT_BEGIN_NAMESPACE
@@ -21,23 +21,19 @@ class Addvideo : public QWidget {
     ~Addvideo(){};
 
    private slots:
-    void openfile();
+    void openFile();
+    void cancel();
+    void submit();
 
    private:
-
-    QAbstractButton *openbutton;
+    void reset();
+    
+    QAbstractButton* openButton;
     QLineEdit* pathField;
-    QLineEdit* dateField;
+    QCalendarWidget* dateField;
     QLineEdit* locationField;
-    QAbstractButton *okButton;
-    QAbstractButton *cancelButton;
-    QLabel* pathl;
-    QLabel* datel;
-    QWidget* window;
-
-
-
+    QAbstractButton* okButton;
+    QAbstractButton* cancelButton;
 };
 
-
-#endif // ADDVIDEO_H
+#endif  // ADDVIDEO_H

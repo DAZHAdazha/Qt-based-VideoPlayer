@@ -22,19 +22,8 @@ Player::Player(QWidget *parent) : QWidget(parent), videoWidget(0), slider(0), co
     library = new Library();
 
     // set the position of the player
-    this->setGeometry(500, 300, 1000, 600);
-    this->setMinimumSize(650, 450);
-
-    connect(player, SIGNAL(durationChanged(qint64)), SLOT(durationChanged(qint64)));
-    connect(player, SIGNAL(positionChanged(qint64)), SLOT(positionChanged(qint64)));
-    connect(player, &QMediaPlayer::currentMediaChanged, this, &Player::currentMediaChanged);
-    connect(playlist, SIGNAL(currentIndexChanged(int)), SLOT(playlistPositionChanged(int)));
-    connect(player, SIGNAL(mediaStatusChanged(QMediaPlayer::MediaStatus)), this,
-            SLOT(statusChanged(QMediaPlayer::MediaStatus)));
-    connect(player, SIGNAL(bufferStatusChanged(int)), this, SLOT(bufferingProgress(int)));
-    connect(player, SIGNAL(videoAvailableChanged(bool)), this, SLOT(videoAvailableChanged(bool)));
-    connect(player, SIGNAL(error(QMediaPlayer::Error)), this, SLOT(displayErrorMessage()));
-    connect(player, &QMediaPlayer::stateChanged, this, &Player::stateChanged);
+    setGeometry(500, 300, 1000, 600);
+    setMinimumSize(650, 450);
 
     videoWidget = new VideoWidget(this);
     player->setVideoOutput(videoWidget);
@@ -77,6 +66,19 @@ Player::Player(QWidget *parent) : QWidget(parent), videoWidget(0), slider(0), co
 }
 
 Player::~Player() {}
+
+void Player::initPlayerSignals() {
+    connect(player, SIGNAL(durationChanged(qint64)), SLOT(durationChanged(qint64)));
+    connect(player, SIGNAL(positionChanged(qint64)), SLOT(positionChanged(qint64)));
+    connect(player, &QMediaPlayer::currentMediaChanged, this, &Player::currentMediaChanged);
+    connect(playlist, SIGNAL(currentIndexChanged(int)), SLOT(playlistPositionChanged(int)));
+    connect(player, SIGNAL(mediaStatusChanged(QMediaPlayer::MediaStatus)), this,
+            SLOT(statusChanged(QMediaPlayer::MediaStatus)));
+    connect(player, SIGNAL(bufferStatusChanged(int)), this, SLOT(bufferingProgress(int)));
+    connect(player, SIGNAL(videoAvailableChanged(bool)), this, SLOT(videoAvailableChanged(bool)));
+    connect(player, SIGNAL(error(QMediaPlayer::Error)), this, SLOT(displayErrorMessage()));
+    connect(player, &QMediaPlayer::stateChanged, this, &Player::stateChanged);
+}
 
 PlayerControls *Player::initControls() {
     PlayerControls *controls = new PlayerControls(this);

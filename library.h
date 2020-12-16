@@ -46,7 +46,7 @@ class Library : public QWidget {
     VideoGridModel* videoGridModel;
 
     Database db;
-    Addvideo *addvideo;
+    Addvideo *addVideoForm;
 
 };
 

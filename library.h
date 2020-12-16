@@ -2,6 +2,7 @@
 #define LIBRARY_H
 
 #include <qlineedit.h>
+
 #include <QWidget>
 
 #include "videogridmodel.h"
@@ -18,7 +19,7 @@ class Library : public QWidget {
     Q_OBJECT
 
    public:
-    Library(QWidget *parent = 0);
+    Library(QWidget* parent = 0);
     ~Library();
 
    private:

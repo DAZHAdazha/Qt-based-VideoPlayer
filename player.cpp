@@ -22,8 +22,8 @@ Player::Player(QWidget *parent) : QWidget(parent), videoWidget(0), slider(0), co
     library = new Library();
 
     // set the position of the player
-    this->setGeometry(500,300,1000,600);
-    this->setMinimumSize(650,450);
+    this->setGeometry(500, 300, 1000, 600);
+    this->setMinimumSize(650, 450);
 
     connect(player, SIGNAL(durationChanged(qint64)), SLOT(durationChanged(qint64)));
     connect(player, SIGNAL(positionChanged(qint64)), SLOT(positionChanged(qint64)));
@@ -57,12 +57,12 @@ Player::Player(QWidget *parent) : QWidget(parent), videoWidget(0), slider(0), co
 
     openButton = new QPushButton(this);
     openButton->setIcon(QIcon(":/add.png"));
-    openButton->setIconSize(QSize(25,25));
+    openButton->setIconSize(QSize(25, 25));
     connect(openButton, SIGNAL(clicked()), this, SLOT(open()));
 
     removeButton = new QPushButton(this);
     removeButton->setIcon(QIcon(":/delete.png"));
-    removeButton->setIconSize(QSize(25,25));
+    removeButton->setIconSize(QSize(25, 25));
     connect(removeButton, SIGNAL(clicked()), this, SLOT(removeSelected()));
 
     libraryButton = new QPushButton("Library");
@@ -70,7 +70,7 @@ Player::Player(QWidget *parent) : QWidget(parent), videoWidget(0), slider(0), co
 
     fullScreenButton = new QPushButton(this);
     fullScreenButton->setIcon(QIcon(":/fullscreen.png"));
-    fullScreenButton->setIconSize(QSize(25,25));
+    fullScreenButton->setIconSize(QSize(25, 25));
     fullScreenButton->setCheckable(true);
 
     initLayout();
@@ -92,8 +92,8 @@ PlayerControls *Player::initControls() {
     connect(controls, SIGNAL(changeVolume(int)), player, SLOT(setVolume(int)));
     connect(controls, SIGNAL(changeMuting(bool)), player, SLOT(setMuted(bool)));
     connect(controls, SIGNAL(changeRate(qreal)), player, SLOT(setPlaybackRate(qreal)));
-    connect(controls, SIGNAL(forward()),this, SLOT(goForward()));
-    connect(controls, SIGNAL(back()),this, SLOT(goBack()));
+    connect(controls, SIGNAL(forward()), this, SLOT(goForward()));
+    connect(controls, SIGNAL(back()), this, SLOT(goBack()));
     connect(controls, SIGNAL(stop()), videoWidget, SLOT(update()));
 
     connect(player, SIGNAL(stateChanged(QMediaPlayer::State)), controls,
@@ -119,13 +119,13 @@ void Player::initLayout() {
 
     QPushButton *tag = new QPushButton("test");
     tag->setIcon(QIcon(":/tag.png"));
-    tag->setIconSize(QSize(25,25));
+    tag->setIconSize(QSize(25, 25));
 
     videoAmount = new QLabel(this);
     int videoAmountNumber = playlistView->model()->rowCount();
     char videoAmountChar[20];
     string videoAmountString = "Total " + to_string(videoAmountNumber) + " videos";
-    strcpy(videoAmountChar,videoAmountString.c_str());
+    strcpy(videoAmountChar, videoAmountString.c_str());
     videoAmount->setText(videoAmountChar);
 
     upperLayout->addWidget(tag);
@@ -136,9 +136,9 @@ void Player::initLayout() {
     inferiorLayout->addWidget(removeButton);
     inferiorWindow->setLayout(inferiorLayout);
 
-    listLayout->addWidget(upperWindow,1);
-    listLayout->addWidget(playlistView,8);
-    listLayout->addWidget(inferiorWindow,1);
+    listLayout->addWidget(upperWindow, 1);
+    listLayout->addWidget(playlistView, 8);
+    listLayout->addWidget(inferiorWindow, 1);
     listLayout->setSpacing(0);
     listWindow->setLayout(listLayout);
 
@@ -178,7 +178,7 @@ void Player::open() {
     int videoAmountNumber = playlistView->model()->rowCount();
     char videoAmountChar[20];
     string videoAmountString = "Total " + to_string(videoAmountNumber) + " videos";
-    strcpy(videoAmountChar,videoAmountString.c_str());
+    strcpy(videoAmountChar, videoAmountString.c_str());
     videoAmount->setText(videoAmountChar);
 }
 
@@ -187,11 +187,11 @@ void Player::addToPlaylist(const QList<QUrl> urls) {
 }
 
 void Player::goForward() {
-    player->setPosition(player->position()+10000);
+    player->setPosition(player->position() + 10000);
 }
 
 void Player::goBack() {
-    player->setPosition(player->position()-10000);
+    player->setPosition(player->position() - 10000);
 }
 
 void Player::removeSelected() {
@@ -202,7 +202,7 @@ void Player::removeSelected() {
     int videoAmountNumber = playlistView->model()->rowCount();
     char videoAmountChar[20];
     string videoAmountString = "Total " + to_string(videoAmountNumber) + " videos";
-    strcpy(videoAmountChar,videoAmountString.c_str());
+    strcpy(videoAmountChar, videoAmountString.c_str());
     videoAmount->setText(videoAmountChar);
 }
 
@@ -331,8 +331,8 @@ void Player::updateDurationInfo(qint64 currentInfo) {
     if (currentInfo || duration) {
         QTime currentTime((currentInfo / 3600000) % 60, (currentInfo / 60000) % 60,
                           currentInfo / 1000 % 60, (currentInfo) % 1000);
-        QTime totalTime((duration / 3600000) % 60, (duration / 60000) % 60,
-                        duration / 1000 % 60, (duration) % 1000);
+        QTime totalTime((duration / 3600000) % 60, (duration / 60000) % 60, duration / 1000 % 60,
+                        (duration) % 1000);
         QString format = "mm:ss";
         if (duration > 3600) format = "hh:mm:ss";
         tStr = currentTime.toString(format) + " / " + totalTime.toString(format);

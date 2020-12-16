@@ -14,7 +14,7 @@ VideoItem::VideoItem(QPixmap _thumb, QString _title, QString _date, QString _loc
 
     QLabel *imgLabel = new QLabel();
     imgLabel->setStyleSheet("border:1px solid black;");
-    QSize picSize(150,75);
+    QSize picSize(150, 75);
     imgLabel->setPixmap(thumb.scaled(picSize));
     imgLabel->setScaledContents(true);
 
@@ -25,7 +25,7 @@ VideoItem::VideoItem(QPixmap _thumb, QString _title, QString _date, QString _loc
 
     bottomWidget->setStyleSheet("border:1px solid #BBBBBB;");
 
-    innerLayout->addWidget(imgLabel,1);
+    innerLayout->addWidget(imgLabel, 1);
     innerLayout->setMargin(0);
     innerLayout->setAlignment(Qt::AlignBottom);
 
@@ -46,16 +46,13 @@ VideoItem::VideoItem(QPixmap _thumb, QString _title, QString _date, QString _loc
     infoLayout->addWidget(locationLabel);
     bottomWidget->setLayout(infoLayout);
 
-
     outerWindow->setLayout(innerLayout);
-    layout->addWidget(outerWindow,3);
+    layout->addWidget(outerWindow, 3);
 
     QLabel *memoLabel = new QLabel(memo);
     memoLabel->setAlignment(Qt::AlignTop | Qt::AlignLeft);
     memoLabel->setWordWrap(true);
     memoLabel->setStyleSheet("border:1px solid #BBBBBB;");
     memoLabel->setFixedWidth(70);
-    layout->addWidget(memoLabel,2);
-
-
+    layout->addWidget(memoLabel, 2);
 }

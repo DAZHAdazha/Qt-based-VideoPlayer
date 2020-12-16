@@ -19,7 +19,7 @@ void VideoGridDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opt
     if (item.widget->geometry() != rect) {
         item.widget->setGeometry(rect);
     }
-    
+
     if (option.state & QStyle::State_Selected)
         painter->fillRect(option.rect, option.palette.highlight());
 

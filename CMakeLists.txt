@@ -28,6 +28,7 @@ add_executable(tomeo
     videogriddelegate.cpp
     videoitem.cpp
     database.cpp
+    addvideo.cpp
     img/img.qrc
 )
 

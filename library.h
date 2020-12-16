@@ -27,12 +27,15 @@ class Library : public QWidget {
 
    private slots:
     void showAddVideo();
-
+    void showAddTag();
+    void selectTag(const QModelIndex &index);
    private:
     void initLayout();
+    void refreshTags();
 
     QAbstractButton* addTagButton;
-    QAbstractItemView* tagListView;
+    QListView* tagListView;
+    QSqlQueryModel* tagListModel;
     QLabel* tagCountText;
 
     QLineEdit* searchText;

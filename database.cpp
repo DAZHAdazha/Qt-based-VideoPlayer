@@ -11,26 +11,33 @@ Database::Database(const QString& path) {
     }
 
     QSqlQuery query;
-    
+
     // Enable FK
     query.exec("PRAGMA foreign_keys = ON;");
 }
 
-bool Database::addTag(const QString &tag) {
+bool Database::addTag(const QString& tag) {
     QSqlQuery query;
 
     query.prepare("INSERT INTO `tags` (name) VALUES (:name)");
+    query.bindValue(":name", tag);
 
-    query.bindValue("name", tag);
-
-    return query.exec();
+    bool success = query.exec();
+    if (!success) {
+        qDebug() << query.lastError();
+    }
+    return success;
 }
 
 bool Database::removeTag(int id) {
     QSqlQuery query;
 
     query.prepare("DELETE FROM `tags` WHERE id=:id");
-    query.bindValue("id", id);
+    query.bindValue(":id", id);
 
-    return query.exec();
+    bool success = query.exec();
+    if (!success) {
+        qDebug() << query.lastError();
+    }
+    return success;
 }

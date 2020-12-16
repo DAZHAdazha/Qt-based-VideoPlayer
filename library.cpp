@@ -8,6 +8,8 @@
 
 #include "videogriddelegate.h"
 
+const QString kTagListQuery = "SELECT id, name FROM tags";
+
 Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
     setWindowTitle("Library - Tomeo");
     setMinimumSize(1300, 720);
@@ -17,10 +19,16 @@ Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
     addvideo = new Addvideo();
 
     addTagButton = new QPushButton("Add Tag");
+    connect(addTagButton, SIGNAL(clicked()), this, SLOT(showAddTag()));
+
+    tagCountText = new QLabel(this);
 
     tagListView = new QListView(this);
-    tagCountText = new QLabel(this);
-    tagCountText->setText("Total Tags: 0");
+    tagListModel = new QSqlQueryModel;
+    refreshTags();
+    tagListView->setModel(tagListModel);
+    tagListView->setModelColumn(1);
+    connect(tagListView, SIGNAL(activated(QModelIndex)), this, SLOT(selectTag(QModelIndex)));
 
     searchText = new QLineEdit(this);
 
@@ -84,4 +92,28 @@ void Library::showAddVideo() {
     } else {
         addvideo->show();
     }
+}
+
+void Library::showAddTag() {
+    bool ok;
+    QString text =
+        QInputDialog::getText(this, tr("Add Tag"), tr("Name:"), QLineEdit::Normal, "", &ok);
+
+    if (ok && !text.isEmpty()) {
+        db.addTag(text);
+        refreshTags();
+    }
+}
+
+void Library::refreshTags() {
+    tagListModel->setQuery(kTagListQuery);
+    QString text;
+    QTextStream(&text) << "Total Tags: " << tagListModel->rowCount();
+    tagCountText->setText(text);
+}
+
+void Library::selectTag(const QModelIndex &index) {
+    auto idIndex = tagListModel->index(index.row(), 0);
+    auto id = idIndex.data().toInt();
+    qDebug() << id;
 }

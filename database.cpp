@@ -11,9 +11,33 @@ Database::Database(const QString& path) {
     }
 
     QSqlQuery query;
-
     // Enable FK
     query.exec("PRAGMA foreign_keys = ON;");
+
+    // Create tables
+    bool success = false;
+    success = query.exec(
+        "CREATE TABLE tags ("
+        "id	INTEGER NOT NULL,"
+        "name	TEXT NOT NULL UNIQUE,"
+        "PRIMARY KEY(id AUTOINCREMENT))");
+    success = query.exec(
+        "CREATE TABLE videos ("
+        "id	INTEGER,"
+        "title	TEXT,"
+        "date	INTEGER,"
+        "location	TEXT,"
+        "path	TEXT,"
+        "PRIMARY KEY(id AUTOINCREMENT)"
+        ")");
+    success = query.exec(
+        "CREATE TABLE video_tag ("
+        "video_id	INTEGER,"
+        "tag_id	INTEGER,"
+        "FOREIGN KEY(video_id) REFERENCES videos(id) ON DELETE CASCADE,"
+        "FOREIGN KEY(tag_id) REFERENCES tags(id) ON DELETE CASCADE,"
+        "PRIMARY KEY(video_id,tag_id)"
+        ")");
 }
 
 bool Database::addTag(const QString& tag) {

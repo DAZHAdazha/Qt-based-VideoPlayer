@@ -24,7 +24,7 @@ Addvideo::Addvideo(QWidget *parent) : QWidget(parent) {
     locationField = new QLineEdit(this);
     QString location = locationField->text();
 
-    //Layout of path
+    // Layout of path
     QBoxLayout *pathLayout = new QHBoxLayout();
     pathLayout->addWidget(pathField);
     pathLayout->addWidget(openbutton);
@@ -32,12 +32,12 @@ Addvideo::Addvideo(QWidget *parent) : QWidget(parent) {
 
     okButton = new QPushButton(this);
     okButton->setText("OK");
-    //TODO:点击OK button以后将field里面的参数传给videoItem
+    // TODO:点击OK button以后将field里面的参数传给videoItem
     //参数为Q     QString date, location
 
     cancelButton = new QPushButton(this);
     cancelButton->setText("Cancel");
-    //TODO:点击cancel button以后关闭本页面，不作任何更改
+    // TODO:点击cancel button以后关闭本页面，不作任何更改
 
     QBoxLayout *buttonLayout = new QHBoxLayout();
     buttonLayout->addWidget(okButton);
@@ -49,7 +49,7 @@ Addvideo::Addvideo(QWidget *parent) : QWidget(parent) {
     datel->setText(date);
 
     // Arrange widgets
-    QFormLayout* form = new QFormLayout();
+    QFormLayout *form = new QFormLayout();
     form->addRow("Video path:", pathLayout);
     form->addRow("Filmed at:", dateField);
     form->addRow("Location:", locationField);
@@ -65,23 +65,19 @@ Addvideo::Addvideo(QWidget *parent) : QWidget(parent) {
 
 void Addvideo::openfile() {
     QFileDialog *fileDialog = new QFileDialog(this);
-      fileDialog->setWindowTitle(tr("Open files"));
-      fileDialog->setDirectory(".");
-      //fileDialog->setNameFilter(tr("Images(*.png *.jpg *.jpeg *.bmp)"));
-//      fileDialog->setNameFilter(tr("text(*.txt)"));
-      //setting multiple files
-      fileDialog->setFileMode(QFileDialog::ExistingFiles);
-      fileDialog->setViewMode(QFileDialog::Detail);
-      // print out filename
-      QStringList fileNames;
-      if (fileDialog->exec())
-      {
+    fileDialog->setWindowTitle(tr("Open files"));
+    fileDialog->setDirectory(".");
+    // fileDialog->setNameFilter(tr("Images(*.png *.jpg *.jpeg *.bmp)"));
+    //      fileDialog->setNameFilter(tr("text(*.txt)"));
+    // setting multiple files
+    fileDialog->setFileMode(QFileDialog::ExistingFiles);
+    fileDialog->setViewMode(QFileDialog::Detail);
+    // print out filename
+    QStringList fileNames;
+    if (fileDialog->exec()) {
         fileNames = fileDialog->selectedFiles();
-      }
-      for (auto tmp : fileNames)
-      {
+    }
+    for (auto tmp : fileNames) {
         qDebug() << tmp << endl;
-      }
+    }
 }
-
-

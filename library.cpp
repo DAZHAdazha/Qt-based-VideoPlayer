@@ -8,7 +8,7 @@
 
 #include "videogriddelegate.h"
 
-Library::Library(QWidget *parent) : QWidget(parent) {
+Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
     setWindowTitle("Library - Tomeo");
     setMinimumSize(1300, 720);
     setMaximumWidth(1280);

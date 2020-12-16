@@ -5,7 +5,8 @@ QT += network \
       xml \
       multimedia \
       multimediawidgets \
-      widgets
+      widgets \
+      sql
 
 HEADERS = \
     player.h \
@@ -18,6 +19,7 @@ HEADERS = \
     library.h \
     videogridmodel.h \
     videogriddelegate.h \
+    database.h \
     videoitem.h
 
 SOURCES = main.cpp \
@@ -29,6 +31,7 @@ SOURCES = main.cpp \
     library.cpp \
     videogridmodel.cpp \
     videogriddelegate.cpp \
+    database.cpp \
     videoitem.cpp
 
 target.path = $$[QT_INSTALL_EXAMPLES]/multimediawidgets/player

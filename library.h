@@ -7,6 +7,8 @@
 
 #include "videogridmodel.h"
 
+#include "database.h"
+
 QT_BEGIN_NAMESPACE
 class QAbstractItemView;
 class QAbstractButton;
@@ -35,6 +37,8 @@ class Library : public QWidget {
 
     QListView* videoGridView;
     VideoGridModel* videoGridModel;
+
+    Database db;
 };
 
 #endif

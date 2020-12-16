@@ -57,3 +57,5 @@ build/
 .vscode
 videos/
 .cache
+
+app.db

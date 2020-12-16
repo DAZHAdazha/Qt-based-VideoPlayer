@@ -5,12 +5,17 @@
 #include <qnamespace.h>
 #include <qpushbutton.h>
 
+#include <iostream>
+
+using namespace std;
+
 Addvideo::Addvideo(QWidget *parent) : QWidget(parent) {
     window = new QWidget(this);
     window->setWindowTitle("Add new video");
 
     openbutton = new QPushButton(this);
     openbutton->setText("Open");
+    connect(openbutton, SIGNAL(clicked()), this, SLOT(openfile()));
 
     QLineEdit *pathField = new QLineEdit();
     QString path = pathField->text();
@@ -57,4 +62,26 @@ Addvideo::Addvideo(QWidget *parent) : QWidget(parent) {
     window->setLayout(form);
     window->show();
 }
+
+void Addvideo::openfile() {
+    QFileDialog *fileDialog = new QFileDialog(this);
+      fileDialog->setWindowTitle(tr("Open files"));
+      fileDialog->setDirectory(".");
+      //fileDialog->setNameFilter(tr("Images(*.png *.jpg *.jpeg *.bmp)"));
+//      fileDialog->setNameFilter(tr("text(*.txt)"));
+      //setting multiple files
+      fileDialog->setFileMode(QFileDialog::ExistingFiles);
+      fileDialog->setViewMode(QFileDialog::Detail);
+      // print out filename
+      QStringList fileNames;
+      if (fileDialog->exec())
+      {
+        fileNames = fileDialog->selectedFiles();
+      }
+      for (auto tmp : fileNames)
+      {
+        qDebug() << tmp << endl;
+      }
+}
+
 

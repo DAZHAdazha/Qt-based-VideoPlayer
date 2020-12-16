@@ -20,6 +20,9 @@ class Addvideo : public QWidget {
     Addvideo(QWidget* parent = 0);
     ~Addvideo(){};
 
+   private slots:
+    void openfile();
+
    private:
 
     QAbstractButton *openbutton;
@@ -31,6 +34,8 @@ class Addvideo : public QWidget {
     QLabel* pathl;
     QLabel* datel;
     QWidget* window;
+
+
 
 };
 

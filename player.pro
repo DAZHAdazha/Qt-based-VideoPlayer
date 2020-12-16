@@ -20,7 +20,6 @@ HEADERS = \
     videogridmodel.h \
     videogriddelegate.h \
     database.h \
-    videoitem.h
     videoitem.h \
     addvideo.h
 
@@ -34,7 +33,6 @@ SOURCES = main.cpp \
     videogridmodel.cpp \
     videogriddelegate.cpp \
     database.cpp \
-    videoitem.cpp
     videoitem.cpp \
     addvideo.cpp
 

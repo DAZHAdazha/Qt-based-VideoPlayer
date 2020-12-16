@@ -21,6 +21,8 @@ HEADERS = \
     videogriddelegate.h \
     database.h \
     videoitem.h
+    videoitem.h \
+    addvideo.h
 
 SOURCES = main.cpp \
     player.cpp \
@@ -33,6 +35,8 @@ SOURCES = main.cpp \
     videogriddelegate.cpp \
     database.cpp \
     videoitem.cpp
+    videoitem.cpp \
+    addvideo.cpp
 
 target.path = $$[QT_INSTALL_EXAMPLES]/multimediawidgets/player
 INSTALLS += target

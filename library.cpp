@@ -14,6 +14,8 @@ Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
     setMaximumWidth(1280);
     setGeometry(50, 50, 1300, 720);
 
+    addvideo = new Addvideo();
+
     addTagButton = new QPushButton("Add Tag");
 
     tagListView = new QListView(this);
@@ -25,6 +27,7 @@ Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
     searchButton = new QPushButton("Search");
 
     addVideoButton = new QPushButton("+");
+    connect(addVideoButton, SIGNAL(clicked()), this, SLOT(showAddVideo()));
 
     videoGridView = new QListView(this);
     videoGridModel = new VideoGridModel(4, this);
@@ -73,4 +76,12 @@ void Library::initLayout() {
     layout->addWidget(rightPanel, 10);
 
     setLayout(layout);
+}
+
+void Library::showAddVideo() {
+    if (addvideo->isVisible()) {
+        addvideo->hide();
+    } else {
+        addvideo->show();
+    }
 }

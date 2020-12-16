@@ -6,6 +6,7 @@
 #include <QWidget>
 
 #include "videogridmodel.h"
+#include "addvideo.h"
 
 QT_BEGIN_NAMESPACE
 class QAbstractItemView;
@@ -22,6 +23,9 @@ class Library : public QWidget {
     Library(QWidget* parent = 0);
     ~Library();
 
+   private slots:
+    void showAddVideo();
+
    private:
     void initLayout();
 
@@ -35,6 +39,9 @@ class Library : public QWidget {
 
     QListView* videoGridView;
     VideoGridModel* videoGridModel;
+
+    Addvideo *addvideo;
+
 };
 
 #endif

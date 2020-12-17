@@ -1,4 +1,5 @@
 #include "taglistmodel.h"
+
 #include <qnamespace.h>
 
 #include <QtCore>

@@ -7,7 +7,8 @@
 
 const QString kCssNoBorder = "border: 0";
 
-VideoItem::VideoItem(int _id, QString _path, QString _title, QString _date, QString _location, QString _memo)
+VideoItem::VideoItem(int _id, QString _path, QString _title, QString _date, QString _location,
+                     QString _memo)
     : id(_id), path(_path), title(_title), date(_date), location(_location), memo(_memo) {
     widget = new QWidget;
     if (path.isEmpty()) {

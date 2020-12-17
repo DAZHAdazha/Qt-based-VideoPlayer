@@ -64,7 +64,7 @@ void Addvideo::openFile() {
     QString filesDisp;
     QTextStream fileDispStream(&filesDisp);
     for (int i = 0; i < files.size(); i++) {
-      fileDispStream << QFileInfo(files[i]).fileName() << "; ";
+        fileDispStream << QFileInfo(files[i]).fileName() << "; ";
     }
     pathField->setText(filesDisp);
 

@@ -6,6 +6,7 @@
 #include <qnamespace.h>
 #include <qpushbutton.h>
 
+#include "library/taglistmodel.h"
 #include "videogriddelegate.h"
 
 const QString kTagListQuery = "SELECT id, name FROM tags";
@@ -26,11 +27,11 @@ Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
     tagCountText = new QLabel(this);
 
     tagListView = new QListView(this);
-    tagListModel = new QSqlQueryModel;
-    refreshTags();
+    tagListModel = new TagListModel;
+    refreshTagCount();
     tagListView->setModel(tagListModel);
     tagListView->setModelColumn(1);
-    connect(tagListView, SIGNAL(activated(QModelIndex)), this, SLOT(selectTag(QModelIndex)));
+    connect(tagListView, SIGNAL(clicked(QModelIndex)), this, SLOT(selectTag(QModelIndex)));
 
     searchText = new QLineEdit(this);
 
@@ -98,13 +99,15 @@ void Library::showAddTag() {
         QInputDialog::getText(this, tr("Add Tag"), tr("Name:"), QLineEdit::Normal, "", &ok);
 
     if (ok && !text.isEmpty()) {
-        db.addTag(text);
-        refreshTags();
+        auto record = tagListModel->record();
+        record.remove(record.indexOf("id"));
+        record.setValue("name", text);
+        tagListModel->insertRecord(-1, record);
+        refreshTagCount();
     }
 }
 
-void Library::refreshTags() {
-    tagListModel->setQuery(kTagListQuery);
+void Library::refreshTagCount() {
     QString text;
     QTextStream(&text) << "Total Tags: " << tagListModel->rowCount();
     tagCountText->setText(text);

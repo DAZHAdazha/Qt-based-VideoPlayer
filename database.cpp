@@ -39,6 +39,9 @@ Database::Database(const QString& path) {
         "FOREIGN KEY(tag_id) REFERENCES tags(id) ON DELETE CASCADE,"
         "PRIMARY KEY(video_id,tag_id)"
         ")");
+
+    query.exec("INSERT INTO tags (name) VALUES ('All')");
+    query.exec("INSERT INTO tags (name) VALUES ('Untagged')");
 }
 
 bool Database::addTag(const QString& tag) {

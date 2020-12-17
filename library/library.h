@@ -5,10 +5,10 @@
 
 #include <QWidget>
 
-#include "videogridmodel.h"
 #include "addvideo.h"
-
 #include "database.h"
+#include "taglistmodel.h"
+#include "videogridmodel.h"
 
 QT_BEGIN_NAMESPACE
 class QAbstractItemView;
@@ -28,16 +28,17 @@ class Library : public QWidget {
    private slots:
     void showAddVideo();
     void showAddTag();
-    void selectTag(const QModelIndex &index);
+    void selectTag(const QModelIndex& index);
     void videoAdded(int id);
     void videoAddDone();
+
    private:
     void initLayout();
-    void refreshTags();
+    void refreshTagCount();
 
     QAbstractButton* addTagButton;
     QListView* tagListView;
-    QSqlQueryModel* tagListModel;
+    TagListModel* tagListModel;
     QLabel* tagCountText;
 
     QLineEdit* searchText;
@@ -48,8 +49,7 @@ class Library : public QWidget {
     VideoGridModel* videoGridModel;
 
     Database db;
-    Addvideo *addVideoForm;
-
+    Addvideo* addVideoForm;
 };
 
 #endif

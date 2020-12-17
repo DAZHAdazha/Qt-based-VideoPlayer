@@ -24,12 +24,7 @@ QVariant VideoGridModel::data(const QModelIndex &cIndex, int role) const {
 VideoItem VideoGridModel::createItemFrom(int id, int row) const {
     auto path = index(row, 4).data().toString();
     auto title = index(row, 1).data().toString();
-
-    auto dateInt = index(row, 2).data().toInt();
-    auto date = QDateTime();
-    date.setSecsSinceEpoch(dateInt);
-    auto dateStr = date.date().toString(Qt::ISODate);
-
+    auto dateStr = index(row, 2).data().toString();
     auto item = VideoItem(id, path, title, dateStr, index(row, 3).data().toString(),
                           index(row, 5).data().toString());
     return item;

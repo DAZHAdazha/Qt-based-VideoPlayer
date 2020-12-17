@@ -69,11 +69,6 @@ void Addvideo::openFile() {
     pathField->setText(filesDisp);
 
     QFileInfo info(files[0]);
-    auto createdTime = info.birthTime();
-    if (createdTime.isValid()) {
-        dateField->setSelectedDate(createdTime.date());
-    }
-
     okButton->setDisabled(false);
 }
 
@@ -99,10 +94,9 @@ void Addvideo::submit() {
             "(title, date, location, path, memo) "
             "VALUES (?, ?, ?, ?, ?)");
         auto path = files[i];
-        auto date = dateField->selectedDate().startOfDay();
-
+        auto date = dateField->selectedDate();
         query.addBindValue(QFileInfo(path).fileName());
-        query.addBindValue(date.toSecsSinceEpoch());
+        query.addBindValue(date);
         query.addBindValue(locationField->text());
         query.addBindValue(path);
         query.addBindValue("");

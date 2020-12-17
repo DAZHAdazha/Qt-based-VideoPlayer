@@ -7,9 +7,9 @@
 #include <QMediaPlaylist>
 #include <QWidget>
 
-#include "library.h"
+#include "library/library.h"
 #include "playercontrols.h"
-#include "playlistmodel.h"
+#include "playlist/playlistmodel.h"
 #include "videowidget.h"
 
 QT_BEGIN_NAMESPACE

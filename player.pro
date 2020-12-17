@@ -11,32 +11,32 @@ QT += network \
 HEADERS = \
     player.h \
     playercontrols.h \
-    playlistmodel.h \
     videowidget.h \
-    playlistdelegate.h \
-    playlistitem.h \
-    absolutesetstyle.h \
-    library.h \
-    videogridmodel.h \
-    videogriddelegate.h \
-    database.h \
-    videoitem.h \
     utils.h \
-    addvideo.h
+    database.h \
+    absolutesetstyle.h \
+    playlist/playlistdelegate.h \
+    playlist/playlistmodel.h \
+    playlist/playlistitem.h \
+    library/library.h \
+    library/videogridmodel.h \
+    library/videogriddelegate.h \
+    library/videoitem.h \
+    library/addvideo.h
 
 SOURCES = main.cpp \
     player.cpp \
     playercontrols.cpp \
-    playlistmodel.cpp \
-    videowidget.cpp \
-    playlistdelegate.cpp \
-    library.cpp \
-    videogridmodel.cpp \
-    videogriddelegate.cpp \
-    database.cpp \
-    videoitem.cpp \
     utils.cpp \
-    addvideo.cpp
+    database.cpp \
+    videowidget.cpp \
+    playlist/playlistmodel.cpp \
+    playlist/playlistdelegate.cpp \
+    library/library.cpp \
+    library/videogridmodel.cpp \
+    library/videogriddelegate.cpp \
+    library/videoitem.cpp \
+    library/addvideo.cpp
 
 target.path = $$[QT_INSTALL_EXAMPLES]/multimediawidgets/player
 INSTALLS += target

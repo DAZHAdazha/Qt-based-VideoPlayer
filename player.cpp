@@ -10,7 +10,7 @@
 using namespace std;
 
 #include "absolutesetstyle.h"
-#include "playlistdelegate.h"
+#include "playlist/playlistdelegate.h"
 
 Player::Player(QWidget *parent) : QWidget(parent), videoWidget(0), slider(0), colorDialog(0) {
     player = new QMediaPlayer(this);

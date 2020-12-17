@@ -20,17 +20,19 @@ add_executable(tomeo
     main.cpp
     player.cpp
     playercontrols.cpp
-    playlistmodel.cpp
+    playlist/playlistmodel.cpp
+    playlist/playlistdelegate.cpp
     videowidget.cpp
-    playlistdelegate.cpp
-    library.cpp
-    videogridmodel.cpp
-    videogriddelegate.cpp
-    videoitem.cpp
     database.cpp
-    addvideo.cpp
     utils.cpp
     img/img.qrc
+    library/library.cpp
+    library/videogridmodel.cpp
+    library/videogriddelegate.cpp
+    library/videoitem.cpp
+    library/addvideo.cpp
 )
+
+target_include_directories(tomeo PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_link_libraries(tomeo Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Multimedia Qt5::MultimediaWidgets Qt5::Network Qt5::Xml Qt5::Sql)

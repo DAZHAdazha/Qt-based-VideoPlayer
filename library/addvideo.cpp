@@ -45,7 +45,7 @@ Addvideo::Addvideo(QWidget *parent) : QWidget(parent) {
     form->addRow("Video path:", pathLayout);
     form->addRow("Filmed at:", dateField);
     form->addRow("Location:", locationField);
-    form->addRow("Memo:", memoField);
+    form->addRow("Memory:", memoField);
 
     form->addRow(buttonLayout);
     form->setHorizontalSpacing(10);

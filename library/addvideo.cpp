@@ -14,7 +14,7 @@
 using namespace std;
 
 Addvideo::Addvideo(QWidget *parent) : QWidget(parent) {
-    this->setGeometry(400,400,400,400);
+    this->setGeometry(400, 400, 400, 400);
     setWindowTitle("Add New Video");
     openButton = new QPushButton("Open", this);
     connect(openButton, SIGNAL(clicked()), this, SLOT(openFile()));
@@ -87,30 +87,44 @@ void Addvideo::cancel() {
     hide();
 }
 
+void Addvideo::setTagId(int id) {
+    m_tagId = id;
+}
+
 void Addvideo::submit() {
     QSqlQuery query;
     bool success = true;
+    query.prepare(
+        "INSERT INTO videos "
+        "(title, date, location, path, memo, tag_id) "
+        "VALUES (?, ?, ?, ?, ?, ?)");
+
+    QVariantList names;
+    QVariantList dates;
+    QVariantList locations;
+    QVariantList paths;
+    QVariantList memos;
+    QVariantList tagIds;
+
     for (int i = 0; i < files.size(); i++) {
-        query.prepare(
-            "INSERT INTO videos "
-            "(title, date, location, path, memo) "
-            "VALUES (?, ?, ?, ?, ?)");
         auto path = files[i];
-        auto date = dateField->selectedDate();
-        query.addBindValue(QFileInfo(path).fileName());
-        query.addBindValue(date);
-        query.addBindValue(locationField->text());
-        query.addBindValue(path);
-        query.addBindValue(memoField->toPlainText());
-        if (!query.exec()) {
-            success = false;
-            QMessageBox::critical(this, "Error", query.lastError().text());
-            break;
-        }
-        emit videoAdded(query.lastInsertId().toInt());
+        names << QFileInfo(path).fileName();
+        dates << dateField->selectedDate();
+        locations << locationField->text();
+        paths << path;
+        memos << memoField->toPlainText();
+        tagIds << m_tagId;
     }
 
-    if (success) {
+    query.addBindValue(names);
+    query.addBindValue(dates);
+    query.addBindValue(locations);
+    query.addBindValue(paths);
+    query.addBindValue(memos);
+    query.addBindValue(tagIds);
+    qDebug() << tagIds;
+
+    if (query.execBatch()) {
         emit videoAddDone();
         cancel();
     } else {

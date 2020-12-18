@@ -17,31 +17,25 @@ Database::Database(const QString& path) {
     // Create tables
     bool success = false;
     success = query.exec(
-        "CREATE TABLE tags ("
+        "CREATE TABLE IF NOT EXISTS tags ("
         "id	INTEGER NOT NULL,"
         "name	TEXT NOT NULL UNIQUE,"
         "PRIMARY KEY(id AUTOINCREMENT))");
     success = query.exec(
-        "CREATE TABLE videos ("
+        "CREATE TABLE IF NOT EXISTS videos ("
         "id	INTEGER NOT NULL,"
         "title	TEXT NOT NULL,"
         "date	INTEGER NOT NULL,"
         "location	TEXT NOT NULL,"
         "path	TEXT NOT NULL,"
         "memo TEXT,"
-        "PRIMARY KEY(id AUTOINCREMENT)"
-        ")");
-    success = query.exec(
-        "CREATE TABLE video_tag ("
-        "video_id	INTEGER,"
         "tag_id	INTEGER,"
-        "FOREIGN KEY(video_id) REFERENCES videos(id) ON DELETE CASCADE,"
-        "FOREIGN KEY(tag_id) REFERENCES tags(id) ON DELETE CASCADE,"
-        "PRIMARY KEY(video_id,tag_id)"
+        "PRIMARY KEY(id AUTOINCREMENT),"
+        "FOREIGN KEY(tag_id) REFERENCES tags(id) ON DELETE CASCADE"
         ")");
+    qDebug() << query.lastError();
 
-    query.exec("INSERT INTO tags (name) VALUES ('All')");
-    query.exec("INSERT INTO tags (name) VALUES ('Untagged')");
+    query.exec("INSERT INTO tags (name) VALUES ('Default')");
 }
 
 bool Database::addTag(const QString& tag) {

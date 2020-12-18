@@ -18,14 +18,3 @@ bool TagListModel::setData(const QModelIndex &index, const QVariant &value, int 
     }
     return QSqlTableModel::setData(index, value, role);
 }
-
-Qt::ItemFlags TagListModel::flags(const QModelIndex &index) const {
-    auto newFlags = QSqlTableModel::flags(index);
-    if (index.isValid() && index.column() == 1) {
-        auto tagName = index.data().toString();
-        if (tagName == kTagAll || tagName == kTagUntagged) {
-            newFlags &= ~Qt::ItemIsEditable;
-        }
-    }
-    return newFlags;
-}

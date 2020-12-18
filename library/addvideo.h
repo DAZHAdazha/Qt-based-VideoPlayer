@@ -19,6 +19,7 @@ class Addvideo : public QWidget {
    public:
     Addvideo(QWidget* parent = 0);
     ~Addvideo(){};
+    void setTagId(int id);
 
    private slots:
     void openFile();
@@ -31,6 +32,7 @@ class Addvideo : public QWidget {
 
    private:
     void reset();
+    int m_tagId = 0;
 
     QAbstractButton* openButton;
     QLineEdit* pathField;

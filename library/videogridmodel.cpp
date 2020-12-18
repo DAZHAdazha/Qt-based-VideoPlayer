@@ -1,7 +1,6 @@
 #include "videogridmodel.h"
 
-#include <qdatetime.h>
-#include <qnamespace.h>
+#include <QtCore>
 
 QVariant VideoGridModel::data(const QModelIndex &cIndex, int role) const {
     if (cIndex.isValid() && role == Qt::DisplayRole && cIndex.column() == 0) {
@@ -30,8 +29,20 @@ VideoItem VideoGridModel::createItemFrom(int id, int row) const {
     return item;
 }
 
+void VideoGridModel::setTagId(int id) {
+    m_tagId = id;
+    qDebug() << "Setting tag id to " << id;
+    refresh();
+}
+
+int VideoGridModel::tagId() const {
+    return m_tagId;
+}
+
 void VideoGridModel::refresh() {
-    setQuery("SELECT * FROM `videos`;");
+    QString query;
+    QTextStream(&query) << "SELECT * FROM `videos` WHERE tag_id = " << m_tagId;
+    setQuery(query);
 }
 
 void VideoGridModel::beginInsertItems(int start, int end) {

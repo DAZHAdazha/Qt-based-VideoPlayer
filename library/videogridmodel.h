@@ -14,6 +14,9 @@ class VideoGridModel : public QSqlQueryModel {
     }
     void refresh();
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    void setTagId(int id);
+    int tagId() const;
+
    private slots:
     void beginInsertItems(int start, int end);
     void endInsertItems();
@@ -23,7 +26,7 @@ class VideoGridModel : public QSqlQueryModel {
 
    private:
     VideoItem createItemFrom(int id, int row) const;
-    int gridSize;
+    int m_tagId = 0;
     QMap<int, VideoItem> m_data;
 };
 

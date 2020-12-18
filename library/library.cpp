@@ -1,10 +1,11 @@
+#include "library.h"
+
 #include <qboxlayout.h>
 #include <qlabel.h>
 #include <qlistview.h>
 #include <qnamespace.h>
 #include <qpushbutton.h>
 
-#include "library.h"
 #include "library/taglistmodel.h"
 #include "videogriddelegate.h"
 
@@ -45,6 +46,11 @@ Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
     videoGridView->setItemDelegate(new VideoGridDelegate);
     videoGridView->setViewMode(QListView::IconMode);
     videoGridView->setGridSize(QSize(250, 200));
+
+    // Select the first tag
+    auto firstTagIndex = tagListModel->index(0, 1);
+    tagListView->setCurrentIndex(firstTagIndex);
+    selectTag(firstTagIndex);
 
     initLayout();
 }
@@ -89,6 +95,7 @@ void Library::initLayout() {
 }
 
 void Library::showAddVideo() {
+    addVideoForm->setTagId(videoGridModel->tagId());
     addVideoForm->show();
 }
 
@@ -115,11 +122,12 @@ void Library::refreshTagCount() {
 void Library::selectTag(const QModelIndex &index) {
     auto idIndex = tagListModel->index(index.row(), 0);
     auto id = idIndex.data().toInt();
-    qDebug() << id;
+    qDebug() << "Select tag id " << id;
+    videoGridModel->setTagId(id);
 }
 
 void Library::videoAdded(int id) {
-    qDebug() << "Video ID " << id;
+    qDebug() << "Added video ID " << id;
 }
 
 void Library::videoAddDone() {

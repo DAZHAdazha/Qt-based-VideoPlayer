@@ -38,7 +38,10 @@ VideoItem::VideoItem(int _id, QString _path, QString _title, QString _date, QStr
     memoLabel = new QLabel(memo);
     memoLabel->setAlignment(Qt::AlignTop | Qt::AlignLeft);
     memoLabel->setWordWrap(true);
-    memoLabel->setStyleSheet("border:1px solid #BBBBBB;");
+    if(memo!=""){
+        memoLabel->setStyleSheet("border:1px solid #BBBBBB;");
+    }
+
     memoLabel->setFixedWidth(70);
 
     initLayout();

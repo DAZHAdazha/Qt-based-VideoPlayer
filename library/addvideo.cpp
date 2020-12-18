@@ -22,6 +22,7 @@ Addvideo::Addvideo(QWidget *parent) : QWidget(parent) {
     pathField->setReadOnly(true);
     dateField = new QCalendarWidget(this);
     locationField = new QLineEdit(this);
+    memoField = new QLineEdit(this);
 
     QBoxLayout *pathLayout = new QHBoxLayout();
     pathLayout->addWidget(pathField);
@@ -43,6 +44,7 @@ Addvideo::Addvideo(QWidget *parent) : QWidget(parent) {
     form->addRow("Video path:", pathLayout);
     form->addRow("Filmed at:", dateField);
     form->addRow("Location:", locationField);
+    form->addRow("Memo:", memoField);
 
     form->addRow(buttonLayout);
     form->setHorizontalSpacing(10);
@@ -75,6 +77,7 @@ void Addvideo::reset() {
     dateField->showToday();
     pathField->clear();
     locationField->clear();
+    memoField->clear();
     okButton->setDisabled(true);
 }
 
@@ -97,7 +100,7 @@ void Addvideo::submit() {
         query.addBindValue(date);
         query.addBindValue(locationField->text());
         query.addBindValue(path);
-        query.addBindValue("");
+        query.addBindValue(memoField->text());
         if (!query.exec()) {
             success = false;
             QMessageBox::critical(this, "Error", query.lastError().text());

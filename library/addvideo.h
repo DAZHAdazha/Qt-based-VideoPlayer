@@ -36,7 +36,7 @@ class Addvideo : public QWidget {
     QLineEdit* pathField;
     QCalendarWidget* dateField;
     QLineEdit* locationField;
-    QLineEdit* memoField;
+    QTextEdit* memoField;
     QAbstractButton* okButton;
     QAbstractButton* cancelButton;
 

@@ -14,6 +14,7 @@
 using namespace std;
 
 Addvideo::Addvideo(QWidget *parent) : QWidget(parent) {
+    this->setGeometry(400,400,400,400);
     setWindowTitle("Add New Video");
     openButton = new QPushButton("Open", this);
     connect(openButton, SIGNAL(clicked()), this, SLOT(openFile()));
@@ -22,7 +23,7 @@ Addvideo::Addvideo(QWidget *parent) : QWidget(parent) {
     pathField->setReadOnly(true);
     dateField = new QCalendarWidget(this);
     locationField = new QLineEdit(this);
-    memoField = new QLineEdit(this);
+    memoField = new QTextEdit(this);
 
     QBoxLayout *pathLayout = new QHBoxLayout();
     pathLayout->addWidget(pathField);
@@ -100,7 +101,7 @@ void Addvideo::submit() {
         query.addBindValue(date);
         query.addBindValue(locationField->text());
         query.addBindValue(path);
-        query.addBindValue(memoField->text());
+        query.addBindValue(memoField->toPlainText());
         if (!query.exec()) {
             success = false;
             QMessageBox::critical(this, "Error", query.lastError().text());

@@ -1,27 +1,23 @@
-#include "player.h"
-
 #include <QAudioProbe>
 #include <QMediaMetaData>
 #include <QMediaPlaylist>
 #include <QMediaService>
 #include <QVideoProbe>
 #include <QtWidgets>
-#include <iostream>
 using namespace std;
 
+#include "player.h"
 #include "absolutesetstyle.h"
 #include "playlist/playlistdelegate.h"
 
 Player::Player(QWidget *parent) : QWidget(parent), videoWidget(0), slider(0), colorDialog(0) {
     player = new QMediaPlayer(this);
-    // Owned by the Player
     playlist = new QMediaPlaylist();
     player->setPlaylist(playlist);
     player->setNotifyInterval(20);
 
     library = new Library();
 
-    // set the position of the player
     setGeometry(500, 300, 1000, 600);
     setMinimumSize(650, 450);
 
@@ -97,7 +93,6 @@ PlayerControls *Player::initControls() {
     connect(controls, SIGNAL(forward()), this, SLOT(goForward()));
     connect(controls, SIGNAL(back()), this, SLOT(goBack()));
     connect(controls, SIGNAL(stop()), videoWidget, SLOT(update()));
-
     connect(player, SIGNAL(stateChanged(QMediaPlayer::State)), controls,
             SLOT(setState(QMediaPlayer::State)));
     connect(player, SIGNAL(volumeChanged(int)), controls, SLOT(setVolume(int)));
@@ -144,7 +139,6 @@ void Player::initLayout() {
     listLayout->setSpacing(0);
     listWindow->setLayout(listLayout);
 
-    // Top layout
     QBoxLayout *displayLayout = new QHBoxLayout;
     displayLayout->addWidget(videoWidget, 3);
     displayLayout->addWidget(listWindow, 1);
@@ -228,8 +222,6 @@ void Player::currentMediaChanged(const QMediaContent &media) {
 }
 
 void Player::previousClicked() {
-    // Go to previous track if we are within the first 5 seconds of playback
-    // Otherwise, seek to the beginning.
     if (player->position() <= 5)
         playlist->previous();
     else
@@ -253,8 +245,6 @@ void Player::seek(int seconds) {
 
 void Player::statusChanged(QMediaPlayer::MediaStatus status) {
     handleCursor(status);
-
-    // handle status message
     switch (status) {
         case QMediaPlayer::UnknownMediaStatus:
         case QMediaPlayer::NoMedia:

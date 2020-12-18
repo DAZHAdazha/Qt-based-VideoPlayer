@@ -23,15 +23,14 @@ Addvideo::Addvideo(QWidget *parent) : QWidget(parent) {
     dateField = new QCalendarWidget(this);
     locationField = new QLineEdit(this);
 
-    // Layout of path
     QBoxLayout *pathLayout = new QHBoxLayout();
     pathLayout->addWidget(pathField);
     pathLayout->addWidget(openButton);
     pathLayout->setMargin(0);
 
     okButton = new QPushButton("OK", this);
-    connect(okButton, SIGNAL(clicked()), this, SLOT(submit()));
     okButton->setDisabled(true);
+    connect(okButton, SIGNAL(clicked()), this, SLOT(submit()));
 
     cancelButton = new QPushButton("Cancel", this);
     connect(cancelButton, SIGNAL(clicked()), this, SLOT(cancel()));
@@ -40,7 +39,6 @@ Addvideo::Addvideo(QWidget *parent) : QWidget(parent) {
     buttonLayout->addWidget(okButton);
     buttonLayout->addWidget(cancelButton);
 
-    // Arrange widgets
     QFormLayout *form = new QFormLayout();
     form->addRow("Video path:", pathLayout);
     form->addRow("Filmed at:", dateField);

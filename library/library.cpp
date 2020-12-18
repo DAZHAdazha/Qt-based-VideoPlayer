@@ -1,11 +1,10 @@
-#include "library.h"
-
 #include <qboxlayout.h>
 #include <qlabel.h>
 #include <qlistview.h>
 #include <qnamespace.h>
 #include <qpushbutton.h>
 
+#include "library.h"
 #include "library/taglistmodel.h"
 #include "videogriddelegate.h"
 

@@ -25,7 +25,6 @@ int main(int argc, char *argv[]) {
         QList<QUrl> urls;
         foreach (const QString &a, parser.positionalArguments())
             urls.append(QUrl::fromUserInput(a, QDir::currentPath(), QUrl::AssumeLocalFile));
-        //        player.addToPlaylist(urls);
     }
 
     player.show();

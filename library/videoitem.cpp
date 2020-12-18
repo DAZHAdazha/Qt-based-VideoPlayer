@@ -1,8 +1,7 @@
-#include "videoitem.h"
-
 #include <qboxlayout.h>
 #include <qnamespace.h>
 
+#include "videoitem.h"
 #include "utils.h"
 
 const QString kCssNoBorder = "border: 0";
@@ -17,6 +16,9 @@ VideoItem::VideoItem(int _id, QString _path, QString _title, QString _date, QStr
     widget->setAttribute(Qt::WA_DeleteOnClose);
 
     thumb = loadThumbnail(path);
+    if (thumb.isNull()) {
+        thumb =  QPixmap(":/video.jpg");
+    }
     imgLabel = new QLabel();
     imgLabel->setStyleSheet("border:1px solid black;");
     QSize picSize(150, 75);

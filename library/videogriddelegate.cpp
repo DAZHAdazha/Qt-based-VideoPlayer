@@ -1,7 +1,6 @@
-#include "videogriddelegate.h"
-
 #include <QtWidgets>
 
+#include "videogriddelegate.h"
 #include "videogridmodel.h"
 
 void VideoGridDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,

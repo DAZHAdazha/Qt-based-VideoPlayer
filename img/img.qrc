@@ -8,5 +8,6 @@
         <file>forward.png</file>
         <file>mute.png</file>
         <file>volume.png</file>
+        <file>video.jpg</file>
     </qresource>
 </RCC>

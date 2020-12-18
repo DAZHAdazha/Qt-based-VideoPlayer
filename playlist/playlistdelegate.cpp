@@ -1,7 +1,6 @@
-#include "playlistdelegate.h"
-
 #include <QtWidgets>
 
+#include "playlistdelegate.h"
 #include "playlistitem.h"
 
 const int kRowHeight = 70;

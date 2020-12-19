@@ -39,9 +39,20 @@ int VideoGridModel::tagId() const {
     return m_tagId;
 }
 
+void VideoGridModel::setSortType(int t) {
+    sortType = t;
+    refresh();
+}
+
 void VideoGridModel::refresh() {
     QString query;
-    QTextStream(&query) << "SELECT * FROM `videos` WHERE tag_id = " << m_tagId;
+    QTextStream queryStream(&query);
+    queryStream << "SELECT * FROM `videos` WHERE tag_id = " << m_tagId;
+    if (sortType == kSortDate) {
+        queryStream << " ORDER BY date DESC";
+    } else if (sortType == kSortName) {
+        queryStream << " ORDER BY title ASC";
+    }
     m_data.clear();
     setQuery(query);
 }

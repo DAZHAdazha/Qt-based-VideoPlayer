@@ -40,6 +40,7 @@ class Library : public QWidget {
 
    private:
     void initLayout();
+    void initSort();
     void refreshTagCount();
 
     QAbstractButton* addTagButton;

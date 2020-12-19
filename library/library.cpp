@@ -7,8 +7,8 @@
 #include <qpushbutton.h>
 
 #include "library/taglistmodel.h"
-#include "videogriddelegate.h"
 #include "player.h"
+#include "videogriddelegate.h"
 
 const QString kTagListQuery = "SELECT id, name FROM tags";
 
@@ -38,28 +38,7 @@ Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
     tagListView->setModelColumn(1);
     connect(tagListView, SIGNAL(clicked(QModelIndex)), this, SLOT(selectTag(QModelIndex)));
 
-    auto sortLayout = new QHBoxLayout();
-    sortWidget = new QWidget(this);
-
-    sortButtonGroup = new QButtonGroup(this);
-    defaultSortButton = new QRadioButton(this);
-    defaultSortButton->setText("Default");
-    defaultSortButton->setChecked(true);
-    connect(defaultSortButton, SIGNAL(clicked()), this, SLOT(defaultSort()));
-    nameSortButton = new QRadioButton(this);
-    nameSortButton->setText("Name");
-    connect(nameSortButton, SIGNAL(clicked()), this, SLOT(nameSort()));
-    dateSortButton = new QRadioButton(this);
-    dateSortButton->setText("Date");
-    connect(dateSortButton, SIGNAL(clicked()), this, SLOT(dateSort()));
-    sortButtonGroup->addButton(nameSortButton);
-    sortButtonGroup->addButton(dateSortButton);
-    sortButtonGroup->addButton(defaultSortButton);
-    sortLayout->addWidget(defaultSortButton,1);
-    sortLayout->addWidget(nameSortButton,1);
-    sortLayout->addWidget(dateSortButton,1);
-    sortLayout->setAlignment(Qt::AlignLeft);
-    sortWidget->setLayout(sortLayout);
+    initSort();
 
     addVideoButton = new QPushButton();
     addVideoButton->setIcon(QIcon(":/add.png"));
@@ -83,6 +62,31 @@ Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
 }
 
 Library::~Library() {}
+
+void Library::initSort() {
+    auto sortLayout = new QHBoxLayout();
+    sortWidget = new QWidget(this);
+
+    sortButtonGroup = new QButtonGroup(this);
+    defaultSortButton = new QRadioButton(this);
+    defaultSortButton->setText("Default");
+    defaultSortButton->setChecked(true);
+    connect(defaultSortButton, SIGNAL(clicked()), this, SLOT(defaultSort()));
+    nameSortButton = new QRadioButton(this);
+    nameSortButton->setText("Name");
+    connect(nameSortButton, SIGNAL(clicked()), this, SLOT(nameSort()));
+    dateSortButton = new QRadioButton(this);
+    dateSortButton->setText("Date");
+    connect(dateSortButton, SIGNAL(clicked()), this, SLOT(dateSort()));
+    sortButtonGroup->addButton(nameSortButton);
+    sortButtonGroup->addButton(dateSortButton);
+    sortButtonGroup->addButton(defaultSortButton);
+    sortLayout->addWidget(defaultSortButton, 1);
+    sortLayout->addWidget(nameSortButton, 1);
+    sortLayout->addWidget(dateSortButton, 1);
+    sortLayout->setAlignment(Qt::AlignLeft);
+    sortWidget->setLayout(sortLayout);
+}
 
 void Library::initLayout() {
     auto leftPanel = new QWidget(this);
@@ -151,7 +155,7 @@ void Library::selectTag(const QModelIndex &index) {
 }
 
 void Library::videoAdded(int id) {
-    qDebug() << "Added video ID " << id;
+    qDebug() << "Added video ID" << id;
 }
 
 void Library::videoAddDone() {
@@ -159,23 +163,21 @@ void Library::videoAddDone() {
 }
 
 void Library::defaultSort() {
-    qDebug() << "Default";
+    videoGridModel->setSortType(kSortDefault);
 }
 
 void Library::nameSort() {
-    qDebug() << "Name";
+    videoGridModel->setSortType(kSortName);
 }
 
 void Library::dateSort() {
-    qDebug() << "Date";
+    videoGridModel->setSortType(kSortDate);
 }
 
-
-void Library::selectVideo(const QModelIndex& index) {
+void Library::selectVideo(const QModelIndex &index) {
     QList<QUrl> urls;
     // Index of path is 4
-    for (int i = 0; i < videoGridModel->rowCount(); i++)
-    {
+    for (int i = 0; i < videoGridModel->rowCount(); i++) {
         auto pathIndex = videoGridModel->index(i, 4);
         auto pathStr = pathIndex.data().toString();
         urls << QUrl::fromLocalFile(pathStr);

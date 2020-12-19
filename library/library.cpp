@@ -24,6 +24,8 @@ Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
     connect(addVideoForm, SIGNAL(videoAddDone()), this, SLOT(videoAddDone()));
 
     addTagButton = new QPushButton("Add Tag");
+    addTagButton->setIcon(QIcon(":/tag.png"));
+    addTagButton->setIconSize(QSize(25, 25));
     connect(addTagButton, SIGNAL(clicked()), this, SLOT(showAddTag()));
 
     tagCountText = new QLabel(this);
@@ -58,7 +60,9 @@ Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
     sortLayout->setAlignment(Qt::AlignLeft);
     sortWidget->setLayout(sortLayout);
 
-    addVideoButton = new QPushButton("+");
+    addVideoButton = new QPushButton();
+    addVideoButton->setIcon(QIcon(":/add.png"));
+    addVideoButton->setIconSize(QSize(25, 25));
     connect(addVideoButton, SIGNAL(clicked()), this, SLOT(showAddVideo()));
 
     videoGridView = new QListView(this);

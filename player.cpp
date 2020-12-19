@@ -6,17 +6,16 @@
 #include <QtWidgets>
 using namespace std;
 
-#include "player.h"
 #include "absolutesetstyle.h"
+#include "player.h"
 #include "playlist/playlistdelegate.h"
 
-Player::Player(QWidget *parent) : QWidget(parent), videoWidget(0), slider(0), colorDialog(0) {
+Player::Player(QWidget *parent, Library *_library)
+    : QWidget(parent), videoWidget(0), slider(0), colorDialog(0), library(_library) {
     player = new QMediaPlayer(this);
     playlist = new QMediaPlaylist();
     player->setPlaylist(playlist);
     player->setNotifyInterval(20);
-
-    library = new Library();
 
     setGeometry(500, 300, 1000, 600);
     setMinimumSize(650, 450);
@@ -230,8 +229,7 @@ void Player::previousClicked() {
 
 void Player::jump(const QModelIndex &index) {
     if (index.isValid()) {
-        playlist->setCurrentIndex(index.row());
-        player->play();
+        jumpToRow(index.row());
     }
 }
 
@@ -338,4 +336,18 @@ void Player::showLibrary() {
     } else {
         library->show();
     }
+}
+
+void Player::clearPlaylist() {
+    playlist->clear();
+}
+
+void Player::jumpToRow(int row) {
+    playlist->setCurrentIndex(row);
+    player->play();
+}
+
+void Player::closeEvent(QCloseEvent *event) {
+    player->stop();
+    QWidget::closeEvent(event);
 }

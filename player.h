@@ -22,18 +22,21 @@ class QSlider;
 class QVideoWidget;
 QT_END_NAMESPACE
 
+class Library;
+
 class PlaylistModel;
 
 class Player : public QWidget {
     Q_OBJECT
 
    public:
-    Player(QWidget *parent = 0);
+    Player(QWidget *parent = 0, Library* _library = 0);
     ~Player();
 
     bool isPlayerAvailable() const;
-
     void addToPlaylist(const QList<QUrl> urls);
+    void clearPlaylist();
+    void jumpToRow(int row);
 
    signals:
     void fullScreenChanged(bool fullScreen);
@@ -71,6 +74,7 @@ class Player : public QWidget {
     // Initializes layouts
     void initLayout();
     void initPlayerSignals();
+    void closeEvent(QCloseEvent *event) override;
     PlayerControls *initControls();
 
     QMediaPlayer *player;

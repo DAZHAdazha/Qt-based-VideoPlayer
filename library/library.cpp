@@ -17,6 +17,8 @@ Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
     setMaximumWidth(1280);
     setGeometry(50, 50, 1300, 720);
 
+    player = new Player(nullptr, this);
+
     addVideoForm = new AddVideoForm();
     connect(addVideoForm, SIGNAL(videoAdded(int)), this, SLOT(videoAdded(int)));
     connect(addVideoForm, SIGNAL(videoAddDone()), this, SLOT(videoAddDone()));
@@ -65,6 +67,7 @@ Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
     videoGridView->setItemDelegate(new VideoGridDelegate);
     videoGridView->setViewMode(QListView::IconMode);
     videoGridView->setGridSize(QSize(250, 200));
+    connect(videoGridView, SIGNAL(activated(QModelIndex)), this, SLOT(selectVideo(QModelIndex)));
 
     // Select the first tag
     auto firstTagIndex = tagListModel->index(0, 1);
@@ -139,7 +142,6 @@ void Library::refreshTagCount() {
 void Library::selectTag(const QModelIndex &index) {
     auto idIndex = tagListModel->index(index.row(), 0);
     auto id = idIndex.data().toInt();
-    qDebug() << "Select tag id " << id;
     videoGridModel->setTagId(id);
 }
 
@@ -163,3 +165,18 @@ void Library::dateSort() {
     qDebug() << "Date";
 }
 
+
+void Library::selectVideo(const QModelIndex& index) {
+    QList<QUrl> urls;
+    // Index of path is 4
+    for (int i = 0; i < videoGridModel->rowCount(); i++)
+    {
+        auto pathIndex = videoGridModel->index(i, 4);
+        auto pathStr = pathIndex.data().toString();
+        urls << QUrl::fromLocalFile(pathStr);
+    }
+    player->clearPlaylist();
+    player->addToPlaylist(urls);
+    player->show();
+    player->jumpToRow(index.row());
+}

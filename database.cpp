@@ -15,13 +15,12 @@ Database::Database(const QString& path) {
     query.exec("PRAGMA foreign_keys = ON;");
 
     // Create tables
-    bool success = false;
-    success = query.exec(
+    query.exec(
         "CREATE TABLE IF NOT EXISTS tags ("
         "id	INTEGER NOT NULL,"
         "name	TEXT NOT NULL UNIQUE,"
         "PRIMARY KEY(id AUTOINCREMENT))");
-    success = query.exec(
+    query.exec(
         "CREATE TABLE IF NOT EXISTS videos ("
         "id	INTEGER NOT NULL,"
         "title	TEXT NOT NULL,"

@@ -64,6 +64,7 @@ class Player : public QWidget {
 
     void displayErrorMessage();
     void showLibrary();
+    void updateVideoCount();
 
    private:
     void setTrackInfo(const QString &info);

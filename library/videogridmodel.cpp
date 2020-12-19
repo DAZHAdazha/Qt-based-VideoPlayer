@@ -42,28 +42,6 @@ int VideoGridModel::tagId() const {
 void VideoGridModel::refresh() {
     QString query;
     QTextStream(&query) << "SELECT * FROM `videos` WHERE tag_id = " << m_tagId;
+    m_data.clear();
     setQuery(query);
-}
-
-void VideoGridModel::beginInsertItems(int start, int end) {
-    m_data.clear();
-    beginInsertRows(QModelIndex(), start, end);
-}
-
-void VideoGridModel::endInsertItems() {
-    endInsertRows();
-}
-
-void VideoGridModel::beginRemoveItems(int start, int end) {
-    m_data.clear();
-    beginRemoveRows(QModelIndex(), start, end);
-}
-
-void VideoGridModel::endRemoveItems() {
-    endInsertRows();
-}
-
-void VideoGridModel::changeItems(int start, int end) {
-    m_data.clear();
-    emit dataChanged(index(start, 0), index(end, columnCount()));
 }

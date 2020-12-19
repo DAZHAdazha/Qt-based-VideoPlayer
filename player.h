@@ -74,6 +74,7 @@ class Player : public QWidget {
     // Initializes layouts
     void initLayout();
     void initPlayerSignals();
+    void closeEvent(QCloseEvent *event) override;
     PlayerControls *initControls();
 
     QMediaPlayer *player;

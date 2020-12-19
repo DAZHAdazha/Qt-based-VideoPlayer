@@ -346,3 +346,8 @@ void Player::jumpToRow(int row) {
     playlist->setCurrentIndex(row);
     player->play();
 }
+
+void Player::closeEvent(QCloseEvent *event) {
+    player->stop();
+    QWidget::closeEvent(event);
+}

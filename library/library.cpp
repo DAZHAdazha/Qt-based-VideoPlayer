@@ -33,9 +33,28 @@ Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
     tagListView->setModelColumn(1);
     connect(tagListView, SIGNAL(clicked(QModelIndex)), this, SLOT(selectTag(QModelIndex)));
 
-    searchText = new QLineEdit(this);
+    auto sortLayout = new QHBoxLayout();
+    sortWidget = new QWidget(this);
 
-    searchButton = new QPushButton("Search");
+    sortButtonGroup = new QButtonGroup(this);
+    defaultSortButton = new QRadioButton(this);
+    defaultSortButton->setText("Default");
+    defaultSortButton->setChecked(true);
+    connect(defaultSortButton, SIGNAL(clicked()), this, SLOT(defaultSort()));
+    nameSortButton = new QRadioButton(this);
+    nameSortButton->setText("Name");
+    connect(nameSortButton, SIGNAL(clicked()), this, SLOT(nameSort()));
+    dateSortButton = new QRadioButton(this);
+    dateSortButton->setText("Date");
+    connect(dateSortButton, SIGNAL(clicked()), this, SLOT(dateSort()));
+    sortButtonGroup->addButton(nameSortButton);
+    sortButtonGroup->addButton(dateSortButton);
+    sortButtonGroup->addButton(defaultSortButton);
+    sortLayout->addWidget(defaultSortButton,1);
+    sortLayout->addWidget(nameSortButton,1);
+    sortLayout->addWidget(dateSortButton,1);
+    sortLayout->setAlignment(Qt::AlignLeft);
+    sortWidget->setLayout(sortLayout);
 
     addVideoButton = new QPushButton("+");
     connect(addVideoButton, SIGNAL(clicked()), this, SLOT(showAddVideo()));
@@ -78,9 +97,7 @@ void Library::initLayout() {
     topBarLayout->setMargin(0);
     topBarLayout->setAlignment(Qt::AlignCenter);
 
-    topBarLayout->addStretch(1);
-    topBarLayout->addWidget(searchText, 3);
-    topBarLayout->addWidget(searchButton);
+    topBarLayout->addWidget(sortWidget);
     topBarLayout->addStretch(1);
     topBarLayout->addWidget(addVideoButton);
 
@@ -133,3 +150,16 @@ void Library::videoAdded(int id) {
 void Library::videoAddDone() {
     videoGridModel->refresh();
 }
+
+void Library::defaultSort() {
+    qDebug() << "Default";
+}
+
+void Library::nameSort() {
+    qDebug() << "Name";
+}
+
+void Library::dateSort() {
+    qDebug() << "Date";
+}
+

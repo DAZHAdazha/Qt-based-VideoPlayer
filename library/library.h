@@ -31,6 +31,9 @@ class Library : public QWidget {
     void selectTag(const QModelIndex& index);
     void videoAdded(int id);
     void videoAddDone();
+    void defaultSort();
+    void nameSort();
+    void dateSort();
 
    private:
     void initLayout();
@@ -41,8 +44,11 @@ class Library : public QWidget {
     TagListModel* tagListModel;
     QLabel* tagCountText;
 
-    QLineEdit* searchText;
-    QAbstractButton* searchButton;
+    QWidget* sortWidget;
+    QButtonGroup* sortButtonGroup;
+    QRadioButton* defaultSortButton;
+    QRadioButton* nameSortButton;
+    QRadioButton* dateSortButton;
     QAbstractButton* addVideoButton;
 
     QListView* videoGridView;

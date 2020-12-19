@@ -181,6 +181,8 @@ void Library::selectVideo(const QModelIndex& index) {
     }
     player->clearPlaylist();
     player->addToPlaylist(urls);
+    player->setTagName(tagListView->currentIndex().data().toString());
     player->show();
+    player->activateWindow();
     player->jumpToRow(index.row());
 }

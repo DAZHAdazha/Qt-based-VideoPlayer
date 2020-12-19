@@ -113,7 +113,7 @@ void Player::initLayout() {
     QBoxLayout *inferiorLayout = new QHBoxLayout;
     QBoxLayout *upperLayout = new QHBoxLayout;
 
-    QPushButton *tag = new QPushButton("test");
+    tag = new QPushButton("test");
     tag->setIcon(QIcon(":/tag.png"));
     tag->setIconSize(QSize(25, 25));
 
@@ -350,4 +350,8 @@ void Player::jumpToRow(int row) {
 void Player::closeEvent(QCloseEvent *event) {
     player->stop();
     QWidget::closeEvent(event);
+}
+
+void Player::setTagName(const QString & name) {
+    tag->setText(name);
 }

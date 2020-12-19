@@ -37,6 +37,7 @@ class Player : public QWidget {
     void addToPlaylist(const QList<QUrl> urls);
     void clearPlaylist();
     void jumpToRow(int row);
+    void setTagName(const QString &name);
 
    signals:
     void fullScreenChanged(bool fullScreen);

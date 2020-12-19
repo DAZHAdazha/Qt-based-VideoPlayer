@@ -8,6 +8,7 @@
 
 #include "library/taglistmodel.h"
 #include "videogriddelegate.h"
+#include "player.h"
 
 const QString kTagListQuery = "SELECT id, name FROM tags";
 

@@ -9,7 +9,6 @@
 #include "database.h"
 #include "taglistmodel.h"
 #include "videogridmodel.h"
-#include "player.h"
 
 QT_BEGIN_NAMESPACE
 class QAbstractItemView;

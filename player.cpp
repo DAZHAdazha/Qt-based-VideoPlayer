@@ -9,6 +9,7 @@ using namespace std;
 #include "absolutesetstyle.h"
 #include "player.h"
 #include "playlist/playlistdelegate.h"
+#include "library/library.h"
 
 Player::Player(QWidget *parent, Library *_library)
     : QWidget(parent), videoWidget(0), slider(0), colorDialog(0), library(_library) {

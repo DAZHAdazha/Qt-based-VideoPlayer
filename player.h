@@ -7,7 +7,6 @@
 #include <QMediaPlaylist>
 #include <QWidget>
 
-#include "library/library.h"
 #include "playercontrols.h"
 #include "playlist/playlistmodel.h"
 #include "videowidget.h"

@@ -9,6 +9,7 @@
 #include "database.h"
 #include "taglistmodel.h"
 #include "videogridmodel.h"
+#include "player.h"
 
 QT_BEGIN_NAMESPACE
 class QAbstractItemView;
@@ -17,6 +18,8 @@ class QLabel;
 class QLineEdit;
 class QListView;
 QT_END_NAMESPACE
+
+class Player;
 
 class Library : public QWidget {
     Q_OBJECT
@@ -31,6 +34,7 @@ class Library : public QWidget {
     void selectTag(const QModelIndex& index);
     void videoAdded(int id);
     void videoAddDone();
+    void selectVideo(const QModelIndex& index);
 
    private:
     void initLayout();
@@ -50,6 +54,7 @@ class Library : public QWidget {
 
     Database db;
     AddVideoForm* addVideoForm;
+    Player* player;
 };
 
 #endif

@@ -33,7 +33,6 @@ Database::Database(const QString& path) {
         "PRIMARY KEY(id AUTOINCREMENT),"
         "FOREIGN KEY(tag_id) REFERENCES tags(id) ON DELETE CASCADE"
         ")");
-    qDebug() << query.lastError();
 
     query.exec("INSERT INTO tags (name) VALUES ('Default')");
 }

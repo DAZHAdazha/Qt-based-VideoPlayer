@@ -1,6 +1,6 @@
 #include <QApplication>
 
-#include "player.h"
+#include "library/library.h"
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
@@ -9,8 +9,8 @@ int main(int argc, char *argv[]) {
     QCoreApplication::setOrganizationName("QtProject");
     QCoreApplication::setApplicationVersion(QT_VERSION_STR);
 
-    Player player;
-
-    player.show();
+    Library library;
+    library.show();
+    
     return app.exec();
 }

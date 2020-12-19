@@ -17,7 +17,7 @@ Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
     setMaximumWidth(1280);
     setGeometry(50, 50, 1300, 720);
 
-    addVideoForm = new Addvideo();
+    addVideoForm = new AddVideoForm();
     connect(addVideoForm, SIGNAL(videoAdded(int)), this, SLOT(videoAdded(int)));
     connect(addVideoForm, SIGNAL(videoAddDone()), this, SLOT(videoAddDone()));
 

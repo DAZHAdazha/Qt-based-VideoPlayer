@@ -13,12 +13,12 @@ class QLabel;
 class QLineEdit;
 QT_END_NAMESPACE
 
-class Addvideo : public QWidget {
+class AddVideoForm : public QWidget {
     Q_OBJECT
 
    public:
-    Addvideo(QWidget* parent = 0);
-    ~Addvideo(){};
+    AddVideoForm(QWidget* parent = 0);
+    ~AddVideoForm(){};
     void setTagId(int id);
 
    private slots:

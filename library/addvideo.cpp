@@ -13,7 +13,7 @@
 
 using namespace std;
 
-Addvideo::Addvideo(QWidget *parent) : QWidget(parent) {
+AddVideoForm::AddVideoForm(QWidget *parent) : QWidget(parent) {
     this->setGeometry(400, 400, 400, 400);
     setWindowTitle("Add New Video");
     openButton = new QPushButton("Open", this);
@@ -55,7 +55,7 @@ Addvideo::Addvideo(QWidget *parent) : QWidget(parent) {
     setLayout(form);
 }
 
-void Addvideo::openFile() {
+void AddVideoForm::openFile() {
     files = QFileDialog::getOpenFileNames(this, tr("Select Video"), ".",
                                           "Video Files (*.mp4 *.mov *.wmv)");
     if (files.isEmpty()) {
@@ -73,7 +73,7 @@ void Addvideo::openFile() {
     okButton->setDisabled(false);
 }
 
-void Addvideo::reset() {
+void AddVideoForm::reset() {
     files.clear();
     dateField->showToday();
     pathField->clear();
@@ -82,16 +82,16 @@ void Addvideo::reset() {
     okButton->setDisabled(true);
 }
 
-void Addvideo::cancel() {
+void AddVideoForm::cancel() {
     reset();
     hide();
 }
 
-void Addvideo::setTagId(int id) {
+void AddVideoForm::setTagId(int id) {
     m_tagId = id;
 }
 
-void Addvideo::submit() {
+void AddVideoForm::submit() {
     QSqlQuery query;
     bool success = true;
     query.prepare(

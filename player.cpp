@@ -57,7 +57,7 @@ Player::Player(QWidget *parent) : QWidget(parent), videoWidget(0), slider(0), co
     fullScreenButton->setIcon(QIcon(":/fullscreen.png"));
     fullScreenButton->setIconSize(QSize(25, 25));
     fullScreenButton->setCheckable(true);
-
+    initPlayerSignals();
     initLayout();
 }
 

@@ -11,6 +11,6 @@ int main(int argc, char *argv[]) {
 
     Library library;
     library.show();
-    
+
     return app.exec();
 }

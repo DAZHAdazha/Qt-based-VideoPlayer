@@ -7,7 +7,6 @@
 #include <QMediaPlaylist>
 #include <QWidget>
 
-#include "library/library.h"
 #include "playercontrols.h"
 #include "playlist/playlistmodel.h"
 #include "videowidget.h"
@@ -30,13 +29,14 @@ class Player : public QWidget {
     Q_OBJECT
 
    public:
-    Player(QWidget *parent = 0, Library* _library = 0);
+    Player(QWidget *parent = 0, Library *_library = 0);
     ~Player();
 
     bool isPlayerAvailable() const;
     void addToPlaylist(const QList<QUrl> urls);
     void clearPlaylist();
     void jumpToRow(int row);
+    void setTagName(const QString &name);
 
    signals:
     void fullScreenChanged(bool fullScreen);
@@ -64,6 +64,7 @@ class Player : public QWidget {
 
     void displayErrorMessage();
     void showLibrary();
+    void updateVideoCount();
 
    private:
     void setTrackInfo(const QString &info);

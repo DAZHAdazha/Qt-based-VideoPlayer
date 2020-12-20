@@ -7,6 +7,7 @@
 using namespace std;
 
 #include "absolutesetstyle.h"
+#include "library/library.h"
 #include "player.h"
 #include "playlist/playlistdelegate.h"
 
@@ -113,16 +114,13 @@ void Player::initLayout() {
     QBoxLayout *inferiorLayout = new QHBoxLayout;
     QBoxLayout *upperLayout = new QHBoxLayout;
 
-    QPushButton *tag = new QPushButton("test");
+    tag = new QPushButton("test");
     tag->setIcon(QIcon(":/tag.png"));
     tag->setIconSize(QSize(25, 25));
 
     videoAmount = new QLabel(this);
     int videoAmountNumber = playlistView->model()->rowCount();
-    char videoAmountChar[20];
-    string videoAmountString = "Total " + to_string(videoAmountNumber) + " videos";
-    strcpy(videoAmountChar, videoAmountString.c_str());
-    videoAmount->setText(videoAmountChar);
+    updateVideoCount();
 
     upperLayout->addWidget(tag);
     upperWindow->setLayout(upperLayout);
@@ -170,15 +168,19 @@ void Player::open() {
     fileDialog.setWindowTitle(tr("Open Files"));
     fileDialog.setMimeTypeFilters(player->supportedMimeTypes());
     if (fileDialog.exec() == QDialog::Accepted) addToPlaylist(fileDialog.selectedUrls());
+    updateVideoCount();
+}
+
+void Player::updateVideoCount() {
     int videoAmountNumber = playlistView->model()->rowCount();
-    char videoAmountChar[20];
-    string videoAmountString = "Total " + to_string(videoAmountNumber) + " videos";
-    strcpy(videoAmountChar, videoAmountString.c_str());
-    videoAmount->setText(videoAmountChar);
+    QString videoAmountStr;
+    QTextStream(&videoAmountStr) << "Total " << videoAmountNumber << " videos";
+    videoAmount->setText(videoAmountStr);
 }
 
 void Player::addToPlaylist(const QList<QUrl> urls) {
     foreach (const QUrl &url, urls) { playlist->addMedia(url); }
+    updateVideoCount();
 }
 
 void Player::goForward() {
@@ -194,11 +196,7 @@ void Player::removeSelected() {
     if (current.isValid()) {
         playlist->removeMedia(current.row());
     }
-    int videoAmountNumber = playlistView->model()->rowCount();
-    char videoAmountChar[20];
-    string videoAmountString = "Total " + to_string(videoAmountNumber) + " videos";
-    strcpy(videoAmountChar, videoAmountString.c_str());
-    videoAmount->setText(videoAmountChar);
+    updateVideoCount();
 }
 
 void Player::durationChanged(qint64 duration) {
@@ -340,6 +338,7 @@ void Player::showLibrary() {
 
 void Player::clearPlaylist() {
     playlist->clear();
+    updateVideoCount();
 }
 
 void Player::jumpToRow(int row) {
@@ -350,4 +349,8 @@ void Player::jumpToRow(int row) {
 void Player::closeEvent(QCloseEvent *event) {
     player->stop();
     QWidget::closeEvent(event);
+}
+
+void Player::setTagName(const QString &name) {
+    tag->setText(name);
 }

@@ -1,3 +1,5 @@
+#include "playlistmodel.h"
+
 #include <QFileInfo>
 #include <QImageReader>
 #include <QLabel>
@@ -5,7 +7,6 @@
 #include <QUrl>
 #include <QtWidgets/QFileIconProvider>
 
-#include "playlistmodel.h"
 #include "utils.h"
 
 PlaylistModel::PlaylistModel(QObject *parent) : QAbstractItemModel(parent), m_playlist(0) {}
@@ -43,8 +44,7 @@ QVariant PlaylistModel::data(const QModelIndex &index, int role) const {
             auto thumb = loadThumbnail(path);
             if (!thumb.isNull()) {
                 value.setValue(PlaylistItem(name, path, thumb));
-            }
-            else{
+            } else {
                 value.setValue(PlaylistItem(name, path, QPixmap(":/video.jpg")));
             }
             // Cache the item

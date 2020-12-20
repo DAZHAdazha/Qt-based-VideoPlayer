@@ -7,9 +7,9 @@
 
 #include "addvideo.h"
 #include "database.h"
+#include "videogridview.h"
 #include "taglistmodel.h"
 #include "videogridmodel.h"
-#include "player.h"
 
 QT_BEGIN_NAMESPACE
 class QAbstractItemView;
@@ -41,6 +41,7 @@ class Library : public QWidget {
 
    private:
     void initLayout();
+    void initSort();
     void refreshTagCount();
 
     QAbstractButton* addTagButton;
@@ -55,7 +56,7 @@ class Library : public QWidget {
     QRadioButton* dateSortButton;
     QAbstractButton* addVideoButton;
 
-    QListView* videoGridView;
+    VideoGridView* videoGridView;
     VideoGridModel* videoGridModel;
 
     Database db;

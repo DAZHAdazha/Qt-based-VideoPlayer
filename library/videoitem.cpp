@@ -1,7 +1,8 @@
+#include "videoitem.h"
+
 #include <qboxlayout.h>
 #include <qnamespace.h>
 
-#include "videoitem.h"
 #include "utils.h"
 
 const QString kCssNoBorder = "border: 0";
@@ -17,7 +18,7 @@ VideoItem::VideoItem(int _id, QString _path, QString _title, QString _date, QStr
 
     thumb = loadThumbnail(path);
     if (thumb.isNull()) {
-        thumb =  QPixmap(":/video.jpg");
+        thumb = QPixmap(":/video.jpg");
     }
     imgLabel = new QLabel();
     imgLabel->setStyleSheet("border:1px solid black;");
@@ -38,7 +39,7 @@ VideoItem::VideoItem(int _id, QString _path, QString _title, QString _date, QStr
     memoLabel = new QLabel(memo);
     memoLabel->setAlignment(Qt::AlignTop | Qt::AlignLeft);
     memoLabel->setWordWrap(true);
-    if(memo!=""){
+    if (memo != "") {
         memoLabel->setStyleSheet("border:1px solid #BBBBBB;");
     }
 

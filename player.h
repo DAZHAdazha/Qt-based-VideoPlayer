@@ -29,7 +29,7 @@ class Player : public QWidget {
     Q_OBJECT
 
    public:
-    Player(QWidget *parent = 0, Library* _library = 0);
+    Player(QWidget *parent = 0, Library *_library = 0);
     ~Player();
 
     bool isPlayerAvailable() const;

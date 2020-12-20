@@ -57,7 +57,7 @@ AddVideoForm::AddVideoForm(QWidget *parent) : QWidget(parent) {
 
 void AddVideoForm::openFile() {
     files = QFileDialog::getOpenFileNames(this, tr("Select Video"), ".",
-                                          "Video Files (*.mp4 *.mov *.wmv)");
+                                          "Video Files (*.mp4 *.mov *.wmv *.avi *.mp3)");
     if (files.isEmpty()) {
         return;
     }

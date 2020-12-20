@@ -7,6 +7,7 @@
 
 #include "addvideo.h"
 #include "database.h"
+#include "videogridview.h"
 #include "taglistmodel.h"
 #include "videogridmodel.h"
 
@@ -55,7 +56,7 @@ class Library : public QWidget {
     QRadioButton* dateSortButton;
     QAbstractButton* addVideoButton;
 
-    QListView* videoGridView;
+    VideoGridView* videoGridView;
     VideoGridModel* videoGridModel;
 
     Database db;

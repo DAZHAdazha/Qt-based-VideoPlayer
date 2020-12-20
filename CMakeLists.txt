@@ -32,6 +32,7 @@ add_executable(tomeo
     library/videoitem.cpp
     library/addvideo.cpp
     library/taglistmodel.cpp
+    library/videogridview.cpp
 )
 
 target_include_directories(tomeo PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})

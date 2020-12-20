@@ -45,12 +45,8 @@ Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
     addVideoButton->setIconSize(QSize(25, 25));
     connect(addVideoButton, SIGNAL(clicked()), this, SLOT(showAddVideo()));
 
-    videoGridView = new QListView(this);
     videoGridModel = new VideoGridModel(this);
-    videoGridView->setModel(videoGridModel);
-    videoGridView->setItemDelegate(new VideoGridDelegate);
-    videoGridView->setViewMode(QListView::IconMode);
-    videoGridView->setGridSize(QSize(250, 200));
+    videoGridView = new VideoGridView(this, videoGridModel);
     connect(videoGridView, SIGNAL(activated(QModelIndex)), this, SLOT(selectVideo(QModelIndex)));
 
     // Select the first tag

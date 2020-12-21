@@ -6,7 +6,7 @@
 #include "utils.h"
 
 const QString kCssNoBorder = "border: 0";
-const QFont kFontRoboto("RobotoCondensed-Regular", 10, QFont::Normal);
+const QFont kFontRoboto("RobotoCondensed-Regular", 12, QFont::Normal);
 
 VideoItem::VideoItem(int _id, QString _path, QString _title, QString _date, QString _location,
                      QString _memo)

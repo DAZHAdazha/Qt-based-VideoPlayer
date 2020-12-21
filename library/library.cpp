@@ -11,8 +11,8 @@
 #include "videogriddelegate.h"
 
 const QString kTagListQuery = "SELECT id, name FROM tags";
-const QFont kFontRoboto("RobotoCondensed-Regular", 10, QFont::Normal);
-const QFont kFontEczer("Eczar-Regular", 10, QFont::Normal);
+const QFont kFontRoboto("RobotoCondensed-Regular", 12, QFont::Normal);
+const QFont kFontEczer("Eczar-Regular", 12, QFont::Normal);
 
 Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
     setWindowTitle("Library - Tomeo");
@@ -111,8 +111,9 @@ void Library::initLayout() {
     addTagButton->setStyleSheet("background-color: #F9AA33");
     tagCountText->setStyleSheet("background-color:#232F34");
     tagCountText->setContentsMargins(10,10,10,10);
-    tagListView->setStyleSheet("background-color:#344955;color:white");
+    tagListView->setStyleSheet("background-color:#344955;color:white;");
     tagListView->setFont(kFontRoboto);
+    tagListView->setSpacing(5);
 
     leftLayout->addWidget(topWidget,1);
     leftLayout->addWidget(tagListView, 8);

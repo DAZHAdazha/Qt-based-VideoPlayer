@@ -11,8 +11,8 @@ using namespace std;
 #include "player.h"
 #include "playlist/playlistdelegate.h"
 
-const QFont kFontEczer("Eczar-Regular", 10, QFont::Normal);
-const QFont kFontRoboto("RobotoCondensed-Regular", 10, QFont::Normal);
+const QFont kFontEczer("Eczar-Regular", 12, QFont::Normal);
+const QFont kFontRoboto("RobotoCondensed-Regular", 12, QFont::Normal);
 
 Player::Player(QWidget *parent, Library *_library)
     : QWidget(parent), videoWidget(0), slider(0), colorDialog(0), library(_library) {

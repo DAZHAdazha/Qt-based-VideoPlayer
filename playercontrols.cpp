@@ -7,7 +7,7 @@
 #include <QToolButton>
 
 #include "absolutesetstyle.h"
-const QFont kFontRoboto("RobotoCondensed-Regular", 10, QFont::Normal);
+const QFont kFontRoboto("RobotoCondensed-Regular", 12, QFont::Normal);
 PlayerControls::PlayerControls(QWidget *parent)
     : QWidget(parent), playerState(QMediaPlayer::StoppedState), playerMuted(false) {
     playButton = new QToolButton(this);

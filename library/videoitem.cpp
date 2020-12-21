@@ -6,7 +6,7 @@
 #include "utils.h"
 
 const QString kCssNoBorder = "border: 0";
-const QFont roboto("RobotoCondensed-Regular", 10, QFont::Normal);
+const QFont kFontRoboto("RobotoCondensed-Regular", 10, QFont::Normal);
 
 VideoItem::VideoItem(int _id, QString _path, QString _title, QString _date, QString _location,
                      QString _memo)
@@ -30,22 +30,22 @@ VideoItem::VideoItem(int _id, QString _path, QString _title, QString _date, QStr
     titleLabel = new QLabel(title);
     titleLabel->setStyleSheet(kCssNoBorder);
     titleLabel->setFixedWidth(150);
-    titleLabel->setFont(roboto);
+    titleLabel->setFont(kFontRoboto);
     dateLabel = new QLabel(date);
     dateLabel->setStyleSheet(kCssNoBorder);
     dateLabel->setFixedWidth(150);
-    dateLabel->setFont(roboto);
+    dateLabel->setFont(kFontRoboto);
     locationLabel = new QLabel(location);
     locationLabel->setStyleSheet(kCssNoBorder);
     locationLabel->setFixedWidth(150);
-    locationLabel->setFont(roboto);
+    locationLabel->setFont(kFontRoboto);
 
     memoLabel = new QLabel(memo);
     memoLabel->setAlignment(Qt::AlignTop | Qt::AlignLeft);
     memoLabel->setWordWrap(true);
     memoLabel->setStyleSheet("border:1px solid #BBBBBB;");
     memoLabel->setFixedWidth(70);
-    memoLabel->setFont(roboto);
+    memoLabel->setFont(kFontRoboto);
 
     initLayout();
 }

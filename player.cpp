@@ -11,8 +11,8 @@ using namespace std;
 #include "player.h"
 #include "playlist/playlistdelegate.h"
 
-const QFont eczer("Eczar-Regular", 10, QFont::Normal);
-const QFont roboto("RobotoCondensed-Regular", 10, QFont::Normal);
+const QFont kFontEczer("Eczar-Regular", 10, QFont::Normal);
+const QFont kFontRoboto("RobotoCondensed-Regular", 10, QFont::Normal);
 
 Player::Player(QWidget *parent, Library *_library)
     : QWidget(parent), videoWidget(0), slider(0), colorDialog(0), library(_library) {
@@ -54,7 +54,7 @@ Player::Player(QWidget *parent, Library *_library)
     connect(removeButton, SIGNAL(clicked()), this, SLOT(removeSelected()));
 
     libraryButton = new QPushButton("Library");
-    libraryButton->setFont(roboto);
+    libraryButton->setFont(kFontRoboto);
     connect(libraryButton, SIGNAL(clicked()), this, SLOT(showLibrary()));
 
     fullScreenButton = new QPushButton(this);
@@ -119,7 +119,7 @@ void Player::initLayout() {
     QBoxLayout *upperLayout = new QHBoxLayout;
 
     tag = new QPushButton("test");
-    tag->setFont(roboto);
+    tag->setFont(kFontRoboto);
     tag->setIcon(QIcon(":/tag.png"));
     tag->setIconSize(QSize(25, 25));
 
@@ -176,7 +176,7 @@ void Player::open() {
 }
 
 void Player::updateVideoCount() {
-    videoAmount->setFont(eczer);
+    videoAmount->setFont(kFontEczer);
     int videoAmountNumber = playlistView->model()->rowCount();
     QString videoAmountStr;
     QTextStream(&videoAmountStr) << "Total " << videoAmountNumber << " videos";
@@ -332,7 +332,7 @@ void Player::updateDurationInfo(qint64 currentInfo) {
         if (duration > 3600) format = "hh:mm:ss";
         tStr = currentTime.toString(format) + " / " + totalTime.toString(format);
     }
-    labelDuration->setFont(roboto);
+    labelDuration->setFont(kFontRoboto);
     labelDuration->setText(tStr);
 }
 

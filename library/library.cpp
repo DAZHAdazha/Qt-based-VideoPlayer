@@ -5,7 +5,7 @@
 #include <qlistview.h>
 #include <qnamespace.h>
 #include <qpushbutton.h>
-
+#include <qpalette.h>
 #include "library/taglistmodel.h"
 #include "player.h"
 #include "videogriddelegate.h"
@@ -36,7 +36,6 @@ Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
     tagCountText->setFont(kFontEczer);
 
     tagListView = new QListView(this);
-    tagListView->setFont(kFontRoboto);
     tagListModel = new TagListModel;
     refreshTagCount();
     tagListView->setModel(tagListModel);
@@ -58,6 +57,7 @@ Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
 
     // Select the first tag
     auto firstTagIndex = tagListModel->index(0, 1);
+
     tagListView->setCurrentIndex(firstTagIndex);
     selectTag(firstTagIndex);
 
@@ -111,7 +111,8 @@ void Library::initLayout() {
     addTagButton->setStyleSheet("background-color: #F9AA33");
     tagCountText->setStyleSheet("background-color:#232F34");
     tagCountText->setContentsMargins(10,10,10,10);
-    tagListView->setStyleSheet("background-color:#344955");
+    tagListView->setStyleSheet("background-color:#344955;color:white");
+    tagListView->setFont(kFontRoboto);
 
     leftLayout->addWidget(topWidget,1);
     leftLayout->addWidget(tagListView, 8);
@@ -187,6 +188,9 @@ void Library::showAddTag() {
 void Library::refreshTagCount() {
     QString text;
     QTextStream(&text) << "Total Tags: " << tagListModel->rowCount();
+    QPalette pe;
+    pe.setColor(QPalette::WindowText, Qt::white);
+    tagCountText->setPalette(pe);
     tagCountText->setText(text);
 }
 

@@ -11,10 +11,10 @@
 #include "videogriddelegate.h"
 
 const QString kTagListQuery = "SELECT id, name FROM tags";
-const QFont roboto("RobotoCondensed-Regular", 10, QFont::Normal);
-const QFont eczer("Eczar-Regular", 10, QFont::Normal);
-Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
+const QFont kFontRoboto("RobotoCondensed-Regular", 10, QFont::Normal);
+const QFont kFontEczer("Eczar-Regular", 10, QFont::Normal);
 
+Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
     setWindowTitle("Library - Tomeo");
     setMinimumSize(1300, 720);
     setMaximumWidth(1280);
@@ -27,15 +27,16 @@ Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
     connect(addVideoForm, SIGNAL(videoAddDone()), this, SLOT(videoAddDone()));
 
     addTagButton = new QPushButton("Add Tag");
-    addTagButton->setFont(roboto);
+    addTagButton->setFont(kFontRoboto);
     addTagButton->setIcon(QIcon(":/tag.png"));
     addTagButton->setIconSize(QSize(25, 25));
     connect(addTagButton, SIGNAL(clicked()), this, SLOT(showAddTag()));
 
     tagCountText = new QLabel(this);
+    tagCountText->setFont(kFontEczer);
 
     tagListView = new QListView(this);
-    tagListView->setFont(roboto);
+    tagListView->setFont(kFontRoboto);
     tagListModel = new TagListModel;
     refreshTagCount();
     tagListView->setModel(tagListModel);
@@ -52,6 +53,8 @@ Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
     videoGridModel = new VideoGridModel(this);
     videoGridView = new VideoGridView(this, videoGridModel);
     connect(videoGridView, SIGNAL(activated(QModelIndex)), this, SLOT(selectVideo(QModelIndex)));
+    connect(videoGridView, SIGNAL(customContextMenuRequested(QPoint)), this,
+            SLOT(videoGridCtxMenu(QPoint)));
 
     // Select the first tag
     auto firstTagIndex = tagListModel->index(0, 1);
@@ -70,16 +73,16 @@ void Library::initSort() {
     sortButtonGroup = new QButtonGroup(this);
     defaultSortButton = new QRadioButton(this);
     defaultSortButton->setText("Default");
-    defaultSortButton->setFont(roboto);
+    defaultSortButton->setFont(kFontRoboto);
     defaultSortButton->setChecked(true);
     connect(defaultSortButton, SIGNAL(clicked()), this, SLOT(defaultSort()));
     nameSortButton = new QRadioButton(this);
     nameSortButton->setText("Name");
-    nameSortButton->setFont(roboto);
+    nameSortButton->setFont(kFontRoboto);
     connect(nameSortButton, SIGNAL(clicked()), this, SLOT(nameSort()));
     dateSortButton = new QRadioButton(this);
     dateSortButton->setText("Date");
-    dateSortButton->setFont(roboto);
+    dateSortButton->setFont(kFontRoboto);
     connect(dateSortButton, SIGNAL(clicked()), this, SLOT(dateSort()));
     sortButtonGroup->addButton(nameSortButton);
     sortButtonGroup->addButton(dateSortButton);
@@ -182,7 +185,6 @@ void Library::showAddTag() {
 }
 
 void Library::refreshTagCount() {
-    tagCountText->setFont(eczer);
     QString text;
     QTextStream(&text) << "Total Tags: " << tagListModel->rowCount();
     tagCountText->setText(text);
@@ -228,4 +230,22 @@ void Library::selectVideo(const QModelIndex &index) {
     player->show();
     player->activateWindow();
     player->jumpToRow(index.row());
+}
+
+void Library::videoGridCtxMenu(const QPoint &pos) {
+    auto index = videoGridView->indexAt(pos);
+    if (!index.isValid()) return;
+
+    if (videoGridMenu == nullptr) {
+        videoGridMenu = new QMenu(this);
+        auto deleteAction = new QAction("Delete", this);
+        connect(deleteAction, SIGNAL(triggered()), this, SLOT(deleteCurrentVideo()));
+        videoGridMenu->addAction(deleteAction);
+    }
+
+    videoGridMenu->popup(videoGridView->viewport()->mapToGlobal(pos));
+}
+
+void Library::deleteCurrentVideo() {
+    videoGridView->deleteCurrentVideo();
 }

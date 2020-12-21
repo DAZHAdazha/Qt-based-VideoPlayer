@@ -38,6 +38,8 @@ class Library : public QWidget {
     void nameSort();
     void dateSort();
     void selectVideo(const QModelIndex& index);
+    void videoGridCtxMenu(const QPoint& pos);
+    void deleteCurrentVideo();
 
    private:
     void initLayout();
@@ -62,6 +64,8 @@ class Library : public QWidget {
     Database db;
     AddVideoForm* addVideoForm;
     Player* player;
+
+    QMenu* videoGridMenu = nullptr;
 };
 
 #endif

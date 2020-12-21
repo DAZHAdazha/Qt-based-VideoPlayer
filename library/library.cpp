@@ -97,9 +97,25 @@ void Library::initLayout() {
     leftPanel->setLayout(leftLayout);
     leftLayout->setAlignment(Qt::AlignTop);
 
-    leftLayout->addWidget(addTagButton);
-    leftLayout->addWidget(tagListView, 1);
-    leftLayout->addWidget(tagCountText);
+    auto topWidget = new QWidget();
+    auto topWidgetLayout = new QHBoxLayout;
+    topWidget->setLayout(topWidgetLayout);
+    topWidgetLayout->addWidget(addTagButton);
+    topWidgetLayout->setMargin(0);
+    topWidgetLayout->setSpacing(0);
+    topWidget->setStyleSheet("background-color: #4A6572");
+
+    addTagButton->setStyleSheet("background-color: #F9AA33");
+    tagCountText->setStyleSheet("background-color:#232F34");
+    tagCountText->setContentsMargins(10,10,10,10);
+    tagListView->setStyleSheet("background-color:#344955");
+
+    leftLayout->addWidget(topWidget,1);
+    leftLayout->addWidget(tagListView, 8);
+    leftLayout->addWidget(tagCountText,1);
+
+    leftLayout->setMargin(0);
+    leftLayout->setSpacing(1);
 
     auto rightPanel = new QWidget(this);
     auto rightLayout = new QVBoxLayout;
@@ -108,20 +124,40 @@ void Library::initLayout() {
 
     auto topBar = new QWidget(this);
     auto topBarLayout = new QHBoxLayout;
+
+    auto colorbar = new QWidget();
+    auto buttonbar = new QWidget();
+    auto buttonLayout = new QHBoxLayout();
+    buttonbar->setLayout(buttonLayout);
+    buttonLayout->addWidget(addVideoButton);
+
+    colorbar->setStyleSheet("background-color:#B0BEC5");
+    sortWidget->setStyleSheet("background-color:#B0BEC5");
+    buttonbar->setStyleSheet("background-color:#B0BEC5");
+    addVideoButton->setStyleSheet("background-color:#F9AA33");
+
     topBar->setLayout(topBarLayout);
     topBarLayout->setMargin(0);
     topBarLayout->setAlignment(Qt::AlignCenter);
 
-    topBarLayout->addWidget(sortWidget);
-    topBarLayout->addStretch(1);
-    topBarLayout->addWidget(addVideoButton);
+    topBarLayout->addWidget(sortWidget,3);
+    topBarLayout->addWidget(colorbar,6);
+    topBarLayout->addWidget(buttonbar,1);
+    topBarLayout->setMargin(0);
+    topBarLayout->setSpacing(0);
+
+    videoGridView->setStyleSheet("background-color: #ECEFF1");
 
     rightLayout->addWidget(topBar);
     rightLayout->addWidget(videoGridView, 1);
+    rightLayout->setMargin(0);
+    rightLayout->setSpacing(0);
 
     auto layout = new QHBoxLayout;
     layout->addWidget(leftPanel, 2);
     layout->addWidget(rightPanel, 10);
+    layout->setMargin(0);
+    layout->setSpacing(0);
 
     setLayout(layout);
 }

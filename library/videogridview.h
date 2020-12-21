@@ -10,6 +10,7 @@
 class VideoGridView : public QListView {
    public:
     explicit VideoGridView(QWidget *parent = 0, VideoGridModel *model = 0);
+    void deleteCurrentVideo();
 
    protected:
     void keyPressEvent(QKeyEvent *event) override;

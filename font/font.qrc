@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Eczar-Regular.ttf</file>
+        <file>RobotoCondensed-Regular.ttf</file>
+        <file>WorkSans-Bold.ttf</file>
+    </qresource>
+</RCC>

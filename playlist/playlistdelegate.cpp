@@ -6,7 +6,8 @@
 
 const int kRowHeight = 70;
 const int kThumbWidth = kRowHeight * (16.0 / 9.0);
-
+const QFont roboto("RobotoCondensed-Regular", 10, QFont::Normal);
+const QFont worksans("WorkSans-Bold", 15, QFont::Bold);
 void PlaylistDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
                              const QModelIndex &index) const {
     auto data = index.data();
@@ -36,15 +37,10 @@ void PlaylistDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
             textRect2.setLeft(rect.left() + kThumbWidth);
             textRect2.setTop(rect.top() + 30);
 
-            QFont font = painter->font();
-            font.setPointSize(font.pointSize() * 1.5);
-            font.setBold(true);
-            painter->setFont(font);
+            painter->setFont(worksans);
             painter->drawText(textRect, Qt::AlignVCenter | Qt::AlignLeading, item.title);
 
-            font.setPointSize(font.pointSize() / 1.5);
-            font.setBold(false);
-            painter->setFont(font);
+            painter->setFont(roboto);
             painter->drawText(textRect2, Qt::AlignVCenter | Qt::AlignLeading, item.location);
         }
 

@@ -7,7 +7,7 @@
 #include <QToolButton>
 
 #include "absolutesetstyle.h"
-
+const QFont roboto("RobotoCondensed-Regular", 10, QFont::Normal);
 PlayerControls::PlayerControls(QWidget *parent)
     : QWidget(parent), playerState(QMediaPlayer::StoppedState), playerMuted(false) {
     playButton = new QToolButton(this);
@@ -56,6 +56,7 @@ PlayerControls::PlayerControls(QWidget *parent)
 
 void PlayerControls::initRateBox() {
     rateBox = new QComboBox(this);
+    rateBox->setFont(roboto);
     rateBox->addItem("0.25x", QVariant(0.25));
     rateBox->addItem("0.5x", QVariant(0.5));
     rateBox->addItem("0.75x", QVariant(0.75));

@@ -11,6 +11,9 @@ using namespace std;
 #include "player.h"
 #include "playlist/playlistdelegate.h"
 
+const QFont eczer("Eczar-Regular", 10, QFont::Normal);
+const QFont roboto("RobotoCondensed-Regular", 10, QFont::Normal);
+
 Player::Player(QWidget *parent, Library *_library)
     : QWidget(parent), videoWidget(0), slider(0), colorDialog(0), library(_library) {
     player = new QMediaPlayer(this);
@@ -51,6 +54,7 @@ Player::Player(QWidget *parent, Library *_library)
     connect(removeButton, SIGNAL(clicked()), this, SLOT(removeSelected()));
 
     libraryButton = new QPushButton("Library");
+    libraryButton->setFont(roboto);
     connect(libraryButton, SIGNAL(clicked()), this, SLOT(showLibrary()));
 
     fullScreenButton = new QPushButton(this);
@@ -115,11 +119,11 @@ void Player::initLayout() {
     QBoxLayout *upperLayout = new QHBoxLayout;
 
     tag = new QPushButton("test");
+    tag->setFont(roboto);
     tag->setIcon(QIcon(":/tag.png"));
     tag->setIconSize(QSize(25, 25));
 
     videoAmount = new QLabel(this);
-    int videoAmountNumber = playlistView->model()->rowCount();
     updateVideoCount();
 
     upperLayout->addWidget(tag);
@@ -172,6 +176,7 @@ void Player::open() {
 }
 
 void Player::updateVideoCount() {
+    videoAmount->setFont(eczer);
     int videoAmountNumber = playlistView->model()->rowCount();
     QString videoAmountStr;
     QTextStream(&videoAmountStr) << "Total " << videoAmountNumber << " videos";
@@ -264,7 +269,9 @@ void Player::statusChanged(QMediaPlayer::MediaStatus status) {
     }
 }
 
-void Player::stateChanged(QMediaPlayer::State state) {}
+void Player::stateChanged(QMediaPlayer::State state) {
+    qInfo()<<state;
+}
 
 void Player::handleCursor(QMediaPlayer::MediaStatus status) {
     if (status == QMediaPlayer::LoadingMedia || status == QMediaPlayer::BufferingMedia ||
@@ -325,6 +332,7 @@ void Player::updateDurationInfo(qint64 currentInfo) {
         if (duration > 3600) format = "hh:mm:ss";
         tStr = currentTime.toString(format) + " / " + totalTime.toString(format);
     }
+    labelDuration->setFont(roboto);
     labelDuration->setText(tStr);
 }
 

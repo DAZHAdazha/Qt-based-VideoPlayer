@@ -46,4 +46,5 @@ target.path = $$[QT_INSTALL_EXAMPLES]/multimediawidgets/player
 INSTALLS += target
 
 RESOURCES += \
+    font/font.qrc \
     img/img.qrc

@@ -20,43 +20,33 @@ Player::Player(QWidget *parent, Library *_library)
     playlist = new QMediaPlaylist();
     player->setPlaylist(playlist);
     player->setNotifyInterval(20);
-
     setGeometry(500, 300, 1000, 600);
     setMinimumSize(650, 450);
-
     videoWidget = new VideoWidget(this);
     player->setVideoOutput(videoWidget);
-
     playlistModel = new PlaylistModel(this);
     playlistModel->setPlaylist(playlist);
-
     playlistView = new QListView(this);
     playlistView->setItemDelegate(new PlaylistDelegate);
     playlistView->setModel(playlistModel);
     playlistView->setCurrentIndex(playlistModel->index(playlist->currentIndex(), 0));
     connect(playlistView, SIGNAL(activated(QModelIndex)), this, SLOT(jump(QModelIndex)));
-
     slider = new QSlider(Qt::Horizontal, this);
     slider->setRange(0, player->duration());
     slider->setStyle(new AbsoluteSetStyle(slider->style()));
     connect(slider, SIGNAL(sliderMoved(int)), this, SLOT(seek(int)));
-
     labelDuration = new QLabel(this);
-
     openButton = new QPushButton(this);
     openButton->setIcon(QIcon(":/add.png"));
     openButton->setIconSize(QSize(25, 25));
     connect(openButton, SIGNAL(clicked()), this, SLOT(open()));
-
     removeButton = new QPushButton(this);
     removeButton->setIcon(QIcon(":/delete.png"));
     removeButton->setIconSize(QSize(25, 25));
     connect(removeButton, SIGNAL(clicked()), this, SLOT(removeSelected()));
-
     libraryButton = new QPushButton("Library");
     libraryButton->setFont(kFontRoboto);
     connect(libraryButton, SIGNAL(clicked()), this, SLOT(showLibrary()));
-
     fullScreenButton = new QPushButton(this);
     fullScreenButton->setIcon(QIcon(":/fullscreen.png"));
     fullScreenButton->setIconSize(QSize(25, 25));
@@ -108,57 +98,45 @@ void Player::initLayout() {
     QWidget *listWindow = new QWidget();
     QWidget *inferiorWindow = new QWidget();
     QWidget *upperWindow = new QWidget();
-
     QPalette pal(inferiorWindow->palette());
     pal.setColor(QPalette::Background, Qt::white);
     inferiorWindow->setAutoFillBackground(true);
     inferiorWindow->setPalette(pal);
-
     QBoxLayout *listLayout = new QVBoxLayout;
     QBoxLayout *inferiorLayout = new QHBoxLayout;
     QBoxLayout *upperLayout = new QHBoxLayout;
-
     tag = new QPushButton("test");
     tag->setFont(kFontRoboto);
     tag->setIcon(QIcon(":/tag.png"));
     tag->setIconSize(QSize(25, 25));
-
     videoAmount = new QLabel(this);
     updateVideoCount();
-
     upperLayout->addWidget(tag);
     upperWindow->setLayout(upperLayout);
-
     inferiorLayout->addWidget(videoAmount);
     inferiorLayout->addWidget(openButton);
     inferiorLayout->addWidget(removeButton);
     inferiorWindow->setLayout(inferiorLayout);
-
     listLayout->addWidget(upperWindow, 1);
     listLayout->addWidget(playlistView, 8);
     listLayout->addWidget(inferiorWindow, 1);
     listLayout->setSpacing(0);
     listWindow->setLayout(listLayout);
-
     QBoxLayout *displayLayout = new QHBoxLayout;
     displayLayout->addWidget(videoWidget, 3);
     displayLayout->addWidget(listWindow, 1);
-
     QBoxLayout *controlLayout = new QHBoxLayout;
     controlLayout->addWidget(initControls());
     controlLayout->addStretch(1);
     controlLayout->addWidget(libraryButton);
     controlLayout->addWidget(fullScreenButton);
-
     QHBoxLayout *hLayout = new QHBoxLayout;
     hLayout->addWidget(slider);
     hLayout->addWidget(labelDuration);
-
     QBoxLayout *layout = new QVBoxLayout;
     layout->addLayout(displayLayout, 2);
     layout->addLayout(hLayout);
     layout->addLayout(controlLayout);
-
     setLayout(layout);
 }
 

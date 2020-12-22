@@ -45,6 +45,7 @@ class Library : public QWidget {
     void initLayout();
     void initSort();
     void refreshTagCount();
+    void setStyle(QHBoxLayout& topBarLayout);
 
     QAbstractButton* addTagButton;
     QAbstractButton* removeTagButton;

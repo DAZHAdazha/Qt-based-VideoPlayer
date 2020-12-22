@@ -14,38 +14,31 @@ PlayerControls::PlayerControls(QWidget *parent)
     playButton->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
     playButton->setIconSize(QSize(25, 25));
     connect(playButton, SIGNAL(clicked()), this, SLOT(playClicked()));
-
     stopButton = new QToolButton(this);
     stopButton->setIcon(style()->standardIcon(QStyle::SP_MediaStop));
     stopButton->setIconSize(QSize(25, 25));
     stopButton->setEnabled(false);
     connect(stopButton, SIGNAL(clicked()), this, SIGNAL(stop()));
-
     nextButton = new QToolButton(this);
     nextButton->setIcon(style()->standardIcon(QStyle::SP_MediaSkipForward));
     nextButton->setIconSize(QSize(25, 25));
     connect(nextButton, SIGNAL(clicked()), this, SIGNAL(next()));
-
     previousButton = new QToolButton(this);
     previousButton->setIcon(style()->standardIcon(QStyle::SP_MediaSkipBackward));
     previousButton->setIconSize(QSize(25, 25));
     connect(previousButton, SIGNAL(clicked()), this, SIGNAL(previous()));
-
     muteButton = new QToolButton(this);
     muteButton->setIcon(QIcon(":/volume.png"));
     muteButton->setIconSize(QSize(25, 25));
     connect(muteButton, SIGNAL(clicked()), this, SLOT(muteClicked()));
-
     volumeSlider = new QSlider(Qt::Horizontal, this);
     volumeSlider->setRange(0, 100);
     volumeSlider->setStyle(new AbsoluteSetStyle(volumeSlider->style()));
     connect(volumeSlider, SIGNAL(valueChanged(int)), this, SLOT(onVolumeSliderValueChanged()));
-
     forwardButton = new QToolButton(this);
     forwardButton->setIcon(QIcon(":/forward.png"));
     forwardButton->setIconSize(QSize(25, 25));
     connect(forwardButton, SIGNAL(clicked()), this, SLOT(forwardClicked()));
-
     backButton = new QToolButton(this);
     backButton->setIconSize(QSize(25, 25));
     backButton->setIcon(QIcon(":/backward.png"));

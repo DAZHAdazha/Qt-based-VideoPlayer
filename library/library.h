@@ -47,6 +47,7 @@ class Library : public QWidget {
     void refreshTagCount();
 
     QAbstractButton* addTagButton;
+    QAbstractButton* removeTagButton;
     QListView* tagListView;
     TagListModel* tagListModel;
     QLabel* tagCountText;
@@ -57,6 +58,7 @@ class Library : public QWidget {
     QRadioButton* nameSortButton;
     QRadioButton* dateSortButton;
     QAbstractButton* addVideoButton;
+    QAbstractButton* removeVideoButton;
 
     VideoGridView* videoGridView;
     VideoGridModel* videoGridModel;

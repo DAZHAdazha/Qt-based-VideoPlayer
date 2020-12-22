@@ -30,6 +30,12 @@ Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
     addTagButton->setFont(kFontRoboto);
     addTagButton->setIcon(QIcon(":/tag.png"));
     addTagButton->setIconSize(QSize(25, 25));
+
+    removeTagButton = new QPushButton("Delete");
+    removeTagButton->setFont(kFontRoboto);
+    removeTagButton->setIcon(QIcon(":/delete.png"));
+    removeTagButton->setIconSize(QSize(25, 25));
+
     connect(addTagButton, SIGNAL(clicked()), this, SLOT(showAddTag()));
 
     tagCountText = new QLabel(this);
@@ -48,6 +54,9 @@ Library::Library(QWidget *parent) : QWidget(parent), db(Database("app.db")) {
     addVideoButton->setIcon(QIcon(":/add.png"));
     addVideoButton->setIconSize(QSize(25, 25));
     connect(addVideoButton, SIGNAL(clicked()), this, SLOT(showAddVideo()));
+    removeVideoButton = new QPushButton();
+    removeVideoButton->setIcon(QIcon(":/delete.png"));
+    removeVideoButton->setIconSize(QSize(25, 25));
 
     videoGridModel = new VideoGridModel(this);
     videoGridView = new VideoGridView(this, videoGridModel);
@@ -104,11 +113,13 @@ void Library::initLayout() {
     auto topWidgetLayout = new QHBoxLayout;
     topWidget->setLayout(topWidgetLayout);
     topWidgetLayout->addWidget(addTagButton);
-    topWidgetLayout->setMargin(0);
-    topWidgetLayout->setSpacing(0);
+    topWidgetLayout->addWidget(removeTagButton);
+    topWidgetLayout->setMargin(5);
+    topWidgetLayout->setSpacing(10);
     topWidget->setStyleSheet("background-color: #4A6572");
 
     addTagButton->setStyleSheet("background-color: #F9AA33");
+    removeTagButton->setStyleSheet("background-color: #F9AA33");
     tagCountText->setStyleSheet("background-color:#232F34");
     tagCountText->setContentsMargins(10,10,10,10);
     tagListView->setStyleSheet("background-color:#344955;color:white;");
@@ -135,11 +146,13 @@ void Library::initLayout() {
     auto buttonLayout = new QHBoxLayout();
     buttonbar->setLayout(buttonLayout);
     buttonLayout->addWidget(addVideoButton);
+    buttonLayout->addWidget(removeVideoButton);
 
     colorbar->setStyleSheet("background-color:#B0BEC5");
     sortWidget->setStyleSheet("background-color:#B0BEC5");
     buttonbar->setStyleSheet("background-color:#B0BEC5");
     addVideoButton->setStyleSheet("background-color:#F9AA33");
+    removeVideoButton->setStyleSheet("background-color:#F9AA33");
 
     topBar->setLayout(topBarLayout);
     topBarLayout->setMargin(0);

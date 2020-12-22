@@ -9,7 +9,6 @@ Database::Database(const QString& path) {
     } else {
         qDebug() << "Database: connection ok";
     }
-
     QSqlQuery query;
     // Enable FK
     query.exec("PRAGMA foreign_keys = ON;");

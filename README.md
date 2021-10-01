@@ -1,4 +1,4 @@
-**XJCO2811 User Interfaces**
+*XJCO2811 User Interfaces**
 
 **Coursework3 Report**
 
@@ -224,11 +224,11 @@ Dec 2020
 
 ------------------------------------ ------------------ ----------
 
-  Yuhui Cheng                          201292010          sc18yc
-  Yunjia Feng                          201292024          sc18yf
-  Minghao Liang                        201291998          el18ml
-  Shuyao Li                            201291954          mn18s2l
-  Hanrong Zhang                        201292723          el18h2z
+  Yuhui Cheng                         
+  Yunjia Feng                          
+  Minghao Liang                        
+  Shuyao Li                          
+  Hanrong Zhang                       
 
 # PACT analysis & Persona & Scenarios 
 
@@ -306,7 +306,7 @@ Outdoor enthusiasts who have the intention to explore and manage a large privat
 
 ## 2.2 Persona
 
-![图片](media/image1.png){width="6.807638888888889in" height="5.020138888888889in"}
+![images](https://github.com/DAZHAdazha/Qt-based-VideoPlayer/blob/version-1/images/1.png)
 
 ## 2.3 Scenarios
 
@@ -374,7 +374,7 @@ Sketch allows to quickly export ideas without getting bogged down in aesthetic d
 
 ### (e) Evidence of the design
 
-![图片](media/image2.png){width="5.236805555555556in" height="3.0229166666666667in"}
+![images](https://github.com/DAZHAdazha/Qt-based-VideoPlayer/blob/version-1/images/2.png)
 
 ## (ii) Evaluation
 
@@ -409,7 +409,7 @@ This player mainly violated four of the ten heuristics. First of all, the system
   \#11     Unable to load users' own video.                                                       3                         Height
   \#12     The play and pause buttons are represented by text.                                    8                         Medium
 
-![图片](media/image3.png){width="3.422222222222222in" height="2.65in"}
+![images](https://github.com/DAZHAdazha/Qt-based-VideoPlayer/blob/version-1/images/3.png)
 
 ## (iii) Code
 
@@ -419,7 +419,7 @@ The video name is cycle 1.
 
 ### (b) The link to a code repository for this cycle
 
-[<span class="underline">https://github.com/DAZHAdazha/ui-cw3/releases/tag/Cycle1</span>](https://github.com/DAZHAdazha/ui-cw3/releases/tag/Cycle1)
+[<span class="underline">https://github.com/DAZHAdazha/Qt-based-VideoPlayer/releases/tag/Cycle1</span>](https://github.com/DAZHAdazha/Qt-based-VideoPlayer/releases/tag/Cycle1)
 
 ### (c) The differences between prototype and implementation 
 
@@ -461,7 +461,7 @@ This prototype technique helps us to design a visualized prototype with intuitio
 
 ### (e) Evidence of design
 
-![图片](media/image4.png){width="5.0569444444444445in" height="3.2395833333333335in"}
+![images](https://github.com/DAZHAdazha/Qt-based-VideoPlayer/blob/version-1/images/4.png)
 
 ## (ii) Evaluation:
 
@@ -529,41 +529,6 @@ The table shown below is the evaluation process of the cognitive walkthrough met
 
 3\. Will the user associate and interpret the response from the action correctly?
 
-+-------------------------------------------------+-------------------------------------------------------------------+------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
-| Step                                            | Correct Action                                                    | Perform                                                                      | Associate and interpret                                                                                          |
-+=================================================+===================================================================+==============================================================================+==================================================================================================================+
-| 1.Click the open button                         | √ - The button has the "open" word                                | √-button highlights, indicating it is clicked                                | √ - Computer directory appears                                                                                   |
-+-------------------------------------------------+-------------------------------------------------------------------+------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
-| 2.Choose a video to play                        | √ - familiar to computer user                                     | √ - the clickable videos and chosen video are highlighted respectively       | × - Need to click continue button to play and not entirely obvious that the video has been loaded(high severity) |
-+-------------------------------------------------+-------------------------------------------------------------------+------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
-| 3.Click the pause button                        | √ -The button has the typical meaning of pause                    | √ - Click the pause button, and it highlights, indicating it is clicked      | √ - The playing video is paused                                                                                  |
-+-------------------------------------------------+-------------------------------------------------------------------+------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
-| 4.Click the continue button                     | √ -The button has the typical meaning of continue                 | √ - Click the continue button, and it highlights, indicating it is clicked   | √ - The playing video continues to play                                                                          |
-+-------------------------------------------------+-------------------------------------------------------------------+------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
-| 5.Drag the progress bar to some different time  | √ -Drag or click the progress bar，familiar to computer user      | √ - The progress bar moves with the drag or click                            | √ - The progress of the video changes to the corresponding place                                                 |
-+-------------------------------------------------+-------------------------------------------------------------------+------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
-| 6.Drag the volume to some different volumes     | √ - Drag or click the volume bar，familiar to computer user       | √ - The volume bar moves with the drag or click                              | √ - The volume of the video changes correspondingly                                                              |
-+-------------------------------------------------+-------------------------------------------------------------------+------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
-| 7.Click the mute button                         | √ -The button has the typical meaning of mute                     | √ - Click the mute  button, and it highlights, indicating it is clicked      | √ - The volume of the video changes to zero and icon changes to mute meaning                                     |
-+-------------------------------------------------+-------------------------------------------------------------------+------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
-| 8.Click the last video button                   | √ -The button has the typical meaning of changing to the last one | √ - Click the last video button, and it highlights, indicating it is clicked | √ - Change to the last video                                                                                     |
-+-------------------------------------------------+-------------------------------------------------------------------+------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
-| 9.Click the next video button                   | √ -The button has the typical meaning of changing to the next one | √ - Click the next video button, and it highlights, indicating it is clicked | √ - Change to the next video                                                                                     |
-+-------------------------------------------------+-------------------------------------------------------------------+------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
-| 10.Click the changing speed button              | √ - The speed switch button has the speed number in it            | √ - The speed  number list shows in the speed switch button shows            | √ - The several speed number in the speed switch button shows                                                    |
-+-------------------------------------------------+-------------------------------------------------------------------+------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
-| 11.Choose some different speeds                 | √ - The speed  number list has several speed number in it         | √ - The speed  number list highlights with the mouse slides on the list      | √ - The speed number list highlights with the mouse slides on the list                                           |
-+-------------------------------------------------+-------------------------------------------------------------------+------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
-| 12.Click the fast forward for 15 seconds button | × - the button meaning is not entirely obvious (medium severity)  | × - the button meaning is not entirely obvious (medium severity)             | √ - The picture and sound fast forward to the next 15s of the video                                              |
-+-------------------------------------------------+-------------------------------------------------------------------+------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
-| 13.Click the back forward for 15 seconds button | × - the button meaning is not entirely obvious                    | × - the button meaning is not entirely obvious                               | √ - The picture and sound back forward to the last 15s of the video                                              |
-|                                                 |                                                                   |                                                                              |                                                                                                                  |
-|                                                 | (medium severity)                                                 | (medium severity)                                                            |                                                                                                                  |
-+-------------------------------------------------+-------------------------------------------------------------------+------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
-| 14.Click the Full-Screen button                 | √ -The button has the typical meaning of  the full screen         | √ -button highlights, indicating it is clicked                               | √ - The screen is turned to full mode                                                                            |
-+-------------------------------------------------+-------------------------------------------------------------------+------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
-| 15.Exit the full-screen mode                    | √ - Familiar to computer user                                     | √ - Familiar to computer user                                                | √ - The screen exits from full mode                                                                              |
-+-------------------------------------------------+-------------------------------------------------------------------+------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
 
 ## (iii) Code
 
@@ -573,7 +538,7 @@ The video name is cycle2.
 
 ### (b) The link to a code repository for this cycle
 
-[<span class="underline">https://github.com/DAZHAdazha/ui-cw3/releases/tag/cycle2</span>](https://github.com/DAZHAdazha/ui-cw3/releases/tag/cycle2.1)
+[<span class="underline">https://github.com/DAZHAdazha/Qt-based-VideoPlaye/releases/tag/cycle2</span>](https://github.com/DAZHAdazha/Qt-based-VideoPlaye/releases/tag/cycle2.1)
 
 ### (c) Differences between prototype and implementation
 
@@ -615,7 +580,7 @@ The sketch can be easily changed and improved. The difference between the proto
 
 ### (e) Evidence of the design
 
-![图片](media/image5.png){width="1.6652777777777779in" height="3.079861111111111in"}![图片](media/image6.png){width="4.670833333333333in" height="3.1354166666666665in"}
+![images](https://github.com/DAZHAdazha/Qt-based-VideoPlayer/blob/version-1/images/5.jpg)
 
 ## (ii) Evaluation
 
@@ -672,7 +637,7 @@ Task3: remove a video from the playlist
   1.Clicks one video    √ - we see the video file we want to click on              √ - when we tried to click on the video file, item highlights   √- blue highlight on the video file
   2.Clicks trash icon   √ -- the user is likely to be familiar with common icons   √ - when we tried to click on the trash icon, item highlights   √ - the video file is removed from the playlist, and the total number of the videos decrease by 1
 
-![图片](media/image7.png){width="5.704166666666667in" height="3.625in"}
+![images](https://github.com/DAZHAdazha/Qt-based-VideoPlayer/blob/version-1/images/6.png)
 
 ## (iii) Code
 
@@ -682,7 +647,7 @@ The video name is cycle3
 
 ### (b) The link to a code repository for this cycle
 
-<https://github.com/DAZHAdazha/ui-cw3/releases/tag/cycle3>
+<https://github.com/DAZHAdazha/Qt-based-VideoPlayer/releases/tag/cycle3>
 
 ### (c) Differences between prototype and implementation 
 
@@ -718,7 +683,7 @@ Quick UI prototype was used to do the prototyping.
 
 The prototype of the video repository part of this video library programme is designed to improve the capability of video management after we've implemented the fundamental video player functions. The capability in video management is one of the most significant properties of the system, due to the requirement that users demand to explore and organize the large personal video library. This requirement indicates that users not only watch these videos through this programme but also manage videos as they wish to look back on particular vivid memories in the future. Thus we designed a new page for the demonstration of video management. It contains all preview of added videos with corresponding customizable information to display the date and the location the video was filmed, and the noted special feeling of the experience behind particular video from users. This new video repository page avoids adding more widgets to the list part of the video player page, so as to reduce the unnecessary complexity of that page and improve user's interaction experience. In terms of visual design for better usability, We use the F group layout to organize the layout of the page.
 
-![图片](media/image8.png){width="5.704166666666667in" height="4.060416666666667in"}
+![images](https://github.com/DAZHAdazha/Qt-based-VideoPlayer/blob/version-1/images/7.png)
 
 *F group layout*
 
@@ -730,7 +695,7 @@ It is quick to design a prototype from scratch using the QT quick UI prototype.
 
 ### (e) Evidence of the design
 
-![图片](media/image9.png){width="5.704166666666667in" height="4.05625in"}
+![images](https://github.com/DAZHAdazha/Qt-based-VideoPlayer/blob/version-1/images/8.png)
 
 ## (ii) Evaluation
 
@@ -773,7 +738,7 @@ The video name is cycle4 in the video folder.
 
 ### (b) The link to a code repository for this cycle
 
-<https://github.com/DAZHAdazha/ui-cw3/releases/tag/cycle4>
+<https://github.com/DAZHAdazha/Qt-based-VideoPlayer/releases/tag/cycle4>
 
 ### (c) Differences between prototype and implementation
 
@@ -787,7 +752,7 @@ There are no differences between the prototype and the implementation. As expect
 
 The goal of the cycle 5 mainly aims at implementing a tag bar and structure a backend relational database to connect each tag with corresponding videos and to provide a real, local-based and stable management service which memorize user's operation and store customized information. Every tag corresponding to a particular video repository implemented in the previous cycle where users can add or delete videos. 
 
-![](media/image10.png){width="4.957638888888889in" height="2.3361111111111112in"}
+![images](https://github.com/DAZHAdazha/Qt-based-VideoPlayer/blob/version-1/images/9.png)
 
 *Database schema*
 
@@ -805,7 +770,7 @@ Qt allows programmers to design a program in pure C++ code without any design to
 
 ### (e) Evidence of the design
 
-![图片](media/image11.png){width="4.122222222222222in" height="3.4347222222222222in"}
+![images](https://github.com/DAZHAdazha/Qt-based-VideoPlayer/blob/version-1/images/10.png)
 
 ## (ii) Evaluation
 
@@ -823,39 +788,39 @@ A questionnaire is needed in the cycle to evaluate the video play system sinc
 
 1\. What is your gender?
 
-<span class="chart">\[CHART\]</span>
+![images](https://github.com/DAZHAdazha/Qt-based-VideoPlayer/blob/version-1/images/11.jpg)
 
 2\. What is your age?
 
-<span class="chart">\[CHART\]</span>
+![images](https://github.com/DAZHAdazha/Qt-based-VideoPlayer/blob/version-1/images/12.jpg)
 
 3\. Are you an outdoor sports enthusiast?
 
-<span class="chart">\[CHART\]</span>
+![images](https://github.com/DAZHAdazha/Qt-based-VideoPlayer/blob/version-1/images/13.jpg)
 
 4\. Whenever you go out, do you have the habit of shooting and collecting videos?
 
-<span class="chart">\[CHART\]</span>
+![images](https://github.com/DAZHAdazha/Qt-based-VideoPlayer/blob/version-1/images/14.jpg)
 
 5\. Is the system interface friendly and easy to operate?
 
-<span class="chart">\[CHART\]</span>
+<span class="chart">![images](https://github.com/DAZHAdazha/Qt-based-VideoPlayer/blob/version-1/images/15.jpg)</span>
 
 6\. Is the video management information provided by the system complete?
 
-<span class="chart">\[CHART\]</span>
+![images](https://github.com/DAZHAdazha/Qt-based-VideoPlayer/blob/version-1/images/16.jpg)
 
 7.Can the system meet the current personal video collection, statistics and management requirements?
 
-<span class="chart">\[CHART\]</span>
+![images](https://github.com/DAZHAdazha/Qt-based-VideoPlayer/blob/version-1/images/17.jpg)
 
 8\. What parts of the interface do you find unattractive or ambiguous?(multiple choice)
 
-<span class="chart">\[CHART\]</span>
+<span class="chart">![images](https://github.com/DAZHAdazha/Qt-based-VideoPlayer/blob/version-1/images/18.jpg)</span>
 
 9\. What are the unmet needs?(multiple choice)
 
-<span class="chart">\[CHART\]</span>
+<span class="chart">![images](https://github.com/DAZHAdazha/Qt-based-VideoPlayer/blob/version-1/images/19.jpg)</span>
 
 According to the questionnaire result, nearly half of the interviewees are outdoor enthusiasts and have the habit of shooting and collecting videos. More than two thirds of them think the system interface friendly and easy to operate. Some of them think the video management information provided by the system is incomplete. But more them 80% of them think that the system meet their current personal video collection, statistics and management requirements. The top four aspects of the interface they find unattractive or ambiguous are the size of player controls, the tag list, the video window, the color schema. The top two aspects of the unmet needs some video sorting method, video classification.
 
@@ -915,16 +880,6 @@ A. The size of player controls B. The video player window C. The play-list D. Th
 
 A. Search video function B. Video tags C. Video classification D. Some video sorting methods E. More information on each video in the library
 
-Photos:
-
-![图片](media/image12.jpeg){width="3.839583333333333in" height="2.879861111111111in"}
-
-*Participants are using the library*
-
-![图片](media/image13.jpeg){width="3.941666666666667in" height="2.9618055555555554in"}
-
-*Participants are filling out questionnaires*
-
 ## (iii) Code
 
 ### (a) Video
@@ -933,7 +888,7 @@ The video name is cycle5 in the video folder.
 
 ### (b) The link to a code repository for this cycle
 
-<https://github.com/DAZHAdazha/ui-cw3/releases/tag/cycle5>
+<https://github.com/DAZHAdazha/Qt-based-VideoPlayer/releases/tag/cycle5>
 
 ### (c) Differences between prototype and implementation
 
@@ -977,7 +932,7 @@ As an independent information collection container, the card has the characteris
 
 ### (e) Evidence of the design 
 
-![图片](media/image14.png){width="5.704166666666667in" height="3.9319444444444445in"}
+![images](https://github.com/DAZHAdazha/Qt-based-VideoPlayer/blob/version-1/images/20.jpg)
 
 ## (ii) Evaluation
 
@@ -1037,16 +992,6 @@ A: No, the lengths of videos are not provided.
 
 A: Not completely. I cannot delete existing custom tags and videos from the library, and I cannot remove a video from one tag to another. Furthermore, I cannot modify information on videos.
 
-Photos:
-
-![图片](media/image15.jpeg){width="4.169444444444444in" height="3.127083333333333in"}
-
-*The interviewee is reading the scenarios and prototype provided*
-
-![图片](media/image16.jpeg){width="4.220138888888889in" height="3.1708333333333334in"}
-
-*Interview in progress*
-
 ## (iii) Code
 
 ### (a) Video
@@ -1055,7 +1000,7 @@ The video name is cycle6 in the video folder.
 
 ### (b) The link to a code repository for this cycle
 
-<https://github.com/DAZHAdazha/ui-cw3/releases/tag/Cycle6>
+<https://github.com/DAZHAdazha/Qt-based-VideoPlayer/releases/tag/Cycle6>
 
 ### (c) Differences between prototype and implementation
 
@@ -1091,57 +1036,4 @@ All the contact information that we collected about participants during the cour
 
 Finally, the signed consent forms would be stored and arranged in place appropriate for the long term as these contain personal data relating to the research participants.
 
-**Information Sheet**
-
-A large personal video library for outdoor enthusiasts
-
-You are being invited to take part in a research project. Before you decide it is important for you to understand why the research is being done and what it will involve. Please take time to read the following information carefully and discuss it with others if you wish. Ask us if there is anything that is not clear or if you would like more information. Take time to decide whether or not you wish to take part.
-
-It is well known that outdoor enthusiasts are keen on shooting and recording their experiences, and collect massive quantities of videos from action cameras, video drones and mobile phones. The video typically from a variety of locations is of different lengths, ranging from a \"moving photo\" of a few seconds to 3 hours of raw skiing footage, and activities, such as cycling, parascending, football and skiing. Therefore, we aim to explore a large personal video library for outdoor enthusiasts, which allow them to manage and view their own videos.
-
-Since it is designed for outdoor enthusiasts, we choose participants who are fond of outdoor sports, with different genders and ages, in order to get more straightforward and comprehensive feedbacks. In total, we are intended to recruit at least 10 participants to take part in the project.
-
-It is up to you to decide whether or not to take part. If you do decide to take part you will be given this information sheet to keep (and be asked to sign a consent form) and you can still withdraw at any time without it affecting any benefits that you are entitled to in any way. You do not have to give a reason.
-
-You will be involved in the evaluation for almost 30 minutes including using the video library and completing a questionnaire online. You are responsible to try out the video library as complete as possible, find problems with its appearance and functionality, and try your best to finish the questionnaire, giving us useful feedback. Based on your feedback, we will analyze it quantitively and qualitatively, in order to improve the video library better.
-
-Since our project is still in the developing stage, appearance and functionality are not yet mature. Therefore, you may not be satisfied with its style, some design may be illogical and make you confused, and it may take a long time or even cause a bug when complete a task. In addition, because we use personal data to support software development on the public interest, individuals participating in research do not have the same rights regarding their personal data as they would in other situations. This means that the following rights are limited for individuals who participate, or have participated in, a research project:
-
-l  The right to access the data we hold about you.
-
-l  The right to rectify the data we hold about you.
-
-l  The right to have the data we hold about you erased.
-
-l  The right to restrict how we process your data.
-
-l  The right to data portability.
-
-l  The right to object to us processing the data we hold about you.
-
-Whilst there are no immediate benefits for those people participating in the project, it is hoped that this work will help you and many other outdoor enthusiasts to possess a wonderful personal video library.
-
-We only collect the minimum amount of personal data which we need for our purposes, and use it fairly and transparently, for research in the public interest, or to support the work of our organization. At the same time, we will keep a record of our processing activities, making it clear to individuals what their data will be used for, how it will be handled and what their rights are. The project-specific information will include more detail about how your data will be used.
-
-In addition, we will only retain your identifiable personal information for as long as necessary to fulfil the purposes we collected it for and will retain your data in the anonymized or pseudonymized format. To determine the appropriate retention period for personal data we consider the amount, nature, and sensitivity of the personal data, the potential risk of harm from unauthorized use or disclosure, the purposes for which we process your personal data and whether we can achieve those purposes through other means, and the applicable legal requirements. We have put in place security measures to prevent your personal data from being accidentally lost, used or accessed in an unauthorized way and will notify you and any applicable regulator of a suspected breach where we are legally required to do so.
-
-All the contact information that we collect about you during the course of the research will be kept strictly confidential and will store separately from the research data. We will take steps wherever possible to anonymize the research data so that you will not be identified in any reports or publications.
-
-If you have any concerns with regard to the way your personal data is being processed or have a query with regard to this Notice, please contact our supervisor (Tom Kelly: T.W.A.Kelly\@leeds.ac.uk). This notice was last updated on 18 December 2020.
-
-You will be given a copy of the information sheet and, if appropriate, a signed consent form to keep. Finally, Thanks for taking the time to read through the information, looking forward to your joining.
-
-**consent form**
-
-Consent to take part in a large personal video library for outdoor enthusiasts
-
-                                                                                                                                                                                                                                                                                                                                                 Add your initials next to the statement if you agree
-
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ------------------------------------------------------
-
-  I confirm that I have read and understood the information sheet dated 2020/12/18 explaining the above research project and I have had the opportunity to ask questions about the project.                                                                                                                                                      
-  I understand that my participation is voluntary and that I am free to withdraw at any time without giving any reason and without there being any negative consequences. In addition, should I not wish to answer any particular question or questions, I am free to decline. Tom Kelly: T.W.A.Kelly\@leeds.ac.uk                               
-  I understand that members of the research team may have access to my anonymized responses. I understand that my name will not be linked with the research materials, and I will not be identified or identifiable in the report or reports that result from the research. I understand that my responses will be kept strictly confidential.   
-  I understand that the data collected from me may be stored and used in relevant future research in an anonymized form.                                                                                                                                                                                                                         
-  I understand that relevant sections of the data collected during the study, maybe looked at by individuals from the University of Leeds or from regulatory authorities where it is relevant to my taking part in this research.                                                                                                                
-  I agree to take part in the above research project and will inform the lead researcher should my contact details change.                                                                                                                                                                                                                       
+​                                                                                                                                                                                                       
